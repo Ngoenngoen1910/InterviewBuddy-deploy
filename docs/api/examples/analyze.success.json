@@ -1,0 +1,59 @@
+{
+  "analysisId": "286c907f-4634-4a41-9fb3-56f0735f3818",
+  "fitScore": 60,
+  "matchedSkills": [
+    "Node.js",
+    "Docker"
+  ],
+  "missingSkills": [
+    "PostgreSQL"
+  ],
+  "summary": "Node.js and Docker are supported; PostgreSQL is a skill gap.",
+  "requirements": [
+    {
+      "skill": "Node.js",
+      "importance": "required",
+      "matched": true,
+      "jdEvidence": "Required skills: Node.js and PostgreSQL.",
+      "cvEvidence": "Implemented REST APIs with Node.js.",
+      "reason": "The CV demonstrates Node.js API development."
+    },
+    {
+      "skill": "PostgreSQL",
+      "importance": "required",
+      "matched": false,
+      "jdEvidence": "Required skills: Node.js and PostgreSQL.",
+      "cvEvidence": "",
+      "reason": "MongoDB experience does not establish PostgreSQL experience."
+    },
+    {
+      "skill": "Docker",
+      "importance": "preferred",
+      "matched": true,
+      "jdEvidence": "Preferred skill: Docker.",
+      "cvEvidence": "Packaged a demonstration service with Docker.",
+      "reason": "The CV includes Docker project evidence."
+    }
+  ],
+  "scoreBreakdown": {
+    "matchedWeight": 3,
+    "totalWeight": 5,
+    "required": {
+      "matched": 1,
+      "total": 2,
+      "weight": 2
+    },
+    "preferred": {
+      "matched": 1,
+      "total": 1,
+      "weight": 1
+    }
+  },
+  "meta": {
+    "provider": "gemini",
+    "model": "gemini-offline-fixture",
+    "scoringVersion": "weighted-skills-v1",
+    "language": "en",
+    "generatedAt": "2026-10-23T11:28:33.198Z"
+  }
+}

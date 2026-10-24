@@ -1,0 +1,397 @@
+{
+  "task": "SCRUM-43",
+  "mode": "live-gemini",
+  "generatedAt": "2026-10-23T10:23:53.785Z",
+  "provenance": "Only the five AI-authored synthetic CV/JD fixtures are sent to Gemini. No real personal data.",
+  "status": "passed",
+  "cases": [
+    {
+      "id": "CVJD-01",
+      "title": "Frontend - full match",
+      "status": "passed",
+      "expected": {
+        "fitScore": 100,
+        "matchedSkills": [
+          "React",
+          "TypeScript",
+          "Git"
+        ],
+        "missingSkills": [],
+        "matchedWeight": 5,
+        "totalWeight": 5
+      },
+      "result": {
+        "analysisId": "1eff833a-c117-4a3b-9038-b447b24425c3",
+        "fitScore": 100,
+        "matchedSkills": [
+          "React",
+          "TypeScript",
+          "Git"
+        ],
+        "missingSkills": [],
+        "summary": "The candidate matches all required and preferred skills specified in the job description, including React, TypeScript, and Git.",
+        "requirements": [
+          {
+            "skill": "React",
+            "importance": "required",
+            "matched": true,
+            "jdEvidence": "Required skills: React",
+            "cvEvidence": "Built dashboards with React",
+            "reason": "The candidate has experience building dashboards with React, matching the required skill."
+          },
+          {
+            "skill": "TypeScript",
+            "importance": "required",
+            "matched": true,
+            "jdEvidence": "and TypeScript.",
+            "cvEvidence": "and TypeScript.",
+            "reason": "The candidate explicitly lists TypeScript experience matching the required skill."
+          },
+          {
+            "skill": "Git",
+            "importance": "preferred",
+            "matched": true,
+            "jdEvidence": "Preferred skill: Git.",
+            "cvEvidence": "Used Git for version control",
+            "reason": "The candidate has experience with Git, fulfilling the preferred skill."
+          }
+        ],
+        "scoreBreakdown": {
+          "matchedWeight": 5,
+          "totalWeight": 5,
+          "required": {
+            "matched": 2,
+            "total": 2,
+            "weight": 2
+          },
+          "preferred": {
+            "matched": 1,
+            "total": 1,
+            "weight": 1
+          }
+        },
+        "meta": {
+          "provider": "gemini",
+          "model": "gemini-3.5-flash-lite",
+          "scoringVersion": "weighted-skills-v1",
+          "language": "en",
+          "generatedAt": "2026-10-23T10:23:55.622Z"
+        }
+      }
+    },
+    {
+      "id": "CVJD-02",
+      "title": "Backend - partial match",
+      "status": "passed",
+      "expected": {
+        "fitScore": 60,
+        "matchedSkills": [
+          "Node.js",
+          "Docker"
+        ],
+        "missingSkills": [
+          "PostgreSQL"
+        ],
+        "matchedWeight": 3,
+        "totalWeight": 5
+      },
+      "result": {
+        "analysisId": "34865a97-c967-4664-a5db-51ff7aea9668",
+        "fitScore": 60,
+        "matchedSkills": [
+          "Node.js",
+          "Docker"
+        ],
+        "missingSkills": [
+          "PostgreSQL"
+        ],
+        "summary": "The candidate meets the Node.js requirement and the preferred Docker skill, but lacks PostgreSQL experience.",
+        "requirements": [
+          {
+            "skill": "Node.js",
+            "importance": "required",
+            "matched": true,
+            "jdEvidence": "Required skills: Node.js and PostgreSQL.",
+            "cvEvidence": "Implemented REST APIs with Node.js.",
+            "reason": "The candidate has proven experience with Node.js."
+          },
+          {
+            "skill": "PostgreSQL",
+            "importance": "required",
+            "matched": false,
+            "jdEvidence": "Required skills: Node.js and PostgreSQL.",
+            "cvEvidence": "",
+            "reason": "The candidate's CV does not mention PostgreSQL."
+          },
+          {
+            "skill": "Docker",
+            "importance": "preferred",
+            "matched": true,
+            "jdEvidence": "Preferred skill: Docker.",
+            "cvEvidence": "Packaged a demonstration service with Docker.",
+            "reason": "The candidate has demonstrated experience with Docker."
+          }
+        ],
+        "scoreBreakdown": {
+          "matchedWeight": 3,
+          "totalWeight": 5,
+          "required": {
+            "matched": 1,
+            "total": 2,
+            "weight": 2
+          },
+          "preferred": {
+            "matched": 1,
+            "total": 1,
+            "weight": 1
+          }
+        },
+        "meta": {
+          "provider": "gemini",
+          "model": "gemini-3.5-flash-lite",
+          "scoringVersion": "weighted-skills-v1",
+          "language": "en",
+          "generatedAt": "2026-10-23T10:23:56.715Z"
+        }
+      }
+    },
+    {
+      "id": "CVJD-03",
+      "title": "Data analyst - no match and explicit negation",
+      "status": "passed",
+      "expected": {
+        "fitScore": 0,
+        "matchedSkills": [],
+        "missingSkills": [
+          "Python",
+          "SQL",
+          "Power BI"
+        ],
+        "matchedWeight": 0,
+        "totalWeight": 5
+      },
+      "result": {
+        "analysisId": "7bedc6ca-1761-49fb-802e-bc4581542445",
+        "fitScore": 0,
+        "matchedSkills": [],
+        "missingSkills": [
+          "Python",
+          "SQL",
+          "Power BI"
+        ],
+        "summary": "The candidate lacks all the technical skills requested in the job description, including Python, SQL, and Power BI.",
+        "requirements": [
+          {
+            "skill": "Python",
+            "importance": "required",
+            "matched": false,
+            "jdEvidence": "Required skills: Python",
+            "cvEvidence": "",
+            "reason": "The candidate explicitly states they have not used Python."
+          },
+          {
+            "skill": "SQL",
+            "importance": "required",
+            "matched": false,
+            "jdEvidence": "Required skills: Python and SQL.",
+            "cvEvidence": "",
+            "reason": "The candidate explicitly states they have not used SQL."
+          },
+          {
+            "skill": "Power BI",
+            "importance": "preferred",
+            "matched": false,
+            "jdEvidence": "Preferred skill: Power BI.",
+            "cvEvidence": "",
+            "reason": "The candidate explicitly states they have not used Power BI."
+          }
+        ],
+        "scoreBreakdown": {
+          "matchedWeight": 0,
+          "totalWeight": 5,
+          "required": {
+            "matched": 0,
+            "total": 2,
+            "weight": 2
+          },
+          "preferred": {
+            "matched": 0,
+            "total": 1,
+            "weight": 1
+          }
+        },
+        "meta": {
+          "provider": "gemini",
+          "model": "gemini-3.5-flash-lite",
+          "scoringVersion": "weighted-skills-v1",
+          "language": "en",
+          "generatedAt": "2026-10-23T10:23:58.314Z"
+        }
+      }
+    },
+    {
+      "id": "CVJD-04",
+      "title": "QA - Vietnamese CV and JD",
+      "status": "passed",
+      "expected": {
+        "fitScore": 80,
+        "matchedSkills": [
+          "kiểm thử thủ công",
+          "Postman"
+        ],
+        "missingSkills": [
+          "Selenium"
+        ],
+        "matchedWeight": 4,
+        "totalWeight": 5
+      },
+      "result": {
+        "analysisId": "af582e57-2633-4500-855d-85c1d2a24715",
+        "fitScore": 80,
+        "matchedSkills": [
+          "Kiểm thử thủ công",
+          "Postman"
+        ],
+        "missingSkills": [
+          "Selenium"
+        ],
+        "summary": "Ứng viên đáp ứng tốt các yêu cầu bắt buộc của công việc bao gồm kiểm thử thủ công và Postman. Tuy nhiên, ứng viên chưa có kỹ năng Selenium được ưu tiên.",
+        "requirements": [
+          {
+            "skill": "Kiểm thử thủ công",
+            "importance": "required",
+            "matched": true,
+            "jdEvidence": "kiểm thử thủ công và Postman",
+            "cvEvidence": "Đã thực hiện kiểm thử thủ công cho ứng dụng đặt lịch.",
+            "reason": "Ứng viên có kinh nghiệm thực hiện kiểm thử thủ công cho ứng dụng đặt lịch."
+          },
+          {
+            "skill": "Postman",
+            "importance": "required",
+            "matched": true,
+            "jdEvidence": "kiểm thử thủ công và Postman",
+            "cvEvidence": "Sử dụng Postman để kiểm thử REST API và ghi nhận lỗi.",
+            "reason": "Ứng viên biết sử dụng Postman để kiểm thử REST API."
+          },
+          {
+            "skill": "Selenium",
+            "importance": "preferred",
+            "matched": false,
+            "jdEvidence": "Ưu tiên: Selenium.",
+            "cvEvidence": "",
+            "reason": "CV không đề cập đến kỹ năng Selenium."
+          }
+        ],
+        "scoreBreakdown": {
+          "matchedWeight": 4,
+          "totalWeight": 5,
+          "required": {
+            "matched": 2,
+            "total": 2,
+            "weight": 2
+          },
+          "preferred": {
+            "matched": 0,
+            "total": 1,
+            "weight": 1
+          }
+        },
+        "meta": {
+          "provider": "gemini",
+          "model": "gemini-3.5-flash-lite",
+          "scoringVersion": "weighted-skills-v1",
+          "language": "vi",
+          "generatedAt": "2026-10-23T10:23:59.818Z"
+        }
+      }
+    },
+    {
+      "id": "CVJD-05",
+      "title": "Java internship - weighted score with rounding",
+      "status": "passed",
+      "expected": {
+        "fitScore": 66.67,
+        "matchedSkills": [
+          "Java",
+          "SQL",
+          "Git"
+        ],
+        "missingSkills": [
+          "Spring Boot"
+        ],
+        "matchedWeight": 4,
+        "totalWeight": 6
+      },
+      "result": {
+        "analysisId": "f7d2f415-cff1-4044-8bb9-c0711a2134e2",
+        "fitScore": 66.67,
+        "matchedSkills": [
+          "Java",
+          "SQL",
+          "Git"
+        ],
+        "missingSkills": [
+          "Spring Boot"
+        ],
+        "summary": "The candidate meets the Java, SQL, and Git requirements but lacks the required Spring Boot experience.",
+        "requirements": [
+          {
+            "skill": "Java",
+            "importance": "required",
+            "matched": true,
+            "jdEvidence": "Required skills: Java and Spring Boot.",
+            "cvEvidence": "Built a Java console application.",
+            "reason": "The candidate built a Java console application, matching the required Java skill."
+          },
+          {
+            "skill": "Spring Boot",
+            "importance": "required",
+            "matched": false,
+            "jdEvidence": "Required skills: Java and Spring Boot.",
+            "cvEvidence": "",
+            "reason": "The candidate explicitly stated they have no Spring Boot project yet, so this requirement is unmatched."
+          },
+          {
+            "skill": "SQL",
+            "importance": "preferred",
+            "matched": true,
+            "jdEvidence": "Preferred skills: SQL and Git.",
+            "cvEvidence": "Wrote SQL queries for a database assignment.",
+            "reason": "The candidate wrote SQL queries for an assignment, matching the preferred SQL skill."
+          },
+          {
+            "skill": "Git",
+            "importance": "preferred",
+            "matched": true,
+            "jdEvidence": "Preferred skills: SQL and Git.",
+            "cvEvidence": "Used Git for source control.",
+            "reason": "The candidate used Git for source control, matching the preferred Git skill."
+          }
+        ],
+        "scoreBreakdown": {
+          "matchedWeight": 4,
+          "totalWeight": 6,
+          "required": {
+            "matched": 1,
+            "total": 2,
+            "weight": 2
+          },
+          "preferred": {
+            "matched": 2,
+            "total": 2,
+            "weight": 1
+          }
+        },
+        "meta": {
+          "provider": "gemini",
+          "model": "gemini-3.5-flash-lite",
+          "scoringVersion": "weighted-skills-v1",
+          "language": "en",
+          "generatedAt": "2026-10-23T10:24:01.164Z"
+        }
+      }
+    }
+  ],
+  "passed": 5,
+  "total": 5
+}

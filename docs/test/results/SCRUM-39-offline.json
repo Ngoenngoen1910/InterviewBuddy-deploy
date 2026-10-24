@@ -1,0 +1,156 @@
+{
+  "task": "SCRUM-43",
+  "mode": "offline-http-with-mocked-gemini",
+  "generatedAt": "2026-10-23T11:28:33.170Z",
+  "externalGeminiCalls": 0,
+  "provenance": "AI-authored synthetic CV/JD pairs and fixed fixture responses; no real Gemini output.",
+  "limitation": "Verifies HTTP, Gemini request construction, response validation and scoring. Does not verify live AI extraction or semantic quality.",
+  "cases": [
+    {
+      "id": "CVJD-01",
+      "title": "Frontend - full match",
+      "status": "passed",
+      "expected": {
+        "fitScore": 100,
+        "matchedSkills": [
+          "React",
+          "TypeScript",
+          "Git"
+        ],
+        "missingSkills": [],
+        "matchedWeight": 5,
+        "totalWeight": 5
+      },
+      "actual": {
+        "fitScore": 100,
+        "matchedSkills": [
+          "React",
+          "TypeScript",
+          "Git"
+        ],
+        "missingSkills": [],
+        "matchedWeight": 5,
+        "totalWeight": 5
+      }
+    },
+    {
+      "id": "CVJD-02",
+      "title": "Backend - partial match",
+      "status": "passed",
+      "expected": {
+        "fitScore": 60,
+        "matchedSkills": [
+          "Node.js",
+          "Docker"
+        ],
+        "missingSkills": [
+          "PostgreSQL"
+        ],
+        "matchedWeight": 3,
+        "totalWeight": 5
+      },
+      "actual": {
+        "fitScore": 60,
+        "matchedSkills": [
+          "Node.js",
+          "Docker"
+        ],
+        "missingSkills": [
+          "PostgreSQL"
+        ],
+        "matchedWeight": 3,
+        "totalWeight": 5
+      }
+    },
+    {
+      "id": "CVJD-03",
+      "title": "Data analyst - no match and explicit negation",
+      "status": "passed",
+      "expected": {
+        "fitScore": 0,
+        "matchedSkills": [],
+        "missingSkills": [
+          "Python",
+          "SQL",
+          "Power BI"
+        ],
+        "matchedWeight": 0,
+        "totalWeight": 5
+      },
+      "actual": {
+        "fitScore": 0,
+        "matchedSkills": [],
+        "missingSkills": [
+          "Python",
+          "SQL",
+          "Power BI"
+        ],
+        "matchedWeight": 0,
+        "totalWeight": 5
+      }
+    },
+    {
+      "id": "CVJD-04",
+      "title": "QA - Vietnamese CV and JD",
+      "status": "passed",
+      "expected": {
+        "fitScore": 80,
+        "matchedSkills": [
+          "kiểm thử thủ công",
+          "Postman"
+        ],
+        "missingSkills": [
+          "Selenium"
+        ],
+        "matchedWeight": 4,
+        "totalWeight": 5
+      },
+      "actual": {
+        "fitScore": 80,
+        "matchedSkills": [
+          "kiểm thử thủ công",
+          "Postman"
+        ],
+        "missingSkills": [
+          "Selenium"
+        ],
+        "matchedWeight": 4,
+        "totalWeight": 5
+      }
+    },
+    {
+      "id": "CVJD-05",
+      "title": "Java internship - weighted score with rounding",
+      "status": "passed",
+      "expected": {
+        "fitScore": 66.67,
+        "matchedSkills": [
+          "Java",
+          "SQL",
+          "Git"
+        ],
+        "missingSkills": [
+          "Spring Boot"
+        ],
+        "matchedWeight": 4,
+        "totalWeight": 6
+      },
+      "actual": {
+        "fitScore": 66.67,
+        "matchedSkills": [
+          "Java",
+          "SQL",
+          "Git"
+        ],
+        "missingSkills": [
+          "Spring Boot"
+        ],
+        "matchedWeight": 4,
+        "totalWeight": 6
+      }
+    }
+  ],
+  "mockedGeminiCalls": 5,
+  "passed": 5,
+  "total": 5
+}

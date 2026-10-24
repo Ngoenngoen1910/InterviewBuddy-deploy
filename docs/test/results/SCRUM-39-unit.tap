@@ -1,0 +1,466 @@
+TAP version 13
+# Subtest: CVJD-01: Khang contract preserves the verified score and skill evidence
+ok 1 - CVJD-01: Khang contract preserves the verified score and skill evidence
+  ---
+  duration_ms: 13.0737
+  type: 'test'
+  ...
+# Subtest: CVJD-02: Khang contract preserves the verified score and skill evidence
+ok 2 - CVJD-02: Khang contract preserves the verified score and skill evidence
+  ---
+  duration_ms: 1.6027
+  type: 'test'
+  ...
+# Subtest: CVJD-03: Khang contract preserves the verified score and skill evidence
+ok 3 - CVJD-03: Khang contract preserves the verified score and skill evidence
+  ---
+  duration_ms: 2.3336
+  type: 'test'
+  ...
+# Subtest: CVJD-04: Khang contract preserves the verified score and skill evidence
+ok 4 - CVJD-04: Khang contract preserves the verified score and skill evidence
+  ---
+  duration_ms: 2.9189
+  type: 'test'
+  ...
+# Subtest: CVJD-05: Khang contract preserves the verified score and skill evidence
+ok 5 - CVJD-05: Khang contract preserves the verified score and skill evidence
+  ---
+  duration_ms: 3.3095
+  type: 'test'
+  ...
+# Subtest: Khang contract rejects invalid input before calling Gemini
+ok 6 - Khang contract rejects invalid input before calling Gemini
+  ---
+  duration_ms: 2.2285
+  type: 'test'
+  ...
+# Subtest: Khang contract rejects invalid input before calling Gemini
+ok 7 - Khang contract rejects invalid input before calling Gemini
+  ---
+  duration_ms: 3.6227
+  type: 'test'
+  ...
+# Subtest: Khang contract rejects invalid input before calling Gemini
+ok 8 - Khang contract rejects invalid input before calling Gemini
+  ---
+  duration_ms: 1.4721
+  type: 'test'
+  ...
+# Subtest: Khang contract rejects invalid input before calling Gemini
+ok 9 - Khang contract rejects invalid input before calling Gemini
+  ---
+  duration_ms: 1.3688
+  type: 'test'
+  ...
+# Subtest: Khang contract rejects invalid input before calling Gemini
+ok 10 - Khang contract rejects invalid input before calling Gemini
+  ---
+  duration_ms: 0.9826
+  type: 'test'
+  ...
+# Subtest: Khang route has the expected Next.js method and input validation
+ok 11 - Khang route has the expected Next.js method and input validation
+  ---
+  duration_ms: 1.1351
+  type: 'test'
+  ...
+# Subtest: Khang contract maps Gemini rate limit into the code used by his client
+ok 12 - Khang contract maps Gemini rate limit into the code used by his client
+  ---
+  duration_ms: 2.4242
+  type: 'test'
+  ...
+# Subtest: Khang endpoint works through the standalone HTTP server
+ok 13 - Khang endpoint works through the standalone HTTP server
+  ---
+  duration_ms: 60.6188
+  type: 'test'
+  ...
+# Subtest: CVJD-01: Frontend - full match - full service with mocked Gemini transport
+ok 14 - CVJD-01: Frontend - full match - full service with mocked Gemini transport
+  ---
+  duration_ms: 33.7687
+  type: 'test'
+  ...
+# Subtest: CVJD-02: Backend - partial match - full service with mocked Gemini transport
+ok 15 - CVJD-02: Backend - partial match - full service with mocked Gemini transport
+  ---
+  duration_ms: 2.0516
+  type: 'test'
+  ...
+# Subtest: CVJD-03: Data analyst - no match and explicit negation - full service with mocked Gemini transport
+ok 16 - CVJD-03: Data analyst - no match and explicit negation - full service with mocked Gemini transport
+  ---
+  duration_ms: 0.9752
+  type: 'test'
+  ...
+# Subtest: CVJD-04: QA - Vietnamese CV and JD - full service with mocked Gemini transport
+ok 17 - CVJD-04: QA - Vietnamese CV and JD - full service with mocked Gemini transport
+  ---
+  duration_ms: 1.9457
+  type: 'test'
+  ...
+# Subtest: CVJD-05: Java internship - weighted score with rounding - full service with mocked Gemini transport
+ok 18 - CVJD-05: Java internship - weighted score with rounding - full service with mocked Gemini transport
+  ---
+  duration_ms: 1.9642
+  type: 'test'
+  ...
+# Subtest: validation trims input and defaults the response language to Vietnamese
+ok 19 - validation trims input and defaults the response language to Vietnamese
+  ---
+  duration_ms: 0.3749
+  type: 'test'
+  ...
+# Subtest: rejects null before invoking the provider
+ok 20 - rejects null before invoking the provider
+  ---
+  duration_ms: 2.9489
+  type: 'test'
+  ...
+# Subtest: rejects array before invoking the provider
+ok 21 - rejects array before invoking the provider
+  ---
+  duration_ms: 0.2642
+  type: 'test'
+  ...
+# Subtest: rejects empty before invoking the provider
+ok 22 - rejects empty before invoking the provider
+  ---
+  duration_ms: 0.3561
+  type: 'test'
+  ...
+# Subtest: rejects non-string CV before invoking the provider
+ok 23 - rejects non-string CV before invoking the provider
+  ---
+  duration_ms: 0.6263
+  type: 'test'
+  ...
+# Subtest: rejects blank JD before invoking the provider
+ok 24 - rejects blank JD before invoking the provider
+  ---
+  duration_ms: 0.6254
+  type: 'test'
+  ...
+# Subtest: rejects short CV before invoking the provider
+ok 25 - rejects short CV before invoking the provider
+  ---
+  duration_ms: 0.1718
+  type: 'test'
+  ...
+# Subtest: rejects long CV before invoking the provider
+ok 26 - rejects long CV before invoking the provider
+  ---
+  duration_ms: 0.1786
+  type: 'test'
+  ...
+# Subtest: rejects long JD before invoking the provider
+ok 27 - rejects long JD before invoking the provider
+  ---
+  duration_ms: 0.1829
+  type: 'test'
+  ...
+# Subtest: rejects invalid language before invoking the provider
+ok 28 - rejects invalid language before invoking the provider
+  ---
+  duration_ms: 0.1608
+  type: 'test'
+  ...
+# Subtest: rejects client API key before invoking the provider
+ok 29 - rejects client API key before invoking the provider
+  ---
+  duration_ms: 0.1768
+  type: 'test'
+  ...
+# Subtest: aliases are deduplicated and cannot inflate the weighted score
+ok 30 - aliases are deduplicated and cannot inflate the weighted score
+  ---
+  duration_ms: 0.3749
+  type: 'test'
+  ...
+# Subtest: C, C++, and C\# remain distinct skills
+ok 31 - C, C++, and C\# remain distinct skills
+  ---
+  duration_ms: 0.2961
+  type: 'test'
+  ...
+# Subtest: rejects a fabricated CV quotation
+ok 32 - rejects a fabricated CV quotation
+  ---
+  duration_ms: 0.4993
+  type: 'test'
+  ...
+# Subtest: rejects a fabricated JD requirement quotation
+ok 33 - rejects a fabricated JD requirement quotation
+  ---
+  duration_ms: 0.3535
+  type: 'test'
+  ...
+# Subtest: rejects a match without CV evidence
+ok 34 - rejects a match without CV evidence
+  ---
+  duration_ms: 0.2443
+  type: 'test'
+  ...
+# Subtest: empty requirements produce a useful 422, not a misleading zero score
+ok 35 - empty requirements produce a useful 422, not a misleading zero score
+  ---
+  duration_ms: 0.2038
+  type: 'test'
+  ...
+# Subtest: rejects an AI-supplied score and malformed field types
+ok 36 - rejects an AI-supplied score and malformed field types
+  ---
+  duration_ms: 0.2838
+  type: 'test'
+  ...
+# Subtest: Gemini schema avoids a maxItems constraint that fails real requests
+ok 37 - Gemini schema avoids a maxItems constraint that fails real requests
+  ---
+  duration_ms: 0.1787
+  type: 'test'
+  ...
+# Subtest: backend still rejects more than forty requirements
+ok 38 - backend still rejects more than forty requirements
+  ---
+  duration_ms: 0.5874
+  type: 'test'
+  ...
+# Subtest: uses the documented Gemini endpoint, a header key, and JSON schema
+ok 39 - uses the documented Gemini endpoint, a header key, and JSON schema
+  ---
+  duration_ms: 36.7789
+  type: 'test'
+  ...
+# Subtest: document instructions stay in data, separate from the system instruction
+ok 40 - document instructions stay in data, separate from the system instruction
+  ---
+  duration_ms: 1.0363
+  type: 'test'
+  ...
+# Subtest: missing key fails explicitly without an external call or fallback result
+ok 41 - missing key fails explicitly without an external call or fallback result
+  ---
+  duration_ms: 1.4723
+  type: 'test'
+  ...
+# Subtest: maps upstream 400 without leaking its body or retrying
+ok 42 - maps upstream 400 without leaking its body or retrying
+  ---
+  duration_ms: 1.4621
+  type: 'test'
+  ...
+# Subtest: maps upstream 401 without leaking its body or retrying
+ok 43 - maps upstream 401 without leaking its body or retrying
+  ---
+  duration_ms: 1.7298
+  type: 'test'
+  ...
+# Subtest: maps upstream 403 without leaking its body or retrying
+ok 44 - maps upstream 403 without leaking its body or retrying
+  ---
+  duration_ms: 0.7107
+  type: 'test'
+  ...
+# Subtest: maps upstream 404 without leaking its body or retrying
+ok 45 - maps upstream 404 without leaking its body or retrying
+  ---
+  duration_ms: 0.9119
+  type: 'test'
+  ...
+# Subtest: maps upstream 429 without leaking its body or retrying
+ok 46 - maps upstream 429 without leaking its body or retrying
+  ---
+  duration_ms: 0.6784
+  type: 'test'
+  ...
+# Subtest: maps upstream 500 without leaking its body or retrying
+ok 47 - maps upstream 500 without leaking its body or retrying
+  ---
+  duration_ms: 0.6128
+  type: 'test'
+  ...
+# Subtest: maps upstream 503 without leaking its body or retrying
+ok 48 - maps upstream 503 without leaking its body or retrying
+  ---
+  duration_ms: 0.6284
+  type: 'test'
+  ...
+# Subtest: rejects null envelope
+ok 49 - rejects null envelope
+  ---
+  duration_ms: 0.8462
+  type: 'test'
+  ...
+# Subtest: rejects no candidate
+ok 50 - rejects no candidate
+  ---
+  duration_ms: 2.8538
+  type: 'test'
+  ...
+# Subtest: rejects blocked prompt
+ok 51 - rejects blocked prompt
+  ---
+  duration_ms: 1.6716
+  type: 'test'
+  ...
+# Subtest: rejects blocked response
+ok 52 - rejects blocked response
+  ---
+  duration_ms: 0.9092
+  type: 'test'
+  ...
+# Subtest: rejects truncated response
+ok 53 - rejects truncated response
+  ---
+  duration_ms: 0.5149
+  type: 'test'
+  ...
+# Subtest: rejects malformed JSON
+ok 54 - rejects malformed JSON
+  ---
+  duration_ms: 0.5377
+  type: 'test'
+  ...
+# Subtest: ignores thought parts when reading the structured answer
+ok 55 - ignores thought parts when reading the structured answer
+  ---
+  duration_ms: 0.5869
+  type: 'test'
+  ...
+# Subtest: network failures are mapped to a safe 502
+ok 56 - network failures are mapped to a safe 502
+  ---
+  duration_ms: 0.5903
+  type: 'test'
+  ...
+# Subtest: a caller cancellation is propagated to the provider
+ok 57 - a caller cancellation is propagated to the provider
+  ---
+  duration_ms: 0.6014
+  type: 'test'
+  ...
+# Subtest: provider timeout is enforced
+ok 58 - provider timeout is enforced
+  ---
+  duration_ms: 1006.4126
+  type: 'test'
+  ...
+# Subtest: rejects an invalid model or timeout configuration
+ok 59 - rejects an invalid model or timeout configuration
+  ---
+  duration_ms: 0.3695
+  type: 'test'
+  ...
+# Subtest: JSON response returns the documented score and no cache
+ok 60 - JSON response returns the documented score and no cache
+  ---
+  duration_ms: 12.7421
+  type: 'test'
+  ...
+# Subtest: HTTP rejects GET without calling AI
+ok 61 - HTTP rejects GET without calling AI
+  ---
+  duration_ms: 1.3865
+  type: 'test'
+  ...
+# Subtest: HTTP rejects malformed JSON without calling AI
+ok 62 - HTTP rejects malformed JSON without calling AI
+  ---
+  duration_ms: 0.9753
+  type: 'test'
+  ...
+# Subtest: HTTP rejects wrong media type without calling AI
+ok 63 - HTTP rejects wrong media type without calling AI
+  ---
+  duration_ms: 0.702
+  type: 'test'
+  ...
+# Subtest: HTTP rejects invalid fields without calling AI
+ok 64 - HTTP rejects invalid fields without calling AI
+  ---
+  duration_ms: 0.9996
+  type: 'test'
+  ...
+# Subtest: HTTP rejects oversized content length without calling AI
+ok 65 - HTTP rejects oversized content length without calling AI
+  ---
+  duration_ms: 1.0473
+  type: 'test'
+  ...
+# Subtest: HTTP rejects oversized stream without length without calling AI
+ok 66 - HTTP rejects oversized stream without length without calling AI
+  ---
+  duration_ms: 0.7825
+  type: 'test'
+  ...
+# Subtest: HTTP rejects disallowed origin without calling AI
+ok 67 - HTTP rejects disallowed origin without calling AI
+  ---
+  duration_ms: 0.5319
+  type: 'test'
+  ...
+# Subtest: CORS preflight allows only configured frontend origins
+ok 68 - CORS preflight allows only configured frontend origins
+  ---
+  duration_ms: 0.6547
+  type: 'test'
+  ...
+# Subtest: same-origin Next.js requests do not need a CORS allowlist
+ok 69 - same-origin Next.js requests do not need a CORS allowlist
+  ---
+  duration_ms: 1.5821
+  type: 'test'
+  ...
+# Subtest: missing server key returns 503 and never silently uses fixture data
+ok 70 - missing server key returns 503 and never silently uses fixture data
+  ---
+  duration_ms: 0.6417
+  type: 'test'
+  ...
+# Subtest: internal errors do not leak implementation details
+ok 71 - internal errors do not leak implementation details
+  ---
+  duration_ms: 0.4973
+  type: 'test'
+  ...
+# Subtest: Next.js route adapter and standalone handler expose the same validation contract
+ok 72 - Next.js route adapter and standalone handler expose the same validation contract
+  ---
+  duration_ms: 0.5633
+  type: 'test'
+  ...
+# Subtest: Next.js GET adapter returns the documented JSON 405 error
+ok 73 - Next.js GET adapter returns the documented JSON 405 error
+  ---
+  duration_ms: 0.4294
+  type: 'test'
+  ...
+# Subtest: Khang client sends the correct request and propagates structured errors
+ok 74 - Khang client sends the correct request and propagates structured errors
+  ---
+  duration_ms: 0.9938
+  type: 'test'
+  ...
+# Subtest: client rejects invalid server output
+ok 75 - client rejects invalid server output
+  ---
+  duration_ms: 0.6044
+  type: 'test'
+  ...
+# Subtest: standalone server and browser client work over actual local HTTP
+ok 76 - standalone server and browser client work over actual local HTTP
+  ---
+  duration_ms: 60.454
+  type: 'test'
+  ...
+1..76
+# tests 76
+# suites 0
+# pass 76
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1190.1346

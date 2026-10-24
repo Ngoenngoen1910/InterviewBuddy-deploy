@@ -1,0 +1,98 @@
+[
+  {
+    "id": "CVJD-01",
+    "title": "Frontend - full match",
+    "provenance": "AI-authored synthetic test data; no real person or interview",
+    "input": {
+      "cvText": "Frontend developer. Built dashboards with React and TypeScript. Used Git for version control in a team project.",
+      "jdText": "Required skills: React and TypeScript. Preferred skill: Git.",
+      "language": "en"
+    },
+    "aiResponse": {
+      "requirements": [
+        { "skill": "React", "importance": "required", "matched": true, "jdEvidence": "Required skills: React and TypeScript.", "cvEvidence": "Built dashboards with React and TypeScript.", "reason": "React is explicitly used in a dashboard project." },
+        { "skill": "TypeScript", "importance": "required", "matched": true, "jdEvidence": "Required skills: React and TypeScript.", "cvEvidence": "Built dashboards with React and TypeScript.", "reason": "The CV provides TypeScript project evidence." },
+        { "skill": "Git", "importance": "preferred", "matched": true, "jdEvidence": "Preferred skill: Git.", "cvEvidence": "Used Git for version control in a team project.", "reason": "Git is explicitly used for team version control." }
+      ],
+      "summary": "All listed required and preferred skills have supporting CV evidence."
+    },
+    "expected": { "fitScore": 100, "matchedSkills": ["React", "TypeScript", "Git"], "missingSkills": [], "matchedWeight": 5, "totalWeight": 5 }
+  },
+  {
+    "id": "CVJD-02",
+    "title": "Backend - partial match",
+    "provenance": "AI-authored synthetic test data; no real person or interview",
+    "input": {
+      "cvText": "Backend developer. Implemented REST APIs with Node.js. Packaged a demonstration service with Docker. Stored project records in MongoDB.",
+      "jdText": "Required skills: Node.js and PostgreSQL. Preferred skill: Docker.",
+      "language": "en"
+    },
+    "aiResponse": {
+      "requirements": [
+        { "skill": "Node.js", "importance": "required", "matched": true, "jdEvidence": "Required skills: Node.js and PostgreSQL.", "cvEvidence": "Implemented REST APIs with Node.js.", "reason": "The CV demonstrates Node.js API development." },
+        { "skill": "PostgreSQL", "importance": "required", "matched": false, "jdEvidence": "Required skills: Node.js and PostgreSQL.", "cvEvidence": "", "reason": "MongoDB experience does not establish PostgreSQL experience." },
+        { "skill": "Docker", "importance": "preferred", "matched": true, "jdEvidence": "Preferred skill: Docker.", "cvEvidence": "Packaged a demonstration service with Docker.", "reason": "The CV includes Docker project evidence." }
+      ],
+      "summary": "Node.js and Docker are supported; PostgreSQL is a skill gap."
+    },
+    "expected": { "fitScore": 60, "matchedSkills": ["Node.js", "Docker"], "missingSkills": ["PostgreSQL"], "matchedWeight": 3, "totalWeight": 5 }
+  },
+  {
+    "id": "CVJD-03",
+    "title": "Data analyst - no match and explicit negation",
+    "provenance": "AI-authored synthetic test data; no real person or interview",
+    "input": {
+      "cvText": "Graphic designer. Created posters with Photoshop and Illustrator. I have not used Python, SQL, or Power BI; these are future learning goals.",
+      "jdText": "Required skills: Python and SQL. Preferred skill: Power BI.",
+      "language": "en"
+    },
+    "aiResponse": {
+      "requirements": [
+        { "skill": "Python", "importance": "required", "matched": false, "jdEvidence": "Required skills: Python and SQL.", "cvEvidence": "", "reason": "The CV explicitly says Python has not been used." },
+        { "skill": "SQL", "importance": "required", "matched": false, "jdEvidence": "Required skills: Python and SQL.", "cvEvidence": "", "reason": "A future learning goal is not evidence of SQL experience." },
+        { "skill": "Power BI", "importance": "preferred", "matched": false, "jdEvidence": "Preferred skill: Power BI.", "cvEvidence": "", "reason": "The CV explicitly states no Power BI usage." }
+      ],
+      "summary": "The CV has no affirmative evidence for the listed data-analysis skills."
+    },
+    "expected": { "fitScore": 0, "matchedSkills": [], "missingSkills": ["Python", "SQL", "Power BI"], "matchedWeight": 0, "totalWeight": 5 }
+  },
+  {
+    "id": "CVJD-04",
+    "title": "QA - Vietnamese CV and JD",
+    "provenance": "AI-authored synthetic test data; no real person or interview",
+    "input": {
+      "cvText": "Sinh viên kiểm thử phần mềm. Đã thực hiện kiểm thử thủ công cho ứng dụng đặt lịch. Sử dụng Postman để kiểm thử REST API và ghi nhận lỗi.",
+      "jdText": "Bắt buộc: kiểm thử thủ công và Postman. Ưu tiên: Selenium.",
+      "language": "vi"
+    },
+    "aiResponse": {
+      "requirements": [
+        { "skill": "kiểm thử thủ công", "importance": "required", "matched": true, "jdEvidence": "Bắt buộc: kiểm thử thủ công và Postman.", "cvEvidence": "Đã thực hiện kiểm thử thủ công cho ứng dụng đặt lịch.", "reason": "CV có kinh nghiệm kiểm thử thủ công trong dự án." },
+        { "skill": "Postman", "importance": "required", "matched": true, "jdEvidence": "Bắt buộc: kiểm thử thủ công và Postman.", "cvEvidence": "Sử dụng Postman để kiểm thử REST API và ghi nhận lỗi.", "reason": "CV nêu rõ việc sử dụng Postman để kiểm thử API." },
+        { "skill": "Selenium", "importance": "preferred", "matched": false, "jdEvidence": "Ưu tiên: Selenium.", "cvEvidence": "", "reason": "CV chưa có bằng chứng sử dụng Selenium." }
+      ],
+      "summary": "Đáp ứng hai kỹ năng bắt buộc; Selenium là phần cần bổ sung."
+    },
+    "expected": { "fitScore": 80, "matchedSkills": ["kiểm thử thủ công", "Postman"], "missingSkills": ["Selenium"], "matchedWeight": 4, "totalWeight": 5 }
+  },
+  {
+    "id": "CVJD-05",
+    "title": "Java internship - weighted score with rounding",
+    "provenance": "AI-authored synthetic test data; no real person or interview",
+    "input": {
+      "cvText": "Software engineering student. Built a Java console application. Wrote SQL queries for a database assignment. Used Git for source control. No Spring Boot project yet.",
+      "jdText": "Required skills: Java and Spring Boot. Preferred skills: SQL and Git.",
+      "language": "en"
+    },
+    "aiResponse": {
+      "requirements": [
+        { "skill": "Java", "importance": "required", "matched": true, "jdEvidence": "Required skills: Java and Spring Boot.", "cvEvidence": "Built a Java console application.", "reason": "The CV demonstrates Java development." },
+        { "skill": "Spring Boot", "importance": "required", "matched": false, "jdEvidence": "Required skills: Java and Spring Boot.", "cvEvidence": "", "reason": "The CV explicitly says there is no Spring Boot project yet." },
+        { "skill": "SQL", "importance": "preferred", "matched": true, "jdEvidence": "Preferred skills: SQL and Git.", "cvEvidence": "Wrote SQL queries for a database assignment.", "reason": "The CV includes SQL query experience." },
+        { "skill": "Git", "importance": "preferred", "matched": true, "jdEvidence": "Preferred skills: SQL and Git.", "cvEvidence": "Used Git for source control.", "reason": "The CV explicitly mentions Git usage." }
+      ],
+      "summary": "Java, SQL, and Git have supporting evidence; Spring Boot is missing."
+    },
+    "expected": { "fitScore": 66.67, "matchedSkills": ["Java", "SQL", "Git"], "missingSkills": ["Spring Boot"], "matchedWeight": 4, "totalWeight": 6 }
+  }
+]

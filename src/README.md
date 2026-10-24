@@ -96,3 +96,18 @@ To change the schema, add a **new** migration file (`YYYYMMDDHHMMSS_short_name.s
 - `proxy.ts` replaces `middleware.ts` (Next.js 16).
 - `cacheComponents` is turned off in `next.config.ts` to keep data fetching simple. With it on, every page that reads the session must be wrapped in `<Suspense>`.
 - `npm audit` reports issues in ESLint's dependencies only (development tools, not shipped to users). Do not run `npm audit fix --force`; it downgrades `eslint-config-next`.
+
+## CV/JD analysis API (SCRUM-39)
+
+`POST /api/analyze-fit` (contract used by the `/analysis` page) and `POST /api/analyze` (original v1 contract) run inside this Next.js app, so `npm run dev` is enough. They need `GEMINI_API_KEY` in `.env.local`; without it they return `503 AI_NOT_CONFIGURED`.
+
+- [API contract v1](../docs/api/CV_JD_ANALYSIS_API_v1.md), [compatibility with the analysis page](../docs/api/KHANG_ANALYZE_FIT_COMPAT.md), [handoff notes](../docs/api/HANDOFF_TO_KHANG.md)
+- Code: `lib/analysis/*.mjs`, routes in `app/api/analyze/` and `app/api/analyze-fit/`
+
+| Command | What it does |
+| --- | --- |
+| `npm test` | Unit tests for the analysis module (Node 22.9+) |
+| `npm run verify:offline` | End-to-end check with a fake Gemini transport |
+| `npm run verify:live` | Sends 5 sample pairs to the real Gemini API (uses quota) |
+| `npm run verify:secrets` | Checks no keys leaked into code, reports or Git changes |
+| `npm run api:standalone` | Runs the API alone on port 3001 without Next.js |

@@ -1,23 +1,28 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 
-// Supabase redirects here after Google sign-in or an email confirmation link.
-// It exchanges the one-time code for a session cookie, then sends the user on.
-// Add <site>/auth/callback to Supabase > Authentication > URL Configuration > Redirect URLs.
 export async function GET(request: NextRequest) {
-  const { searchParams, origin } = new URL(request.url);
-  const code = searchParams.get("code");
-  const next = searchParams.get("next") ?? "/dashboard";
-  // Only allow relative paths, so the link cannot redirect to another site.
-  const redirectTo = next.startsWith("/") && !next.startsWith("//") ? next : "/dashboard";
+  const code = request.nextUrl.searchParams.get("code");
+  const providerError = request.nextUrl.searchParams.get("error");
 
-  if (code) {
-    const supabase = await createClient();
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
-    if (!error) {
-      return NextResponse.redirect(`${origin}${redirectTo}`);
-    }
+  const loginUrl = new URL("/login", request.url);
+  loginUrl.searchParams.set("error", "auth_callback");
+
+  if (providerError || !code) {
+    return NextResponse.redirect(loginUrl);
   }
 
-  return NextResponse.redirect(`${origin}/login?error=auth_callback`);
+  try {
+    const supabase = await createClient();
+
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+
+    if (error) {
+      return NextResponse.redirect(loginUrl);
+    }
+  } catch {
+    return NextResponse.redirect(loginUrl);
+  }
+
+  return NextResponse.redirect(new URL("/dashboard", request.url));
 }

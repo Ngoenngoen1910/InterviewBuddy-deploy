@@ -1,0 +1,182 @@
+[1mdiff --git a/src/app/(workspace)/dashboard/page.tsx b/src/app/(workspace)/dashboard/page.tsx[m
+[1mindex 42740b8..4dcda28 100644[m
+[1m--- a/src/app/(workspace)/dashboard/page.tsx[m
+[1m+++ b/src/app/(workspace)/dashboard/page.tsx[m
+[36m@@ -51,7 +51,7 @@[m [mexport default function DashboardPage() {[m
+ [m
+       <section className="rounded-2xl border border-indigo-100 bg-indigo-50 p-6 sm:p-8">[m
+         <p className="text-xs font-semibold tracking-widest text-indigo-600">[m
+[31m-          WELCOME BACK, TÀI![m
+[32m+[m[32m          WELCOME BACK![m
+         </p>[m
+ [m
+         <h2 className="mt-3 text-2xl font-bold sm:text-3xl">[m
+[1mdiff --git a/src/app/login/page.tsx b/src/app/login/page.tsx[m
+[1mnew file mode 100644[m
+[1mindex 0000000..8b167ca[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/login/page.tsx[m
+[36m@@ -0,0 +1,258 @@[m
+[32m+[m[32m"use client";[m
+[32m+[m
+[32m+[m[32mimport { useRouter } from "next/navigation";[m
+[32m+[m[32mimport { useState, type FormEvent } from "react";[m
+[32m+[m[32mimport { createClient } from "@/lib/supabase/client";[m
+[32m+[m[32mimport Button from "@/components/ui/Button";[m
+[32m+[m[32mimport Card from "@/components/ui/Card";[m
+[32m+[m[32mimport Input from "@/components/ui/Input";[m
+[32m+[m
+[32m+[m[32mexport default function LoginPage() {[m
+[32m+[m
+[32m+[m[32m  const router = useRouter();[m
+[32m+[m[32m  const [mode, setMode] = useState<"login" | "signup">("login");[m
+[32m+[m[32m  const [email, setEmail] = useState("");[m
+[32m+[m[32m  const [password, setPassword] = useState("");[m
+[32m+[m[32m  const [confirmPassword, setConfirmPassword] = useState("");[m
+[32m+[m[32m  const [busy, setBusy] = useState(false);[m
+[32m+[m[32m  const [error, setError] = useState("");[m
+[32m+[m[32m  const [message, setMessage] = useState("");[m
+[32m+[m
+[32m+[m[32m  const isSignup = mode === "signup";[m
+[32m+[m
+[32m+[m[32m  function switchMode() {[m
+[32m+[m[32m    setMode(isSignup ? "login" : "signup");[m
+[32m+[m[32m    setPassword("");[m
+[32m+[m[32m    setConfirmPassword("");[m
+[32m+[m[32m    setError("");[m
+[32m+[m[32m    setMessage("");[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  async function handleSubmit(event: FormEvent<HTMLFormElement>) {[m
+[32m+[m[32m    event.preventDefault();[m
+[32m+[m[32m    setError("");[m
+[32m+[m[32m    setMessage("");[m
+[32m+[m
+[32m+[m[32m    if (isSignup && password !== confirmPassword) {[m
+[32m+[m[32m      setError("Mật khẩu nhập lại không khớp.");[m
+[32m+[m[32m      return;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    setBusy(true);[m
+[32m+[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      const supabase = createClient();[m
+[32m+[m
+[32m+[m[32m      if (isSignup) {[m
+[32m+[m[32m        const { data, error: signupError } = await supabase.auth.signUp({[m
+[32m+[m[32m          email: email.trim(),[m
+[32m+[m[32m          password,[m
+[32m+[m[32m          options: {[m
+[32m+[m[32m            emailRedirectTo: `${window.location.origin}/auth/callback`,[m
+[32m+[m[32m          },[m
+[32m+[m[32m        });[m
+[32m+[m
+[32m+[m[32m        if (signupError) {[m
+[32m+[m[32m          setError(signupError.message);[m
+[32m+[m[32m          return;[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        if (data.session) {[m
+[32m+[m[32m          router.replace("/dashboard");[m
+[32m+[m[32m          router.refresh();[m
+[32m+[m[32m          return;[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        setMessage([m
+[32m+[m[32m          "Nếu địa chỉ này đủ điều kiện đăng ký, bạn sẽ nhận được email xác nhận. Hãy kiểm tra hộp thư và mục spam. Nếu đã có tài khoản, hãy chuyển sang đăng nhập."[m
+[32m+[m[32m        );[m
+[32m+[m[32m        setPassword("");[m
+[32m+[m[32m        setConfirmPassword("");[m
+[32m+[m[32m      } else {[m
+[32m+[m[32m        const { error: loginError } =[m
+[32m+[m[32m          await supabase.auth.signInWithPassword({[m
+[32m+[m[32m            email: email.trim(),[m
+[32m+[m[32m            password,[m
+[32m+[m[32m          });[m
+[32m+[m
+[32m+[m[32m        if (loginError) {[m
+[32m+[m[32m          setError([m
+[32m+[m[32m            loginError.code === "email_not_confirmed"[m
+[32m+[m[32m              ? "Bạn cần xác nhận email trước khi đăng nhập."[m
+[32m+[m[32m              : "Không thể đăng nhập. Hãy kiểm tra email, mật khẩu và thử lại."[m
+[32m+[m[32m          );[m
+[32m+[m[32m          return;[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        router.replace("/dashboard");[m
+[32m+[m[32m        router.refresh();[m
+[32m+[m[32m      }[m
+[32m+[m[32m    } catch {[m
+[32m+[m[32m      setError([m
+[32m+[m[32m        "Không thể kết nối dịch vụ đăng nhập. Kiểm tra mạng và cấu hình Supabase."[m
+[32m+[m[32m      );[m
+[32m+[m[32m    } finally {[m
+[32m+[m[32m      setBusy(false);[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  async function handleGoogleLogin() {[m
+[32m+[m[32m    setError("");[m
+[32m+[m[32m    setMessage("");[m
+[32m+[m[32m    setBusy(true);[m
+[32m+[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      const supabase = createClient();[m
+[32m+[m
+[32m+[m[32m      const { error: googleError } =[m
+[32m+[m[32m        await supabase.auth.signInWithOAuth({[m
+[32m+[m[32m          provider: "google",[m
+[32m+[m[32m          options: {[m
+[32m+[m[32m            redirectTo: `${window.location.origin}/auth/callback`,[m
+[32m+[m[32m          },[m
+[32m+[m[32m        });[m
+[32m+[m
+[32m+[m[32m      if (googleError) {[m
+[32m+[m[32m        setError(googleError.message);[m
+[32m+[m[32m        setBusy(false);[m
+[32m+[m[32m      }[m
+[32m+[m[32m    } catch {[m
+[32m+[m[32m      setError("Không thể bắt đầu đăng nhập Google. Vui lòng thử lại.");[m
+[32m+[m[32m      setBusy(false);[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  return ([m
+[32m+[m[32m    <main className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-10 text-slate-900">[m
+[32m+[m[32m      <div className="w-full max-w-md">[m
+[32m+[m[32m        <div className="mb-8 text-center">[m
+[32m+[m[32m          <p className="text-2xl font-bold tracking-tight">[m
+[32m+[m[32m            Interview<span className="text-indigo-600">Buddy</span>[m
+[32m+[m[32m          </p>[m
+[32m+[m
+[32m+[m[32m          <p className="mt-2 text-sm text-slate-500">[m
+[32m+[m[32m            Tự tin hơn trong buổi phỏng vấn tiếp theo.[m
+[32m+[m[32m          </p>[m
+[32m+[m[32m        </div>[m
+[32m+[m
+[32m+[m[32m        <Card>[m
+[32m+[m[32m          <h1 className="text-2xl font-bold">[m
+[32m+[m[32m            {isSignup ? "Tạo tài khoản" : "Chào mừng trở lại"}[m
+[32m+[m[32m          </h1>[m
+[32m+[m
+[32m+[m[32m          <p className="mt-2 text-sm text-slate-500">[m
+[32m+[m[32m            {isSignup[m
+[32m+[m[32m              ? "Đăng ký để bắt đầu luyện phỏng vấn."[m
+[32m+[m[32m              : "Đăng nhập để tiếp tục hành trình luyện tập."}[m
+[32m+[m[32m          </p>[m
+[32m+[m
+[32m+[m[32m          <Button[m
+[32m+[m[32m            variant="secondary"[m
+[32m+[m[32m            className="mt-6 w-full"[m
+[32m+[m[32m            disabled={busy}[m
+[32m+[m[32m            onClick={handleGoogleLogin}[m
+[32m+[m[32m          >[m
+[32m+[m[32m            Tiếp tục với Google[m
+[32m+[m[32m          </Button>[m
+[32m+[m
+[32m+[m[32m          <div className="my-6 flex items-center gap-3">[m
+[32m+[m[32m            <div className="h-px flex-1 bg-slate-200" />[m
+[32m+[m[32m            <span className="text-xs text-slate-400">[m
+[32m+[m[32m              hoặc dùng email[m
+[32m+[m[32m            </span>[m
+[32m+[m[32m    
