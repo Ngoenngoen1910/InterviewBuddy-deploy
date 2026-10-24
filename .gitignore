@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js / build output
+.next/
+out/
+build/
+dist/
+.vercel/
+.netlify/
+*.tsbuildinfo
+next-env.d.ts
+
+# Environment variables and secrets (API keys)
+.env
+.env*.local
+.env.development
+.env.production
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Testing
+coverage/
+
+# Editors and OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Office lock files
+~$*
+
+# Interview recordings (store them in the shared Drive instead)
+*.mp3
+*.m4a
+*.wav
+*.mp4
+*.mov
