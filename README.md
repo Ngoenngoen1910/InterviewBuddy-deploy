@@ -8,20 +8,27 @@ Course project for **Introduction to Software Engineering**, University of Scien
 
 ## Team
 
-| No. | Full name | Student ID | Role |
-| --- | --- | --- | --- |
-| 1 | | | Team leader |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
+Group 3, class 24C01.
+
+| No. | Full name | Role |
+| --- | --- | --- |
+| 1 | Đào Ngọc Chung Nguyên | Team leader – Jira, deployment, use cases, reports |
+| 2 | Nguyễn Trần Trung Nhân | Project skeleton, database, architecture, merges PRs |
+| 3 | Trần Phước Tài | Shared UI and authentication |
+| 4 | Lâm Gia Hưng | AI features (Gemini) |
+| 5 | Nguyễn Đặng Hoàng Khang | CV/JD analysis page, vision document |
 
 ## Tech stack
 
-- Frontend: Next.js (React) + Tailwind CSS
-- Backend / database / auth: Supabase or Firebase (to be decided in Sprint 2)
-- AI: Gemini API (Flash models)
+- Frontend: Next.js 16 (App Router, TypeScript) + Tailwind CSS 4
+- Auth and database: Supabase (PostgreSQL with Row Level Security)
+- AI: Gemini API (free Flash model, set in `GEMINI_MODEL`)
 - Speech-to-text: browser Web Speech API
 - Deployment: Vercel or Netlify
+
+## Getting started
+
+The app lives in `/src`. Setup steps are in [src/README.md](src/README.md). Architecture and database design are in [docs/analysis and design](docs/analysis%20and%20design/).
 
 ## Repository structure
 
@@ -49,9 +56,11 @@ Course project for **Introduction to Software Engineering**, University of Scien
 
 ## Working conventions
 
-- `main` always holds reviewed work. Do not push directly to `main`.
-- Create one branch per Jira task: `feature/<JIRA-KEY>-short-name`, `fix/<JIRA-KEY>-short-name`, or `docs/<JIRA-KEY>-short-name`.
-- Start commit messages with the Jira key, e.g. `IB-12: Add JD input form`.
-- Open a pull request and get at least one teammate's review before merging.
-- Never commit secrets. Put API keys in `.env.local`, which is git-ignored.
+- Nobody pushes directly to `main`, documents included. Every change goes through a pull request.
+- Branch names: `feat/<feature>-<name>`, `fix/<feature>-<name>`, `docs/<name>`, e.g. `feat/login-page`.
+- Mention the Jira issue (e.g. `SCRUM-29`) in the PR title or description.
+- Check that the preview link works before asking for review.
+- Nhân merges PRs into `main` (Monday, Wednesday and Friday evenings); Khang is the backup.
+- On a conflict, merge `main` into your branch and ask the people involved. Never force-push.
+- Never commit secrets. Real keys live only in `.env.local` and the hosting dashboard. Run `git status` before every commit.
 - Keep interview recordings and other personal data in the team's shared Drive, not in this repository.
