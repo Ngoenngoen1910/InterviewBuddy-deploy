@@ -78,6 +78,9 @@ export function createAnalysisHandler({
     } catch (error) {
       const known = error instanceof AnalysisError;
       const status = known ? error.status : 500;
+      // Server log for debugging on the hosting dashboard. Only the error code and
+      // status are logged: never request bodies, CV/JD text, keys or provider bodies.
+      console.error(`[analysis] ${endpoint} -> ${status} ${known ? error.code : `${error?.name}: ${error?.message}`}`);
       return respond(status, { error: formatError({
         code: known ? error.code : 'INTERNAL_ERROR',
         message: known ? error.message : 'An unexpected error occurred.',

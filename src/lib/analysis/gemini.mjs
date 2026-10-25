@@ -65,6 +65,7 @@ export function createGeminiProvider({ env = process.env, fetchImpl = globalThis
           // Provider error bodies can contain input or credentials. Do not
           // forward them, or automatically retry a potentially billed call.
           await response.body?.cancel();
+          console.error(`[gemini] model=${model} http=${response.status}`);
           if (response.status === 429) {
             throw new AnalysisError('AI_RATE_LIMITED', 'Gemini quota or rate limit reached. Please try again later.', 429);
           }
@@ -83,6 +84,7 @@ export function createGeminiProvider({ env = process.env, fetchImpl = globalThis
           throw new AnalysisError('AI_CONTENT_BLOCKED', 'The AI could not process this content. Please revise the documents.', 422);
         }
         if (!candidate || candidate.finishReason !== 'STOP' || !Array.isArray(candidate.content?.parts)) {
+          console.error(`[gemini] model=${model} unexpected finishReason=${candidate?.finishReason ?? 'none'}`);
           throw invalidAiResponse();
         }
         const text = candidate.content.parts
@@ -92,6 +94,7 @@ export function createGeminiProvider({ env = process.env, fetchImpl = globalThis
         return JSON.parse(text);
       } catch (error) {
         if (error instanceof AnalysisError) throw error;
+        console.error(`[gemini] model=${model} ${error?.name}: ${error?.message}${error?.cause?.code ? ` (${error.cause.code})` : ''}`);
         if (timeout.aborted) throw new AnalysisError('AI_TIMEOUT', 'The analysis timed out. Please try again.', 504);
         if (signal?.aborted) throw new AnalysisError('REQUEST_CANCELLED', 'The request was cancelled.', 408);
         if (error instanceof SyntaxError) throw invalidAiResponse();
