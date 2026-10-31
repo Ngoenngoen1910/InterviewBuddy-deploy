@@ -30,24 +30,32 @@ export async function POST(request: Request) {
     return fail(400, "BAD_FILE", "File quá lớn (tối đa 5 MB).");
   }
 
-  const parser = new PDFParse({ data: new Uint8Array(await file.arrayBuffer()) });
+  let parser: PDFParse | undefined;
   try {
+    parser = new PDFParse({ data: new Uint8Array(await file.arrayBuffer()) });
     const result = await parser.getText();
     const text = cleanText(result.text);
+    const truncated = text.length > MAX_TEXT_CHARS;
 
     // A scanned PDF is not an error (status 200), so the browser console stays clean;
     // the page sees noText: true and shows a warning instead.
     const noText = text.length < MIN_TEXT_CHARS;
 
     return NextResponse.json(
-      { text: noText ? "" : text.slice(0, MAX_TEXT_CHARS), pages: result.total, noText },
+      {
+        text: noText ? "" : text.slice(0, MAX_TEXT_CHARS),
+        pages: result.total,
+        noText,
+        truncated,
+        originalChars: text.length,
+      },
       { headers: { "Cache-Control": "no-store" } },
     );
   } catch (e) {
     console.error("[extract-cv]", e);
     return fail(400, "BAD_FILE", "Không đọc được file PDF (file hỏng hoặc có mật khẩu).");
   } finally {
-    await parser.destroy();
+    await parser?.destroy();
   }
 }
 

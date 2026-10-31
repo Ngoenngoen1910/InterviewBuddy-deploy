@@ -28,11 +28,32 @@ function exactEvidence(source, quotation) {
   return normalize(source).includes(normalize(quotation));
 }
 
+function validateCoachingItems(items, allowedSkills, required, adviceMax = 500) {
+  if (!Array.isArray(items) || items.length > 3 || (required && items.length === 0)) {
+    throw invalidAiResponse();
+  }
+  const seen = new Set();
+  return items.map((item) => {
+    if (!item || typeof item !== 'object' || Array.isArray(item)
+        || Object.keys(item).some((key) => !['skill', 'advice'].includes(key))
+        || !isText(item.skill, 160) || !isText(item.advice, adviceMax)) {
+      throw invalidAiResponse();
+    }
+    const key = canonicalSkill(item.skill);
+    const requirement = allowedSkills.get(key);
+    if (!requirement || seen.has(key)) throw invalidAiResponse();
+    seen.add(key);
+    return { skill: requirement.skill, advice: item.advice.trim() };
+  });
+}
+
 export function scoreAnalysis(raw, input) {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)
       || !Array.isArray(raw.requirements) || raw.requirements.length > LIMITS.maxRequirements
       || !isText(raw.summary, 2000)
-      || Object.keys(raw).some((key) => !['requirements', 'summary'].includes(key))) {
+      || !raw.coaching || typeof raw.coaching !== 'object' || Array.isArray(raw.coaching)
+      || Object.keys(raw).some((key) => !['requirements', 'summary', 'coaching'].includes(key))
+      || Object.keys(raw.coaching).some((key) => !['beforeInterview', 'improvements', 'strengths'].includes(key))) {
     throw invalidAiResponse();
   }
   if (raw.requirements.length === 0) {
@@ -75,6 +96,18 @@ export function scoreAnalysis(raw, input) {
   }
 
   const requirements = [...distinct.values()];
+  const allSkills = new Map([...distinct.entries()]);
+  const missingSkills = new Map([...distinct].filter(([, item]) => !item.matched));
+  const matchedSkills = new Map([...distinct].filter(([, item]) => item.matched));
+  const preparationSkills = missingSkills.size > 0 ? missingSkills : matchedSkills;
+  // A complete match has no gap to improve. Gemini may legitimately leave the
+  // gap-focused sections empty, while strengths still need supported advice.
+  const needsGapAdvice = missingSkills.size > 0;
+  const coaching = {
+    beforeInterview: validateCoachingItems(raw.coaching.beforeInterview, preparationSkills, needsGapAdvice, 900),
+    improvements: validateCoachingItems(raw.coaching.improvements, allSkills, needsGapAdvice),
+    strengths: validateCoachingItems(raw.coaching.strengths, matchedSkills, matchedSkills.size > 0, 900),
+  };
   const scoreBreakdown = {
     matchedWeight: 0, totalWeight: 0,
     required: { matched: 0, total: 0, weight: WEIGHTS.required },
@@ -95,6 +128,7 @@ export function scoreAnalysis(raw, input) {
     matchedSkills: requirements.filter((item) => item.matched).map((item) => item.skill),
     missingSkills: requirements.filter((item) => !item.matched).map((item) => item.skill),
     summary: raw.summary.trim(),
+    coaching,
     requirements,
     scoreBreakdown,
   };

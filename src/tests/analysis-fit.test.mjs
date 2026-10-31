@@ -38,7 +38,10 @@ for (const fixture of fixtures) {
     assert.ok(body.requirements.every((item) => ['matched', 'missing'].includes(item.status)));
     assert.ok(body.requirements.every((item) => typeof item.evidence === 'string'));
     assert.ok(body.recommendation.length > 0);
-    assert.deepEqual(Object.keys(body).sort(), ['fitScore', 'matched', 'missing', 'recommendation', 'requirements'].sort());
+    assert.deepEqual(body.coaching.beforeInterview, fixture.aiResponse.coaching.beforeInterview);
+    assert.deepEqual(body.coaching.improvements, fixture.aiResponse.coaching.improvements);
+    assert.deepEqual(body.coaching.strengths, fixture.aiResponse.coaching.strengths);
+    assert.deepEqual(Object.keys(body).sort(), ['fitScore', 'matched', 'missing', 'recommendation', 'requirements', 'coaching'].sort());
   });
 }
 
@@ -76,6 +79,17 @@ test('Khang contract maps Gemini rate limit into the code used by his client', a
   assert.equal(response.status, 429);
   const body = await response.json();
   assert.equal(body.error.code, 'RATE_LIMIT');
+  assert.doesNotMatch(body.error.message, /Upstream/u);
+});
+
+test('Khang contract distinguishes Gemini connection failure from invalid AI output', async () => {
+  const handler = createAnalysisFitHandler({ analyze: async () => {
+    throw new AnalysisError('AI_UNAVAILABLE', 'Upstream connection detail.', 502);
+  } });
+  const response = await handler(fitRequest(khangInput(fixtures[0])));
+  assert.equal(response.status, 502);
+  const body = await response.json();
+  assert.equal(body.error.code, 'SERVER_ERROR');
   assert.doesNotMatch(body.error.message, /Upstream/u);
 });
 

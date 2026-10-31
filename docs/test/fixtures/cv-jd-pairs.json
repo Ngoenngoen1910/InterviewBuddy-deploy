@@ -14,7 +14,19 @@
         { "skill": "TypeScript", "importance": "required", "matched": true, "jdEvidence": "Required skills: React and TypeScript.", "cvEvidence": "Built dashboards with React and TypeScript.", "reason": "The CV provides TypeScript project evidence." },
         { "skill": "Git", "importance": "preferred", "matched": true, "jdEvidence": "Preferred skill: Git.", "cvEvidence": "Used Git for version control in a team project.", "reason": "Git is explicitly used for team version control." }
       ],
-      "summary": "All listed required and preferred skills have supporting CV evidence."
+      "summary": "All listed required and preferred skills have supporting CV evidence.",
+      "coaching": {
+        "beforeInterview": [
+          { "skill": "React", "advice": "Prepare one concrete dashboard example that shows how you used React and TypeScript before the interview." }
+        ],
+        "improvements": [
+          { "skill": "React", "advice": "Clarify which dashboard features you built with React and TypeScript and what your own contribution was." }
+        ],
+        "strengths": [
+          { "skill": "React", "advice": "Describe the dashboards you built with React and TypeScript." },
+          { "skill": "Git", "advice": "Explain how you used Git for version control in the team project." }
+        ]
+      }
     },
     "expected": { "fitScore": 100, "matchedSkills": ["React", "TypeScript", "Git"], "missingSkills": [], "matchedWeight": 5, "totalWeight": 5 }
   },
@@ -33,7 +45,20 @@
         { "skill": "PostgreSQL", "importance": "required", "matched": false, "jdEvidence": "Required skills: Node.js and PostgreSQL.", "cvEvidence": "", "reason": "MongoDB experience does not establish PostgreSQL experience." },
         { "skill": "Docker", "importance": "preferred", "matched": true, "jdEvidence": "Preferred skill: Docker.", "cvEvidence": "Packaged a demonstration service with Docker.", "reason": "The CV includes Docker project evidence." }
       ],
-      "summary": "Node.js and Docker are supported; PostgreSQL is a skill gap."
+      "summary": "Node.js and Docker are supported; PostgreSQL is a skill gap.",
+      "coaching": {
+        "beforeInterview": [
+          { "skill": "PostgreSQL", "advice": "If you have used PostgreSQL, add a truthful project example to the CV; otherwise practise a small database task before the interview." }
+        ],
+        "improvements": [
+          { "skill": "Node.js", "advice": "Describe your role in implementing the REST APIs and the specific work you completed." },
+          { "skill": "PostgreSQL", "advice": "Do not present MongoDB work as PostgreSQL experience; explain the distinction honestly." }
+        ],
+        "strengths": [
+          { "skill": "Node.js", "advice": "Discuss the REST APIs you implemented with Node.js." },
+          { "skill": "Docker", "advice": "Explain how you packaged the demonstration service with Docker." }
+        ]
+      }
     },
     "expected": { "fitScore": 60, "matchedSkills": ["Node.js", "Docker"], "missingSkills": ["PostgreSQL"], "matchedWeight": 3, "totalWeight": 5 }
   },
@@ -52,7 +77,18 @@
         { "skill": "SQL", "importance": "required", "matched": false, "jdEvidence": "Required skills: Python and SQL.", "cvEvidence": "", "reason": "A future learning goal is not evidence of SQL experience." },
         { "skill": "Power BI", "importance": "preferred", "matched": false, "jdEvidence": "Preferred skill: Power BI.", "cvEvidence": "", "reason": "The CV explicitly states no Power BI usage." }
       ],
-      "summary": "The CV has no affirmative evidence for the listed data-analysis skills."
+      "summary": "The CV has no affirmative evidence for the listed data-analysis skills.",
+      "coaching": {
+        "beforeInterview": [
+          { "skill": "Python", "advice": "Practise a small Python data task before applying; the CV explicitly says you have not used Python." },
+          { "skill": "SQL", "advice": "Learn to write basic SQL queries and document real practice before claiming this skill." },
+          { "skill": "Power BI", "advice": "If time allows, build a simple Power BI report as a learning exercise." }
+        ],
+        "improvements": [
+          { "skill": "Python", "advice": "Describe learning goals honestly and separate them from experience already gained." }
+        ],
+        "strengths": []
+      }
     },
     "expected": { "fitScore": 0, "matchedSkills": [], "missingSkills": ["Python", "SQL", "Power BI"], "matchedWeight": 0, "totalWeight": 5 }
   },
@@ -71,7 +107,19 @@
         { "skill": "Postman", "importance": "required", "matched": true, "jdEvidence": "Bắt buộc: kiểm thử thủ công và Postman.", "cvEvidence": "Sử dụng Postman để kiểm thử REST API và ghi nhận lỗi.", "reason": "CV nêu rõ việc sử dụng Postman để kiểm thử API." },
         { "skill": "Selenium", "importance": "preferred", "matched": false, "jdEvidence": "Ưu tiên: Selenium.", "cvEvidence": "", "reason": "CV chưa có bằng chứng sử dụng Selenium." }
       ],
-      "summary": "Đáp ứng hai kỹ năng bắt buộc; Selenium là phần cần bổ sung."
+      "summary": "Đáp ứng hai kỹ năng bắt buộc; Selenium là phần cần bổ sung.",
+      "coaching": {
+        "beforeInterview": [
+          { "skill": "Selenium", "advice": "Nếu chưa dùng Selenium, hãy luyện viết một kịch bản kiểm thử đơn giản; chỉ thêm vào CV sau khi có trải nghiệm thực tế." }
+        ],
+        "improvements": [
+          { "skill": "Postman", "advice": "Mô tả rõ một API đã kiểm thử bằng Postman và cách bạn ghi nhận lỗi." }
+        ],
+        "strengths": [
+          { "skill": "kiểm thử thủ công", "advice": "Kể về công việc kiểm thử thủ công cho ứng dụng đặt lịch." },
+          { "skill": "Postman", "advice": "Giải thích cách bạn dùng Postman để kiểm thử REST API và ghi nhận lỗi." }
+        ]
+      }
     },
     "expected": { "fitScore": 80, "matchedSkills": ["kiểm thử thủ công", "Postman"], "missingSkills": ["Selenium"], "matchedWeight": 4, "totalWeight": 5 }
   },
@@ -91,7 +139,19 @@
         { "skill": "SQL", "importance": "preferred", "matched": true, "jdEvidence": "Preferred skills: SQL and Git.", "cvEvidence": "Wrote SQL queries for a database assignment.", "reason": "The CV includes SQL query experience." },
         { "skill": "Git", "importance": "preferred", "matched": true, "jdEvidence": "Preferred skills: SQL and Git.", "cvEvidence": "Used Git for source control.", "reason": "The CV explicitly mentions Git usage." }
       ],
-      "summary": "Java, SQL, and Git have supporting evidence; Spring Boot is missing."
+      "summary": "Java, SQL, and Git have supporting evidence; Spring Boot is missing.",
+      "coaching": {
+        "beforeInterview": [
+          { "skill": "Spring Boot", "advice": "Practise a small Spring Boot project before claiming project experience; the current CV says there is no such project yet." }
+        ],
+        "improvements": [
+          { "skill": "Java", "advice": "Describe what the Java console application does and which parts you implemented." }
+        ],
+        "strengths": [
+          { "skill": "Java", "advice": "Discuss the Java console application you built." },
+          { "skill": "SQL", "advice": "Explain the SQL queries you wrote for the database assignment." }
+        ]
+      }
     },
     "expected": { "fitScore": 66.67, "matchedSkills": ["Java", "SQL", "Git"], "missingSkills": ["Spring Boot"], "matchedWeight": 4, "totalWeight": 6 }
   }

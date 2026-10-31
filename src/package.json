@@ -12,7 +12,9 @@
     "api:standalone": "node --env-file-if-exists=.env.local server.mjs",
     "verify:offline": "node scripts/verify-offline.mjs",
     "verify:live": "node --env-file-if-exists=.env.local scripts/verify-live.mjs",
-    "verify:secrets": "node --env-file-if-exists=.env.local scripts/check-secret-leaks.mjs"
+    "verify:secrets": "node --env-file-if-exists=.env.local scripts/check-secret-leaks.mjs",
+    "seed": "node --env-file-if-exists=.env.local scripts/seed.mjs",
+    "test:session-api": "node --env-file-if-exists=.env.local scripts/test-session-api.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

@@ -49,6 +49,11 @@ test('aliases are deduplicated and cannot inflate the weighted score', () => {
   };
   const raw = {
     summary: 'One required skill is missing.',
+    coaching: {
+      beforeInterview: [{ skill: 'SQL', advice: 'Practise SQL before the interview.' }],
+      improvements: [{ skill: 'JavaScript', advice: 'Describe the JavaScript work clearly.' }],
+      strengths: [{ skill: 'Git', advice: 'Discuss how you used Git.' }],
+    },
     requirements: [
       { skill: 'JavaScript', importance: 'required', matched: true, jdEvidence: 'Required: JavaScript, SQL.', cvEvidence: 'Developed a website with JavaScript', reason: 'Project evidence.' },
       { skill: 'JS', importance: 'preferred', matched: true, jdEvidence: 'Preferred: JS and Git.', cvEvidence: 'Developed a website with JavaScript', reason: 'Same language alias.' },
@@ -64,7 +69,11 @@ test('aliases are deduplicated and cannot inflate the weighted score', () => {
 
 test('C, C++, and C# remain distinct skills', () => {
   const input = { cvText: 'Used C++ for a systems programming project.', jdText: 'Required programming languages: C, C++, and C#.' };
-  const result = scoreAnalysis({ summary: 'C++ has evidence.', requirements: ['C', 'C++', 'C#'].map((skill) => ({
+  const result = scoreAnalysis({ summary: 'C++ has evidence.', coaching: {
+    beforeInterview: [{ skill: 'C', advice: 'Practise C before the interview.' }],
+    improvements: [{ skill: 'C++', advice: 'Explain the systems programming project.' }],
+    strengths: [{ skill: 'C++', advice: 'Discuss the C++ project.' }],
+  }, requirements: ['C', 'C++', 'C#'].map((skill) => ({
     skill, importance: 'required', matched: skill === 'C++', jdEvidence: input.jdText,
     cvEvidence: skill === 'C++' ? input.cvText : '', reason: 'Check the exact programming language.',
   })) }, input);
@@ -90,8 +99,49 @@ test('rejects a match without CV evidence', () => {
   assert.throws(() => scoreAnalysis(raw, fixtures[0].input), { code: 'INVALID_AI_RESPONSE' });
 });
 
+test('coaching cannot present a missing skill as an interview strength', () => {
+  const raw = structuredClone(fixtures[1].aiResponse);
+  raw.coaching.strengths[0].skill = 'PostgreSQL';
+  assert.throws(() => scoreAnalysis(raw, fixtures[1].input), { code: 'INVALID_AI_RESPONSE' });
+});
+
+test('coaching requires Gemini-written advice for each nonempty section', () => {
+  const raw = structuredClone(fixtures[1].aiResponse);
+  raw.coaching.beforeInterview = [];
+  assert.throws(() => scoreAnalysis(raw, fixtures[1].input), { code: 'INVALID_AI_RESPONSE' });
+  raw.coaching = structuredClone(fixtures[1].aiResponse.coaching);
+  raw.coaching.improvements[0].advice = '';
+  assert.throws(() => scoreAnalysis(raw, fixtures[1].input), { code: 'INVALID_AI_RESPONSE' });
+});
+
+test('detailed interview preparation and strengths fit the validated response', () => {
+  const raw = structuredClone(fixtures[1].aiResponse);
+  raw.coaching.beforeInterview[0].advice = 'A'.repeat(700);
+  raw.coaching.strengths[0].advice = 'B'.repeat(700);
+  const result = scoreAnalysis(raw, fixtures[1].input);
+  assert.equal(result.coaching.beforeInterview[0].advice.length, 700);
+  assert.equal(result.coaching.strengths[0].advice.length, 700);
+
+  raw.coaching.strengths[0].advice = 'B'.repeat(901);
+  assert.throws(() => scoreAnalysis(raw, fixtures[1].input), { code: 'INVALID_AI_RESPONSE' });
+});
+
+test('a full skill match accepts empty gap advice but keeps supported strengths', () => {
+  const raw = structuredClone(fixtures[0].aiResponse);
+  raw.coaching.beforeInterview = [];
+  raw.coaching.improvements = [];
+  const result = scoreAnalysis(raw, fixtures[0].input);
+  assert.equal(result.fitScore, 100);
+  assert.deepEqual(result.coaching.beforeInterview, []);
+  assert.deepEqual(result.coaching.improvements, []);
+  assert.ok(result.coaching.strengths.length > 0);
+});
+
 test('empty requirements produce a useful 422, not a misleading zero score', () => {
-  assert.throws(() => scoreAnalysis({ requirements: [], summary: 'No skills specified.' }, fixtures[0].input), {
+  assert.throws(() => scoreAnalysis({
+    requirements: [], summary: 'No skills specified.',
+    coaching: { beforeInterview: [], improvements: [], strengths: [] },
+  }, fixtures[0].input), {
     code: 'NO_JOB_REQUIREMENTS', status: 422,
   });
 });

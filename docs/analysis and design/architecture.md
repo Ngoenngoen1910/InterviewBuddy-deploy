@@ -2,6 +2,8 @@
 
 Author: Nguyen Tran Trung Nhan · Sprint 2, week 3 · Status: **draft, waiting for team agreement on Slack**
 
+> Superseded by the Software Architecture Document v1.0 (`InterviewBuddy_Software_Architecture_Document_v1.0.docx`, Sprint 2 week 4). This page is kept as the week-3 draft.
+
 This document describes the high-level architecture, the main data flows and where secrets live. The database is described in [database-design.md](database-design.md).
 
 ## 1. Overview

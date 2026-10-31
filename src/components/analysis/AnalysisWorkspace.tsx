@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import CvUpload, { type CvStatus } from "@/components/analysis/CvUpload";
@@ -13,13 +13,22 @@ import {
   analyzeFit,
   extractCvText,
 } from "@/lib/analysis/client";
-import { MIN_TEXT_CHARS, type AnalysisLanguage, type AnalyzeFitResponse } from "@/lib/analysis/types";
+import { getLatestFitAnalysis, saveFitAnalysis, type SavedFitAnalysis } from "@/lib/analysis/storage";
+import {
+  JD_MAX_CHARS,
+  MIN_TEXT_CHARS,
+  type AnalysisLanguage,
+  type AnalyzeFitResponse,
+} from "@/lib/analysis/types";
 
 type RunState =
   | { kind: "idle" }
   | { kind: "loading" }
   | { kind: "done"; result: AnalyzeFitResponse }
   | { kind: "error"; message: string };
+
+// Saving runs after a successful analysis and never blocks showing the result.
+type SaveState = "idle" | "saving" | "saved" | "failed";
 
 export default function AnalysisWorkspace() {
   const [jd, setJd] = useState("");
@@ -31,6 +40,18 @@ export default function AnalysisWorkspace() {
   const [cvPasted, setCvPasted] = useState("");
 
   const [run, setRun] = useState<RunState>({ kind: "idle" });
+  const [save, setSave] = useState<SaveState>("idle");
+  // Last result to save again if saving failed.
+  const pendingSave = useRef<Parameters<typeof saveFitAnalysis>[0] | null>(null);
+  const [latest, setLatest] = useState<SavedFitAnalysis | null>(null);
+
+  // Offer the latest saved analysis so the user can read it again (SCRUM-72).
+  useEffect(() => {
+    if (USE_MOCK) return;
+    getLatestFitAnalysis()
+      .then(setLatest)
+      .catch(() => setLatest(null)); // optional feature: stay silent on failure
+  }, []);
 
   // Ignore a slow extraction result if the user already removed or replaced the file.
   const extractId = useRef(0);
@@ -39,13 +60,16 @@ export default function AnalysisWorkspace() {
   const busy = run.kind === "loading" || cvStatus.kind === "extracting";
   const jdLength = jd.trim().length;
   const jdTooShort = jdLength < MIN_TEXT_CHARS;
+  const jdTooLong = jdLength > JD_MAX_CHARS;
   const cvTooShort = cvText.length < MIN_TEXT_CHARS;
-  const canSubmit = !jdTooShort && !cvTooShort && !busy;
+  const canSubmit = !jdTooShort && !jdTooLong && !cvTooShort && !busy;
 
   // Tell the user exactly what is missing instead of letting the API return 400.
   let submitHint = "";
   if (jdLength === 0 || cvText.length === 0) {
     submitHint = "Cần nhập JD và tải CV (hoặc dán nội dung CV) để phân tích.";
+  } else if (jdTooLong) {
+    submitHint = `JD dài ${jdLength} ký tự, vượt giới hạn ${JD_MAX_CHARS}. Hãy bỏ bớt phần giới thiệu công ty hoặc phúc lợi.`;
   } else if (jdTooShort) {
     submitHint = `JD quá ngắn, cần ít nhất ${MIN_TEXT_CHARS} ký tự (hiện có ${jdLength}).`;
   } else if (cvTooShort) {
@@ -59,10 +83,10 @@ export default function AnalysisWorkspace() {
     setCvStatus({ kind: "extracting" });
 
     try {
-      const { text, pages } = await extractCvText(file);
+      const { text, pages, truncated, originalChars } = await extractCvText(file);
       if (id !== extractId.current) return;
       setCvFromPdf(text);
-      setCvStatus({ kind: "ready", pages, chars: text.length });
+      setCvStatus({ kind: "ready", pages, chars: text.length, truncated, originalChars });
     } catch (e) {
       if (id !== extractId.current) return;
       if (e instanceof CvExtractError && e.code === "NO_TEXT") {
@@ -70,6 +94,8 @@ export default function AnalysisWorkspace() {
         setCvFile(null);
         setCvStatus({ kind: "warning", message: e.message });
       } else {
+        // A failed PDF must not keep the paste fallback disabled.
+        setCvFile(null);
         setCvStatus({ kind: "error", message: e instanceof Error ? e.message : "Không đọc được file PDF." });
       }
     }
@@ -87,14 +113,45 @@ export default function AnalysisWorkspace() {
     if (!canSubmit) return;
 
     setRun({ kind: "loading" });
+    setSave("idle");
     try {
       const result = await analyzeFit({ jd: jd.trim(), cv: cvText, language });
       setRun({ kind: "done", result });
+      if (!USE_MOCK) {
+        pendingSave.current = {
+          jd: jd.trim(),
+          cv: cvText,
+          cvFileName: cvFile?.name ?? null,
+          language,
+          result,
+        };
+        void handleSave();
+      }
     } catch (err) {
       const message =
         err instanceof AnalyzeFitError ? err.message : "Có lỗi không xác định. Vui lòng thử lại.";
       setRun({ kind: "error", message });
     }
+  }
+
+  async function handleSave() {
+    const input = pendingSave.current;
+    if (!input) return;
+    setSave("saving");
+    try {
+      const id = await saveFitAnalysis(input);
+      pendingSave.current = null;
+      setSave("saved");
+      setLatest({ id, createdAt: new Date().toISOString(), language: input.language, result: input.result });
+    } catch {
+      setSave("failed");
+    }
+  }
+
+  function showLatest() {
+    if (!latest) return;
+    setSave("saved");
+    setRun({ kind: "done", result: latest.result });
   }
 
   return (
@@ -160,9 +217,22 @@ export default function AnalysisWorkspace() {
         </h2>
 
         {run.kind === "idle" && (
-          <Card className="text-sm text-slate-500">
-            Kết quả sẽ hiện ở đây sau khi bạn bấm phân tích: điểm phù hợp, kỹ năng đã có và còn
-            thiếu, bảng so sánh yêu cầu và lời khuyên.
+          <Card className="space-y-3 text-sm text-slate-500">
+            <p>
+              Kết quả sẽ hiện ở đây sau khi bạn bấm phân tích: điểm phù hợp, kỹ năng đã có và còn
+              thiếu, bảng so sánh yêu cầu và lời khuyên.
+            </p>
+            {latest && (
+              <div className="flex flex-wrap items-center gap-3 border-t border-slate-200 pt-3">
+                <span>
+                  Bản phân tích gần nhất: {Math.round(latest.result.fitScore)}/100, lúc{" "}
+                  {new Date(latest.createdAt).toLocaleString("vi-VN")}
+                </span>
+                <Button variant="secondary" onClick={showLatest}>
+                  Xem lại
+                </Button>
+              </div>
+            )}
           </Card>
         )}
 
@@ -177,9 +247,35 @@ export default function AnalysisWorkspace() {
           </Card>
         )}
 
-        {run.kind === "done" && <FitResult result={run.result} />}
+        {run.kind === "done" && (
+          <>
+            <SaveNotice state={save} onRetry={handleSave} />
+            <FitResult result={run.result} />
+          </>
+        )}
       </section>
     </div>
+  );
+}
+
+function SaveNotice({ state, onRetry }: { state: SaveState; onRetry: () => void }) {
+  if (state === "idle") return null;
+  if (state === "failed") {
+    return (
+      <div role="alert" className="flex flex-wrap items-center gap-3 rounded-lg bg-amber-50 p-3 text-sm text-amber-900">
+        <span className="flex-1">Chưa lưu được kết quả vào tài khoản. Kết quả vẫn hiện bên dưới.</span>
+        <Button variant="secondary" onClick={onRetry}>
+          Lưu lại
+        </Button>
+      </div>
+    );
+  }
+  return (
+    <p role="status" className="text-sm text-slate-500">
+      {state === "saving"
+        ? "Đang lưu kết quả..."
+        : "Đã lưu vào tài khoản. Buổi phỏng vấn thử tiếp theo sẽ dùng bản phân tích này."}
+    </p>
   );
 }
 

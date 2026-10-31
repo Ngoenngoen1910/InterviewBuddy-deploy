@@ -6,7 +6,7 @@ import { CV_MAX_FILE_BYTES } from "@/lib/analysis/types";
 export type CvStatus =
   | { kind: "idle" }
   | { kind: "extracting" }
-  | { kind: "ready"; pages: number; chars: number }
+  | { kind: "ready"; pages: number; chars: number; truncated: boolean; originalChars: number }
   | { kind: "warning"; message: string } // e.g. scanned PDF with no text
   | { kind: "error"; message: string };
 
@@ -61,8 +61,12 @@ export default function CvUpload({
       <div>
         <h2 className="text-base font-semibold text-slate-900">CV / Resume</h2>
         <p className="text-sm text-slate-500">
-          Tải CV dạng PDF hoặc dán nội dung CV bên dưới. File chỉ được đọc để phân tích, không
-          được lưu lại.
+          Tải CV dạng PDF hoặc dán nội dung CV bên dưới.
+        </p>
+        <p id="cv-privacy" className="mt-2 rounded-lg bg-slate-50 p-3 text-xs text-slate-600">
+          Quyền riêng tư: file PDF chỉ được đọc để lấy chữ và không được lưu lại. Phần chữ của CV,
+          JD và kết quả phân tích được lưu vào tài khoản của bạn để dùng cho buổi phỏng vấn thử;
+          chỉ bạn xem được.
         </p>
       </div>
 
@@ -137,6 +141,12 @@ export default function CvUpload({
             Xóa
           </button>
         </div>
+      )}
+
+      {status.kind === "ready" && status.truncated && (
+        <p role="status" className="rounded-lg bg-amber-50 p-3 text-sm text-amber-900">
+          PDF có {status.originalChars.toLocaleString("vi-VN")} ký tự. Chỉ {status.chars.toLocaleString("vi-VN")} ký tự đầu được phân tích; phần còn lại chưa được xét. Hãy rút gọn CV nếu phần quan trọng nằm ở cuối file.
+        </p>
       )}
 
       {(localError || status.kind === "error") && (

@@ -58,6 +58,43 @@ export const GEMINI_ANALYSIS_SCHEMA = {
       },
     },
     summary: { type: 'string', description: 'A short skills-gap summary in the requested language; do not include a numeric score.' },
+    coaching: {
+      type: 'object',
+      additionalProperties: false,
+      properties: {
+        beforeInterview: {
+          type: 'array',
+          items: {
+            type: 'object', additionalProperties: false,
+            properties: {
+              skill: { type: 'string' },
+              advice: { type: 'string', description: 'Two or three technically specific sentences: concept to review, practical exercise with an observable result, and interview discussion point.' },
+            },
+            required: ['skill', 'advice'],
+          },
+        },
+        improvements: {
+          type: 'array',
+          items: {
+            type: 'object', additionalProperties: false,
+            properties: { skill: { type: 'string' }, advice: { type: 'string' } },
+            required: ['skill', 'advice'],
+          },
+        },
+        strengths: {
+          type: 'array',
+          items: {
+            type: 'object', additionalProperties: false,
+            properties: {
+              skill: { type: 'string' },
+              advice: { type: 'string', description: 'Two or three technical sentences grounded in proven CV skills; make unsupported details questions or conditional preparation, and do not quote or cite the CV.' },
+            },
+            required: ['skill', 'advice'],
+          },
+        },
+      },
+      required: ['beforeInterview', 'improvements', 'strengths'],
+    },
   },
-  required: ['requirements', 'summary'],
+  required: ['requirements', 'summary', 'coaching'],
 };

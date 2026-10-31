@@ -13,12 +13,22 @@ export interface SkillRequirement {
   reason: string;
 }
 
+export interface CoachingItem {
+  skill: string;
+  advice: string;
+}
+
 export interface AnalysisResult {
   analysisId: string;
   fitScore: number;
   matchedSkills: string[];
   missingSkills: string[];
   summary: string;
+  coaching: {
+    beforeInterview: CoachingItem[];
+    improvements: CoachingItem[];
+    strengths: CoachingItem[];
+  };
   requirements: SkillRequirement[];
   scoreBreakdown: {
     matchedWeight: number;

@@ -52,6 +52,15 @@ export async function analyzeFit(input: AnalyzeFitRequest): Promise<AnalyzeFitRe
     throw new AnalyzeFitError(code, message);
   }
 
+  const coaching = body.coaching;
+  const validItems = (items: unknown): items is { skill: string; advice: string }[] =>
+    Array.isArray(items) && items.every((item) =>
+      item && typeof item.skill === "string" && typeof item.advice === "string");
+  if (!coaching || !validItems(coaching.beforeInterview)
+      || !validItems(coaching.improvements) || !validItems(coaching.strengths)) {
+    throw new AnalyzeFitError("INVALID_OUTPUT", MESSAGES.INVALID_OUTPUT);
+  }
+
   return body;
 }
 
@@ -63,7 +72,12 @@ function toCode(status: number, code?: string): AnalyzeFitErrorCode {
   return "SERVER_ERROR";
 }
 
-export type ExtractCvResult = { text: string; pages: number };
+export type ExtractCvResult = {
+  text: string;
+  pages: number;
+  truncated: boolean;
+  originalChars: number;
+};
 
 // NO_TEXT = the PDF is a scan/image: show a warning and let the user paste the CV.
 export class CvExtractError extends Error {

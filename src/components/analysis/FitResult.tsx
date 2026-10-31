@@ -9,7 +9,6 @@ const STATUS: Record<RequirementStatus, { label: string; dot: string; text: stri
 
 export default function FitResult({ result }: { result: AnalyzeFitResponse }) {
   const score = Math.max(0, Math.min(100, Math.round(result.fitScore)));
-
   return (
     <div className="space-y-4" aria-live="polite">
       {/* Score */}
@@ -21,86 +20,69 @@ export default function FitResult({ result }: { result: AnalyzeFitResponse }) {
         </div>
       </Card>
 
-      {/* Matched / missing skills */}
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <h3 className="mb-3 font-semibold text-green-700">
-            Kỹ năng đã có ({result.matched.length})
-          </h3>
-          {result.matched.length === 0 ? (
-            <p className="text-sm text-slate-500">Chưa tìm thấy kỹ năng nào khớp với JD.</p>
-          ) : (
-            <ul className="flex flex-wrap gap-2">
-              {result.matched.map((s) => (
-                <li
-                  key={s.skill}
-                  title={s.evidence}
-                  className="rounded-full bg-green-50 px-3 py-1 text-sm text-green-800"
-                >
-                  {s.skill}
-                </li>
-              ))}
-            </ul>
-          )}
-        </Card>
-
-        <Card>
-          <h3 className="mb-3 font-semibold text-red-700">
-            Kỹ năng còn thiếu ({result.missing.length})
-          </h3>
-          {result.missing.length === 0 ? (
-            <p className="text-sm text-slate-500">Không thiếu kỹ năng nào. Tuyệt vời!</p>
-          ) : (
-            <ul className="flex flex-wrap gap-2">
-              {result.missing.map((s) => (
-                <li
-                  key={s.skill}
-                  title={s.note}
-                  className="rounded-full bg-red-50 px-3 py-1 text-sm text-red-800"
-                >
-                  {s.skill}
-                </li>
-              ))}
-            </ul>
-          )}
-        </Card>
-      </div>
-
-      {/* Requirements table */}
+      {/* Gemini-written preparation priorities, checked against missing skills */}
       <Card>
-        <h3 className="font-semibold">Yêu cầu trong JD và CV của bạn</h3>
-        <div className="mt-3 overflow-x-auto">
-          <table className="w-full min-w-[480px] text-left text-sm">
-            <thead className="border-b border-slate-200 text-xs text-slate-500 uppercase">
-              <tr>
-                <th scope="col" className="py-2 pr-3 font-medium">Yêu cầu</th>
-                <th scope="col" className="py-2 pr-3 font-medium">Trạng thái</th>
-                <th scope="col" className="py-2 font-medium">Bằng chứng từ CV</th>
-              </tr>
-            </thead>
-            <tbody>
-              {result.requirements.map((r, i) => {
-                const s = STATUS[r.status] ?? STATUS.missing;
-                return (
-                  <tr key={`${r.requirement}-${i}`} className="border-b border-slate-100 last:border-0">
-                    <td className="py-2 pr-3 text-slate-900">{r.requirement}</td>
-                    <td className={`py-2 pr-3 whitespace-nowrap ${s.text}`}>
-                      <span className={`mr-2 inline-block h-2 w-2 rounded-full ${s.dot}`} aria-hidden="true" />
-                      {s.label}
-                    </td>
-                    <td className="py-2 text-slate-600">{r.evidence || "—"}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        <h3 className="font-semibold text-amber-900">Nên bổ sung trước buổi phỏng vấn</h3>
+        {result.coaching.beforeInterview.length === 0 ? (
+          <p className="mt-2 text-sm text-slate-600">
+            Chưa tìm thấy yêu cầu kỹ năng nào thiếu bằng chứng trong CV.
+          </p>
+        ) : (
+          <ul className="mt-3 space-y-3">
+            {result.coaching.beforeInterview.map((item) => (
+              <li key={item.skill} className="rounded-lg bg-amber-50 p-3 text-sm">
+                <p className="font-medium text-amber-950">{item.skill}</p>
+                <p className="mt-1 leading-relaxed text-amber-900">{item.advice}</p>
+              </li>
+            ))}
+          </ul>
+        )}
       </Card>
 
-      {/* Recommendation */}
-      <Card className="border-amber-200 bg-amber-50">
-        <h3 className="font-semibold text-amber-900">Lời khuyên</h3>
-        <p className="mt-1 text-sm text-amber-900">{result.recommendation}</p>
+      {/* Requirement status without CV evidence */}
+      <Card>
+        <h3 className="font-semibold">Yêu cầu trong JD và CV của bạn</h3>
+        <table className="mt-3 w-full table-fixed text-left text-sm">
+          <thead className="border-b border-slate-200 text-xs uppercase text-slate-500">
+            <tr>
+              <th scope="col" className="w-2/3 py-2 pr-3 font-medium">Yêu cầu</th>
+              <th scope="col" className="w-1/3 py-2 font-medium">Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            {result.requirements.map((item, index) => {
+              const status = STATUS[item.status] ?? STATUS.missing;
+              return (
+                <tr key={`${item.requirement}-${index}`} className="border-b border-slate-100 last:border-0">
+                  <td className="break-words py-2 pr-3 text-slate-900">{item.requirement}</td>
+                  <td className={`py-2 ${status.text}`}>
+                    <span className={`mr-2 inline-block h-2 w-2 rounded-full ${status.dot}`} aria-hidden="true" />
+                    {status.label}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </Card>
+
+      {/* Gemini-written technical talking points */}
+      <Card>
+        <h3 className="font-semibold text-green-800">Điểm mạnh nên nhắc khi phỏng vấn</h3>
+        {result.coaching.strengths.length === 0 ? (
+          <p className="mt-2 text-sm text-slate-600">
+            Chưa có kỹ năng phù hợp để nêu thành điểm mạnh.
+          </p>
+        ) : (
+          <ul className="mt-3 space-y-3">
+            {result.coaching.strengths.map((item) => (
+              <li key={item.skill} className="rounded-lg bg-green-50 p-3 text-sm">
+                <p className="font-medium text-green-900">{item.skill}</p>
+                <p className="mt-1 leading-relaxed text-green-900">{item.advice}</p>
+              </li>
+            ))}
+          </ul>
+        )}
       </Card>
 
       <p className="text-xs text-slate-500">

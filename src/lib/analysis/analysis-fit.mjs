@@ -48,21 +48,24 @@ export function formatFitResult(result, input) {
     : (missing.length
       ? `Hãy bổ sung minh chứng về ${missingNames} vào CV hoặc luyện tập các kỹ năng này trước buổi phỏng vấn.`
       : 'Hãy chuẩn bị ví dụ dự án cụ thể để giải thích các kỹ năng đã thể hiện trong CV.');
-  return { fitScore: result.fitScore, matched, missing, requirements, recommendation };
+  return { fitScore: result.fitScore, matched, missing, requirements, recommendation, coaching: result.coaching };
 }
 
 export function formatFitError(error, status) {
   let code = 'SERVER_ERROR';
   if ([400, 413, 415].includes(status) || error.code === 'NO_JOB_REQUIREMENTS') code = 'BAD_INPUT';
   else if (status === 429) code = 'RATE_LIMIT';
-  else if (status === 502 || error.code === 'AI_CONTENT_BLOCKED') code = 'INVALID_OUTPUT';
+  else if (error.code === 'INVALID_AI_RESPONSE' || error.code === 'AI_CONTENT_BLOCKED') code = 'INVALID_OUTPUT';
   const messages = {
     BAD_INPUT: 'JD hoặc CV không hợp lệ. Vui lòng kiểm tra lại.',
     RATE_LIMIT: 'AI đang quá tải. Vui lòng thử lại sau.',
     INVALID_OUTPUT: 'AI chưa tạo được kết quả hợp lệ. Vui lòng thử lại.',
     SERVER_ERROR: 'Không thể phân tích lúc này. Vui lòng thử lại sau.',
   };
-  return { code, message: messages[code], ...(error.details ? { details: error.details } : {}) };
+  const message = error.code === 'AI_TIMEOUT'
+    ? 'Phân tích mất quá nhiều thời gian. Vui lòng thử lại với CV ngắn hơn hoặc thử lại sau.'
+    : messages[code];
+  return { code, message, ...(error.details ? { details: error.details } : {}) };
 }
 
 export function createAnalysisFitHandler(options = {}) {

@@ -30,7 +30,10 @@ export function createAnalysisClient({ baseUrl = '', fetchImpl = globalThis.fetc
     }
     if (!result || !Number.isFinite(result.fitScore) || result.fitScore < 0 || result.fitScore > 100
         || !Array.isArray(result.matchedSkills) || !result.matchedSkills.every((skill) => typeof skill === 'string')
-        || !Array.isArray(result.missingSkills) || !result.missingSkills.every((skill) => typeof skill === 'string')) {
+        || !Array.isArray(result.missingSkills) || !result.missingSkills.every((skill) => typeof skill === 'string')
+        || !result.coaching || !['beforeInterview', 'improvements', 'strengths'].every((section) =>
+          Array.isArray(result.coaching[section]) && result.coaching[section].every((item) =>
+            item && typeof item.skill === 'string' && typeof item.advice === 'string'))) {
       throw new AnalysisApiError('INVALID_RESPONSE', 'The server returned an invalid analysis.', response.status);
     }
     return result;

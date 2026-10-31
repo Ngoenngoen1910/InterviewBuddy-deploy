@@ -44,13 +44,24 @@ Content-Type: application/json
     { "requirement": "PostgreSQL", "status": "missing", "evidence": "" },
     { "requirement": "Docker", "status": "matched", "evidence": "Packaged a demonstration service with Docker." }
   ],
-  "recommendation": "Add evidence for PostgreSQL to your CV or practise these skills before the interview."
+  "recommendation": "Add evidence for PostgreSQL to your CV or practise these skills before the interview.",
+  "coaching": {
+    "beforeInterview": [
+      { "skill": "PostgreSQL", "advice": "If you have used PostgreSQL, add a truthful project example to the CV; otherwise practise a small database task before the interview." }
+    ],
+    "improvements": [
+      { "skill": "Node.js", "advice": "Describe your role in implementing the REST APIs and the specific work you completed." }
+    ],
+    "strengths": [
+      { "skill": "Node.js", "advice": "Discuss the REST APIs you implemented with Node.js." }
+    ]
+  }
 }
 ```
 
 Ví dụ trên minh họa cấu trúc từ cặp dữ liệu giả lập CVJD-02, không phải trích xuất mới từ Gemini. Danh sách và trích dẫn thực tế do kết quả Gemini tạo ra; backend xác minh bằng chứng và tự tính điểm. Trạng thái `partial` mà giao diện Khang cho phép hiện chưa có trong cách tính điểm; API trả `matched` hoặc `missing`. Giao diện Khang làm tròn `fitScore` khi hiển thị vòng điểm: 66,67 từ API sẽ hiện 67%.
 
-`recommendation` được tạo theo quy tắc từ danh sách kỹ năng thiếu, không phải một lượt gọi Gemini thứ hai. Nếu không thiếu kỹ năng, API gợi ý chuẩn bị ví dụ dự án. API không ghi CV/JD vào cơ sở dữ liệu.
+`recommendation` vẫn được tạo theo quy tắc để tương thích với client cũ. Từ 26/10/2026, `coaching` chứa ba nhóm nhận xét do Gemini viết trong cùng lần gọi phân tích; trang kết quả mới dùng các nhóm này. Backend xác nhận tên kỹ năng của mỗi mục gắn với kết quả đối chiếu, nhưng không thể tự chứng minh mọi câu văn AI viết đều đúng về mặt ngữ nghĩa. Khi không thiếu kỹ năng, `beforeInterview` chuyển sang lời khuyên chuẩn bị ví dụ cho kỹ năng đã khớp; nếu không có kỹ năng khớp, `strengths` là mảng rỗng. Ba lần gọi Gemini thật với các cặp giả lập CVJD-01, CVJD-02 và CVJD-04 đã trả đủ ba nhóm và điểm lần lượt 100, 60, 80. Ngày 27/10/2026 đã chụp bản xem trước thành phần kết quả với dữ liệu Gemini thật của CVJD-04; chưa kiểm tra toàn bộ luồng đăng nhập và nhập CV/JD. API không ghi CV/JD vào cơ sở dữ liệu.
 
 ## Mã lỗi
 

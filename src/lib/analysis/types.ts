@@ -22,12 +22,21 @@ export type RequirementRow = {
   evidence: string;
 };
 
+export type CoachingItem = { skill: string; advice: string };
+
+export type AnalysisCoaching = {
+  beforeInterview: CoachingItem[];
+  improvements: CoachingItem[];
+  strengths: CoachingItem[];
+};
+
 export type AnalyzeFitResponse = {
   fitScore: number; // 0–100
   matched: MatchedSkill[];
   missing: MissingSkill[];
   requirements: RequirementRow[];
   recommendation: string;
+  coaching: AnalysisCoaching;
 };
 
 export type AnalyzeFitErrorCode =

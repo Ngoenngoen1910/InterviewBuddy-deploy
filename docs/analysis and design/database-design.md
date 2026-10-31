@@ -1,8 +1,13 @@
-# InterviewBuddy – Database Design (draft v0.1)
+# InterviewBuddy – Database Design (v1.0)
 
-Author: Nguyen Tran Trung Nhan · Sprint 2, week 3 · Status: **draft, waiting for team agreement on Slack**
+Author: Nguyen Tran Trung Nhan · Sprint 2, week 4 · Status: **matches the Supabase database after both migrations below**
 
-Database: Supabase (PostgreSQL). Migration: [`src/supabase/migrations/20261021000000_initial_schema.sql`](../../src/supabase/migrations/20261021000000_initial_schema.sql).
+Database: Supabase (PostgreSQL 17). Migrations, applied in order:
+
+1. [`20261021000000_initial_schema.sql`](../../src/supabase/migrations/20261021000000_initial_schema.sql) – the 7 tables and RLS.
+2. [`20261030000000_interview_session_settings.sql`](../../src/supabase/migrations/20261030000000_interview_session_settings.sql) – Interview Setup fields (UC-05) and the ownership check for linked analyses.
+
+Change the schema only with a new migration file, never by hand in the dashboard.
 
 ## 1. Entity–relationship diagram
 
@@ -46,6 +51,10 @@ erDiagram
     text round_type
     text difficulty
     text language
+    text target_position
+    date interview_date
+    smallint duration_minutes
+    text input_mode
     smallint planned_questions
     text status
   }
@@ -93,7 +102,7 @@ erDiagram
 | --- | --- | --- | --- |
 | `profiles` | Sign-up, login and profile | `id` = `auth.users.id`; field of study, target position, experience level, preferred language (`vi`/`en`) | 1–1 with `auth.users`; deleted with the user |
 | `fit_analyses` | JD and CV fit analysis | `jd_text` (≤ 3000 chars), `cv_text`, `fit_score` (0–100), `result` (full `/api/analyze-fit` JSON) | many per user |
-| `interview_sessions` | Interview setup, chat interview, history | `round_type` (`hr`/`technical`/`behavioral`), `difficulty`, `language`, `planned_questions` (1–20), `status` (`in_progress`/`completed`/`abandoned`), JD/CV snapshot | many per user; optional link to a fit analysis (set to null if it is deleted) |
+| `interview_sessions` | Interview setup, chat interview, history | `round_type` (`hr`/`technical`/`behavioral`), `difficulty`, `language`, `target_position` (1–120 chars), `interview_date` (optional), `duration_minutes` (15/30/45), `input_mode` (`text`/`voice`), `planned_questions` (1–20, derived from the duration), `status` (`in_progress`/`completed`/`abandoned`), JD/CV snapshot | many per user; optional link to a fit analysis (set to null if it is deleted) |
 | `questions` | Chat interview, targeted practice | `position` (unique per session), `kind` (`main`/`follow_up`/`practice`), `parent_question_id` for follow-ups | many per session |
 | `answers` | Chat interview, voice answers | `content`, `input_mode` (`text`/`voice`), `duration_seconds`, `word_count` | at most one per question |
 | `feedbacks` | Per-answer scoring and feedback | 4 rubric scores 0–10 (content, STAR structure, clarity, confidence), `overall_score`, explanation, strengths, improvements, sample answer, `next_action` (`follow_up`/`next_topic`/`end`) | at most one per answer |
@@ -110,7 +119,8 @@ RLS is enabled on **every** table. Without a matching policy, a request with the
 | Table | Who can read / write | How it is checked |
 | --- | --- | --- |
 | `profiles` | Owner: read, update | `id = auth.uid()` |
-| `fit_analyses`, `interview_sessions` | Owner: all operations | `user_id = auth.uid()` (`user_id` defaults to `auth.uid()`) |
+| `fit_analyses` | Owner: all operations | `user_id = auth.uid()` (`user_id` defaults to `auth.uid()`) |
+| `interview_sessions` | Owner: all operations; a linked analysis must also be the owner's | `user_id = auth.uid()` and `owns_fit_analysis(fit_analysis_id)` |
 | `questions`, `reports` | Owner of the session | `owns_session(session_id)` |
 | `answers` | Owner of the question's session | `owns_question(question_id)` |
 | `feedbacks` | Owner of the answer's session | `owns_answer(answer_id)` |
@@ -124,7 +134,9 @@ The migration was run on a local PostgreSQL (PGlite) with stand-ins for `auth.us
 
 | Check | Result |
 | --- | --- |
-| Migration runs without errors | Pass |
+| Both migrations run without errors | Pass |
+| New setup fields: defaults (30 min, text), invalid duration / answer mode / empty position rejected | Pass |
+| B cannot link a session to A's analysis, on insert or update | Pass (blocked by RLS) |
 | Sign-up creates a profile with the name from email or Google metadata | Pass |
 | User A sees only A's rows in all 7 tables; user B sees none of them | Pass |
 | B cannot add questions or answers to A's session, create a session for A, or move a session to A | Pass (blocked by RLS) |

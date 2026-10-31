@@ -9,6 +9,34 @@
     "PostgreSQL"
   ],
   "summary": "Node.js and Docker are supported; PostgreSQL is a skill gap.",
+  "coaching": {
+    "beforeInterview": [
+      {
+        "skill": "PostgreSQL",
+        "advice": "If you have used PostgreSQL, add a truthful project example to the CV; otherwise practise a small database task before the interview."
+      }
+    ],
+    "improvements": [
+      {
+        "skill": "Node.js",
+        "advice": "Describe your role in implementing the REST APIs and the specific work you completed."
+      },
+      {
+        "skill": "PostgreSQL",
+        "advice": "Do not present MongoDB work as PostgreSQL experience; explain the distinction honestly."
+      }
+    ],
+    "strengths": [
+      {
+        "skill": "Node.js",
+        "advice": "Discuss the REST APIs you implemented with Node.js."
+      },
+      {
+        "skill": "Docker",
+        "advice": "Explain how you packaged the demonstration service with Docker."
+      }
+    ]
+  },
   "requirements": [
     {
       "skill": "Node.js",

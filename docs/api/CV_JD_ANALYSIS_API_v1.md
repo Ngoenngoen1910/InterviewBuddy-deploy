@@ -3,7 +3,7 @@
 Ngày: 23/10/2026. Phạm vi: SCRUM-39, SCRUM-40, SCRUM-41, SCRUM-42, SCRUM-43; bên gọi: SCRUM-46 của Khang.
 
 Đây là contract được triển khai trong nhánh `feature/SCRUM-39-cv-jd-analysis`.
-Đã kiểm thử tự động và đã xác minh Gemini thật với 5 cặp CV/JD giả lập ngày 23/10/2026: 5/5 đạt kết quả kỳ vọng. Model được xác minh: `gemini-3.5-flash-lite`.
+Lõi Fit Score đã kiểm thử tự động và đã xác minh Gemini thật với 5 cặp CV/JD giả lập ngày 23/10/2026: 5/5 đạt kết quả kỳ vọng. Model được xác minh: `gemini-3.5-flash-lite`. Phần nhận xét `coaching` được bổ sung ngày 26/10/2026; ba lần gọi Gemini thật với cặp giả lập CVJD-01, CVJD-02 và CVJD-04 đã trả lần lượt 100, 60 và 80 điểm, cùng ba nhóm nhận xét có nội dung.
 Giao diện hiện có của Khang dùng một contract khác; xem [adapter `/api/analyze-fit`](KHANG_ANALYZE_FIT_COMPAT.md) để ghép mà không sửa client của Khang.
 
 ## 1. Endpoint
@@ -24,7 +24,7 @@ Content-Type: application/json
 |---|---|---|---|
 | `cvText` | string | Có | 30–50.000 đơn vị độ dài JavaScript `.length`, sau khi trim. |
 | `jdText` | string | Có | 30–30.000 đơn vị độ dài JavaScript `.length`, sau khi trim. |
-| `language` | `"vi"` hoặc `"en"` | Không | Ngôn ngữ của `summary` và `reason`; mặc định `"vi"`. |
+| `language` | `"vi"` hoặc `"en"` | Không | Ngôn ngữ của `summary`, `reason` và `coaching.advice`; mặc định `"vi"`. |
 
 Giới hạn body: **400.000 byte UTF-8**. Các trường không có trong bảng bị từ chối.
 Trích dẫn trong `jdEvidence`/`cvEvidence` giữ ngôn ngữ gốc của văn bản đầu vào.
@@ -46,6 +46,7 @@ Trích dẫn trong `jdEvidence`/`cvEvidence` giữ ngôn ngữ gốc của văn 
 | `matchedSkills` | string[] | Kỹ năng có bằng chứng trong CV. Có thể rỗng. |
 | `missingSkills` | string[] | Kỹ năng yêu cầu trong JD chưa có bằng chứng khẳng định trong CV. Có thể rỗng. |
 | `summary` | string | Nhận xét ngắn về khoảng thiếu kỹ năng. |
+| `coaching` | object | Ba nhóm lời khuyên do Gemini viết: `beforeInterview`, `improvements`, `strengths`. Mỗi nhóm chứa tối đa 3 `{skill, advice}`. |
 | `requirements` | object[] | Tối đa 40 yêu cầu, gồm lý do và trích dẫn để đối chiếu. |
 | `scoreBreakdown` | object | Số lượng và trọng số dùng để tính lại điểm. |
 | `meta` | object | Provider, model, phiên bản cách tính điểm, ngôn ngữ, thời điểm. |
@@ -79,6 +80,8 @@ Phiên bản `weighted-skills-v1` là lựa chọn triển khai cho bản này, 
 - `fitScore = round(100 × matchedWeight / totalWeight, 2)`.
 - Ví dụ Node.js khớp (2), PostgreSQL thiếu (2), Docker khớp (1): `100 × 3/5 = 60`.
 - Gemini nhận diện yêu cầu và bằng chứng; **backend tính điểm**, không nhận một tỷ lệ do model tự đặt.
+- Gemini viết lời khuyên trong cùng lần phân tích. Backend kiểm tra mỗi `skill` được nhắc tới có trong yêu cầu JD, mục `beforeInterview` chỉ trỏ đến kỹ năng thiếu, mục `strengths` chỉ trỏ đến kỹ năng đã có bằng chứng CV. Nội dung ngữ nghĩa của `advice` vẫn cần người dùng kiểm tra.
+- `beforeInterview.advice` và `strengths.advice` được yêu cầu viết thành 2–3 câu có chi tiết chuyên môn và hướng chuẩn bị phỏng vấn. Giao diện không hiển thị trích dẫn CV bên dưới mục điểm mạnh; dữ liệu bằng chứng trong API vẫn phục vụ kiểm tra kỹ năng khớp.
 - Alias trùng nhau như JS/JavaScript được gộp để không nhân đôi trọng số. `C`, `C++`, `C#` là các kỹ năng khác nhau.
 - Không có yêu cầu kỹ năng nào để đánh giá: trả `422 NO_JOB_REQUIREMENTS`.
 

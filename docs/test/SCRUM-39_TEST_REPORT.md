@@ -1,5 +1,14 @@
 # SCRUM-39 — Báo cáo triển khai và kiểm thử
 
+## Cập nhật 26/10/2026: ba mục nhận xét cho màn hình kết quả
+
+Gemini nay trả `coaching.beforeInterview`, `coaching.improvements` và `coaching.strengths` trong cùng lần phân tích CV/JD. Backend kiểm tra mỗi mục gắn với một kỹ năng trong kết quả đối chiếu; `beforeInterview` chỉ dùng kỹ năng thiếu và `strengths` chỉ dùng kỹ năng có bằng chứng trong CV. Fit Score vẫn do backend tính.
+
+- Bộ kiểm thử hiện tại: **80/80 đạt** (bao gồm các ca xác minh ràng buộc của ba mục nhận xét và trường hợp khớp 100%).
+- TypeScript và ESLint cho các file giao diện liên quan: đạt.
+- Ba lần gọi Gemini thật với các cặp giả lập: CVJD-01 trả **100** điểm và số mục `2/1/1`; CVJD-02 trả **60** điểm và `1/1/1`; CVJD-04 tiếng Việt trả **80** điểm và `1/1/1` (theo thứ tự `beforeInterview/improvements/strengths`). Lệnh kiểm tra chỉ in trạng thái, điểm, số mục và cờ xác nhận có dấu tiếng Việt; không in API key hoặc văn bản CV/JD.
+- Ngày 27/10/2026, đã dùng CV/JD giả lập CVJD-04 gọi Gemini thật và chụp giao diện kết quả bằng trình duyệt: Fit Score **80%**, một nhận xét chuẩn bị Selenium và một nhận xét điểm mạnh Postman. Ảnh và JSON nằm trong `output/interviewbuddy-live-coaching-*`. Đây là bản xem trước của thành phần kết quả, chưa phải kiểm thử toàn bộ luồng đăng nhập và nhập CV/JD. Lời khuyên AI vẫn cần người dùng kiểm tra, đặc biệt khi nêu kỹ thuật chưa được CV chứng minh. Các số liệu 5/5 bên dưới là kết quả trước khi bổ sung `coaching`.
+
 Ngày: 23/10/2026. Kiểm thử do Codex thực hiện; không phải đánh giá của giảng viên hoặc xác nhận review của thành viên nhóm.
 
 ## 1. Truy vết nhiệm vụ

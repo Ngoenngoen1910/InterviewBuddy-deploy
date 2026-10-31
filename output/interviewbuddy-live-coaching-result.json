@@ -1,0 +1,146 @@
+{
+  "kind": "synthetic-live-gemini-demo",
+  "generatedAt": "2026-10-27T04:16:11.903Z",
+  "fixtureId": "CVJD-04",
+  "input": {
+    "cvText": "Sinh viên kiểm thử phần mềm. Đã thực hiện kiểm thử thủ công cho ứng dụng đặt lịch. Sử dụng Postman để kiểm thử REST API và ghi nhận lỗi.",
+    "jdText": "Bắt buộc: kiểm thử thủ công và Postman. Ưu tiên: Selenium.",
+    "language": "vi"
+  },
+  "analysis": {
+    "analysisId": "98f6c873-83f3-46a5-a379-e6b0cb263dca",
+    "fitScore": 80,
+    "matchedSkills": [
+      "kiểm thử thủ công",
+      "Postman"
+    ],
+    "missingSkills": [
+      "Selenium"
+    ],
+    "summary": "Ứng viên đáp ứng tốt các yêu cầu bắt buộc về kiểm thử thủ công và Postman, nhưng chưa thể hiện được kỹ năng Selenium thuộc nhóm ưu tiên.",
+    "coaching": {
+      "beforeInterview": [
+        {
+          "skill": "Selenium",
+          "advice": "Hãy ôn tập khái niệm về cơ chế định vị phần tử (locator strategies) và vòng đời của WebDriver trong tự động hóa. Viết một script kịch bản kiểm thử nhỏ với Selenium WebDriver để tự động hóa thao tác đăng nhập và kiểm tra kết quả hiển thị trên màn hình. Chuẩn bị giải thích về quyết định chọn kiểu locator (như XPath so với CSS Selector) và cách xử lý các ngoại lệ khi phần tử chưa tải kịp."
+        }
+      ],
+      "improvements": [
+        {
+          "skill": "Selenium",
+          "advice": "Bổ sung các dự án hoặc bài tập thực hành với Selenium vào CV nếu đã từng làm, hoặc chuẩn bị sẵn tinh thần giải thích cách bạn sẽ tiếp cận công cụ này trong công việc."
+        }
+      ],
+      "strengths": [
+        {
+          "skill": "Postman",
+          "advice": "Hãy chuẩn bị thảo luận về cách bạn thiết lập các biến môi trường và viết script kiểm tra tự động mã phản hồi trong Postman. Nếu bạn đã từng thực hiện kiểm thử tích hợp chuỗi API, hãy sẵn sàng chia sẻ về kịch bản truyền dữ liệu giữa các request. Cân nhắc thảo luận về ưu nhược điểm của việc kiểm thử API thủ công qua giao diện so với việc tự động hóa hoàn toàn."
+        }
+      ]
+    },
+    "requirements": [
+      {
+        "skill": "kiểm thử thủ công",
+        "importance": "required",
+        "matched": true,
+        "jdEvidence": "kiểm thử thủ công",
+        "cvEvidence": "Đã thực hiện kiểm thử thủ công cho ứng dụng đặt lịch.",
+        "reason": "CV có đề cập rõ việc thực hiện kiểm thử thủ công cho ứng dụng đặt lịch."
+      },
+      {
+        "skill": "Postman",
+        "importance": "required",
+        "matched": true,
+        "jdEvidence": "Postman",
+        "cvEvidence": "Sử dụng Postman để kiểm thử REST API và ghi nhận lỗi.",
+        "reason": "CV xác nhận kỹ năng sử dụng Postman để kiểm thử REST API."
+      },
+      {
+        "skill": "Selenium",
+        "importance": "preferred",
+        "matched": false,
+        "jdEvidence": "Selenium",
+        "cvEvidence": "",
+        "reason": "CV không có bất kỳ bằng chứng nào về việc sử dụng Selenium."
+      }
+    ],
+    "scoreBreakdown": {
+      "matchedWeight": 4,
+      "totalWeight": 5,
+      "required": {
+        "matched": 2,
+        "total": 2,
+        "weight": 2
+      },
+      "preferred": {
+        "matched": 0,
+        "total": 1,
+        "weight": 1
+      }
+    },
+    "meta": {
+      "provider": "gemini",
+      "model": "gemini-3.5-flash-lite",
+      "scoringVersion": "weighted-skills-v1",
+      "language": "vi",
+      "generatedAt": "2026-10-27T04:16:11.902Z"
+    }
+  },
+  "uiResult": {
+    "fitScore": 80,
+    "matched": [
+      {
+        "skill": "kiểm thử thủ công",
+        "evidence": "Đã thực hiện kiểm thử thủ công cho ứng dụng đặt lịch."
+      },
+      {
+        "skill": "Postman",
+        "evidence": "Sử dụng Postman để kiểm thử REST API và ghi nhận lỗi."
+      }
+    ],
+    "missing": [
+      {
+        "skill": "Selenium",
+        "note": "CV không có bất kỳ bằng chứng nào về việc sử dụng Selenium."
+      }
+    ],
+    "requirements": [
+      {
+        "requirement": "kiểm thử thủ công",
+        "status": "matched",
+        "evidence": "Đã thực hiện kiểm thử thủ công cho ứng dụng đặt lịch."
+      },
+      {
+        "requirement": "Postman",
+        "status": "matched",
+        "evidence": "Sử dụng Postman để kiểm thử REST API và ghi nhận lỗi."
+      },
+      {
+        "requirement": "Selenium",
+        "status": "missing",
+        "evidence": ""
+      }
+    ],
+    "recommendation": "Hãy bổ sung minh chứng về Selenium vào CV hoặc luyện tập các kỹ năng này trước buổi phỏng vấn.",
+    "coaching": {
+      "beforeInterview": [
+        {
+          "skill": "Selenium",
+          "advice": "Hãy ôn tập khái niệm về cơ chế định vị phần tử (locator strategies) và vòng đời của WebDriver trong tự động hóa. Viết một script kịch bản kiểm thử nhỏ với Selenium WebDriver để tự động hóa thao tác đăng nhập và kiểm tra kết quả hiển thị trên màn hình. Chuẩn bị giải thích về quyết định chọn kiểu locator (như XPath so với CSS Selector) và cách xử lý các ngoại lệ khi phần tử chưa tải kịp."
+        }
+      ],
+      "improvements": [
+        {
+          "skill": "Selenium",
+          "advice": "Bổ sung các dự án hoặc bài tập thực hành với Selenium vào CV nếu đã từng làm, hoặc chuẩn bị sẵn tinh thần giải thích cách bạn sẽ tiếp cận công cụ này trong công việc."
+        }
+      ],
+      "strengths": [
+        {
+          "skill": "Postman",
+          "advice": "Hãy chuẩn bị thảo luận về cách bạn thiết lập các biến môi trường và viết script kiểm tra tự động mã phản hồi trong Postman. Nếu bạn đã từng thực hiện kiểm thử tích hợp chuỗi API, hãy sẵn sàng chia sẻ về kịch bản truyền dữ liệu giữa các request. Cân nhắc thảo luận về ưu nhược điểm của việc kiểm thử API thủ công qua giao diện so với việc tự động hóa hoàn toàn."
+        }
+      ]
+    }
+  }
+}
