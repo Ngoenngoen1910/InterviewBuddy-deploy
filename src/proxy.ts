@@ -8,6 +8,7 @@ const protectedRoutes = [
   "/reports",
   "/practice-plan",
   "/history",
+  "/profile",
   "/settings",
 ];
 

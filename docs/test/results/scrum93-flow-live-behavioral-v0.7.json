@@ -1,0 +1,83 @@
+{
+  "checkedAt": "2026-11-05T01:05:27.721Z",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "0.7",
+  "memoryVersion": "last-four-extractive-v1",
+  "externalRequests": 1,
+  "boundary": "Actual Gemini + actual HTTP handler/service/repository + local PGlite; simulated authentication; no hosted migration or UI integration.",
+  "provenance": "AI-authored synthetic profiles/JDs/answers. Expected semantic actions are fixture expectations, not an independent expert benchmark.",
+  "results": [
+    {
+      "id": "developed-behavioral-vi",
+      "purpose": "move on from a developed STAR account without invented achievements",
+      "input": {
+        "settings": {
+          "type": "behavioral",
+          "difficulty": "medium",
+          "language": "vi",
+          "targetPosition": "Software Engineer Intern",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Software Engineer Intern: phối hợp với nhóm, giao tiếp rõ ràng, chủ động tìm nguyên nhân lỗi và kiểm tra kết quả sửa lỗi.",
+        "cvText": "Ứng viên giả lập tham gia bài tập nhóm xây dựng website và viết kiểm thử cho một lỗi hiển thị. Không có thông tin cá nhân.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "Phối hợp xử lý lỗi",
+            "question": "Hãy kể một lần bạn phối hợp với nhóm để xử lý một lỗi khó trước hạn bàn giao.",
+            "answer": "Trước hạn nộp bài một ngày, trang danh sách bị trắng khi API trả mảng rỗng. Tôi phụ trách tái hiện và khoanh vùng lỗi, còn một bạn kiểm tra response phía server. Tôi tạo dữ liệu rỗng để tái hiện, bổ sung nhánh empty state và viết regression test; sau đó nhờ bạn kiểm tra lại trên bản tích hợp. Nhóm đã xác nhận trường hợp rỗng hoạt động và nộp bản sửa trước hạn; tôi rút kinh nghiệm phải có test cho empty state từ đầu."
+          }
+        ]
+      },
+      "expectedActions": [
+        "next_topic"
+      ],
+      "httpStatus": 200,
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "elapsedMs": 1876,
+      "generationRequests": 1,
+      "replaySameResult": true,
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "b6c4d7f5-f817-490e-a157-9b08a3e403c4",
+          "kind": "main",
+          "topic": "Giao tiếp và xử lý xung đột",
+          "content": "Hãy kể về một lần bạn gặp sự cố bất ngờ khi làm việc nhóm và bạn đã chủ động giao tiếp với các thành viên như thế nào để thống nhất hướng giải quyết.",
+          "position": 2
+        },
+        "sessionId": "1ed578d0-bfcf-4c69-ac49-18aa4d7fd53d"
+      },
+      "promptTrace": {
+        "recentTurns": [
+          {
+            "kind": "main",
+            "topic": "Phối hợp xử lý lỗi",
+            "question": "Hãy kể một lần bạn phối hợp với nhóm để xử lý một lỗi khó trước hạn bàn giao.",
+            "answer": "Trước hạn nộp bài một ngày, trang danh sách bị trắng khi API trả mảng rỗng. Tôi phụ trách tái hiện và khoanh vùng lỗi, còn một bạn kiểm tra response phía server. Tôi tạo dữ liệu rỗng để tái hiện, bổ sung nhánh empty state và viết regression test; sau đó nhờ bạn kiểm tra lại trên bản tích hợp. Nhóm đã xác nhận trường hợp rỗng hoạt động và nộp bản sửa trước hạn; tôi rút kinh nghiệm phải có test cho empty state từ đầu."
+          }
+        ],
+        "summary": null,
+        "serverPolicy": {
+          "allowedActions": [
+            "follow_up",
+            "next_topic"
+          ],
+          "endReason": null,
+          "mainQuestionsAnswered": 1,
+          "followUpsForCurrent": 0,
+          "maxFollowUps": 2
+        },
+        "originalHistoryCharacters": 568,
+        "sentHistoryCharacters": 614
+      },
+      "needsIndependentContentReview": true
+    }
+  ]
+}

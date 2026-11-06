@@ -6,6 +6,7 @@ import Card from "@/components/ui/Card";
 import CvUpload, { type CvStatus } from "@/components/analysis/CvUpload";
 import FitResult from "@/components/analysis/FitResult";
 import JdInput from "@/components/analysis/JdInput";
+import { RESULT_TEXT } from "@/lib/analysis/result-text";
 import {
   AnalyzeFitError,
   CvExtractError,
@@ -23,9 +24,9 @@ import {
 
 type RunState =
   | { kind: "idle" }
-  | { kind: "loading" }
-  | { kind: "done"; result: AnalyzeFitResponse }
-  | { kind: "error"; message: string };
+  | { kind: "loading"; language: AnalysisLanguage }
+  | { kind: "done"; result: AnalyzeFitResponse; language: AnalysisLanguage }
+  | { kind: "error"; message: string; language: AnalysisLanguage };
 
 // Saving runs after a successful analysis and never blocks showing the result.
 type SaveState = "idle" | "saving" | "saved" | "failed";
@@ -40,6 +41,8 @@ export default function AnalysisWorkspace() {
   const [cvPasted, setCvPasted] = useState("");
 
   const [run, setRun] = useState<RunState>({ kind: "idle" });
+  const resultLanguage = run.kind === "idle" ? language : run.language;
+  const resultText = RESULT_TEXT[resultLanguage];
   const [save, setSave] = useState<SaveState>("idle");
   // Last result to save again if saving failed.
   const pendingSave = useRef<Parameters<typeof saveFitAnalysis>[0] | null>(null);
@@ -112,25 +115,26 @@ export default function AnalysisWorkspace() {
     e?.preventDefault();
     if (!canSubmit) return;
 
-    setRun({ kind: "loading" });
+    const requestedLanguage = language;
+    setRun({ kind: "loading", language: requestedLanguage });
     setSave("idle");
     try {
-      const result = await analyzeFit({ jd: jd.trim(), cv: cvText, language });
-      setRun({ kind: "done", result });
+      const result = await analyzeFit({ jd: jd.trim(), cv: cvText, language: requestedLanguage });
+      setRun({ kind: "done", result, language: requestedLanguage });
       if (!USE_MOCK) {
         pendingSave.current = {
           jd: jd.trim(),
           cv: cvText,
           cvFileName: cvFile?.name ?? null,
-          language,
+          language: requestedLanguage,
           result,
         };
         void handleSave();
       }
     } catch (err) {
       const message =
-        err instanceof AnalyzeFitError ? err.message : "Có lỗi không xác định. Vui lòng thử lại.";
-      setRun({ kind: "error", message });
+        err instanceof AnalyzeFitError ? err.message : RESULT_TEXT[requestedLanguage].unexpectedError;
+      setRun({ kind: "error", message, language: requestedLanguage });
     }
   }
 
@@ -150,8 +154,17 @@ export default function AnalysisWorkspace() {
 
   function showLatest() {
     if (!latest) return;
+    setLanguage(latest.language);
     setSave("saved");
-    setRun({ kind: "done", result: latest.result });
+    setRun({ kind: "done", result: latest.result, language: latest.language });
+  }
+
+  function changeLanguage(next: AnalysisLanguage) {
+    if (next === language) return;
+    setLanguage(next);
+    // Existing AI prose belongs to its original language; request a fresh analysis.
+    setRun({ kind: "idle" });
+    setSave("idle");
   }
 
   return (
@@ -186,7 +199,8 @@ export default function AnalysisWorkspace() {
                     name="language"
                     value={value}
                     checked={language === value}
-                    onChange={() => setLanguage(value)}
+                    onChange={() => changeLanguage(value)}
+                    disabled={run.kind === "loading"}
                     className="h-4 w-4 accent-indigo-600"
                   />
                   {label}
@@ -211,46 +225,45 @@ export default function AnalysisWorkspace() {
       </Card>
 
       {/* Right: result */}
-      <section aria-labelledby="result-heading" className="min-w-0 space-y-4">
+      <section aria-labelledby="result-heading" className="min-w-0 space-y-4" lang={resultLanguage}>
         <h2 id="result-heading" className="text-lg font-semibold">
-          Kết quả phân tích
+          {resultText.heading}
         </h2>
 
         {run.kind === "idle" && (
           <Card className="space-y-3 text-sm text-slate-500">
             <p>
-              Kết quả sẽ hiện ở đây sau khi bạn bấm phân tích: điểm phù hợp, kỹ năng đã có và còn
-              thiếu, bảng so sánh yêu cầu và lời khuyên.
+              {resultText.empty}
             </p>
             {latest && (
               <div className="flex flex-wrap items-center gap-3 border-t border-slate-200 pt-3">
                 <span>
-                  Bản phân tích gần nhất: {Math.round(latest.result.fitScore)}/100, lúc{" "}
-                  {new Date(latest.createdAt).toLocaleString("vi-VN")}
+                  {resultText.latest}: {Math.round(latest.result.fitScore)}/100, {" "}
+                  {new Date(latest.createdAt).toLocaleString(resultText.locale)}
                 </span>
                 <Button variant="secondary" onClick={showLatest}>
-                  Xem lại
+                  {resultText.viewLatest}
                 </Button>
               </div>
             )}
           </Card>
         )}
 
-        {run.kind === "loading" && <ResultSkeleton />}
+        {run.kind === "loading" && <ResultSkeleton language={run.language} />}
 
         {run.kind === "error" && (
           <Card role="alert" className="border-red-200 bg-red-50">
             <p className="text-sm text-red-700">{run.message}</p>
             <Button variant="secondary" className="mt-3" onClick={() => handleSubmit()}>
-              Thử lại
+              {resultText.retry}
             </Button>
           </Card>
         )}
 
         {run.kind === "done" && (
           <>
-            <SaveNotice state={save} onRetry={handleSave} />
-            <FitResult result={run.result} />
+            <SaveNotice state={save} language={run.language} onRetry={handleSave} />
+            <FitResult result={run.result} language={run.language} />
           </>
         )}
       </section>
@@ -258,14 +271,15 @@ export default function AnalysisWorkspace() {
   );
 }
 
-function SaveNotice({ state, onRetry }: { state: SaveState; onRetry: () => void }) {
+function SaveNotice({ state, language, onRetry }: { state: SaveState; language: AnalysisLanguage; onRetry: () => void }) {
+  const text = RESULT_TEXT[language];
   if (state === "idle") return null;
   if (state === "failed") {
     return (
       <div role="alert" className="flex flex-wrap items-center gap-3 rounded-lg bg-amber-50 p-3 text-sm text-amber-900">
-        <span className="flex-1">Chưa lưu được kết quả vào tài khoản. Kết quả vẫn hiện bên dưới.</span>
+        <span className="flex-1">{text.saveFailed}</span>
         <Button variant="secondary" onClick={onRetry}>
-          Lưu lại
+          {text.retrySave}
         </Button>
       </div>
     );
@@ -273,16 +287,17 @@ function SaveNotice({ state, onRetry }: { state: SaveState; onRetry: () => void 
   return (
     <p role="status" className="text-sm text-slate-500">
       {state === "saving"
-        ? "Đang lưu kết quả..."
-        : "Đã lưu vào tài khoản. Buổi phỏng vấn thử tiếp theo sẽ dùng bản phân tích này."}
+        ? text.saving
+        : text.saved}
     </p>
   );
 }
 
-function ResultSkeleton() {
+function ResultSkeleton({ language }: { language: AnalysisLanguage }) {
+  const text = RESULT_TEXT[language];
   return (
-    <div className="space-y-4" aria-busy="true" aria-label="Đang phân tích">
-      <p className="text-sm text-slate-500">AI đang đọc JD và CV, thường mất 5–15 giây...</p>
+    <div className="space-y-4" aria-busy="true" aria-label={text.loadingLabel}>
+      <p className="text-sm text-slate-500">{text.loading}</p>
       {[112, 96, 160].map((h) => (
         <div key={h} className="animate-pulse rounded-xl bg-slate-200" style={{ height: h }} />
       ))}

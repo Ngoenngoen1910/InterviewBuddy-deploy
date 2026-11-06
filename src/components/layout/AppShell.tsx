@@ -8,11 +8,12 @@ import Topbar from "@/components/layout/Topbar";
 
 const navigation = [
   { label: "Dashboard", href: "/dashboard", ready: true },
-  { label: "New Interview", href: "/interview/new", ready: false },
+  { label: "New Interview", href: "/interview/new", ready: true },
   { label: "Analysis", href: "/analysis", ready: true },
   { label: "Reports", href: "/reports", ready: false },
   { label: "Practice Plan", href: "/practice-plan", ready: false },
   { label: "History", href: "/history", ready: false },
+  { label: "Profile", href: "/profile", ready: true },
   { label: "Settings", href: "/settings", ready: false },
 ];
 

@@ -1,0 +1,60 @@
+{
+  "mode": "prepared",
+  "provenance": "AI-authored synthetic cases",
+  "cases": [
+    {
+      "id": "technical-medium-vi",
+      "type": "technical",
+      "difficulty": "medium",
+      "language": "vi",
+      "position": "Frontend Intern",
+      "jd": "Frontend Intern: sử dụng React, REST API, xử lý trạng thái tải và lỗi, kiểm thử giao diện.",
+      "cv": "Hồ sơ giả lập: đã xây dựng ứng dụng danh sách công việc bằng React và gọi REST API. Chưa có kinh nghiệm làm việc chuyên nghiệp."
+    },
+    {
+      "id": "technical-hard-en",
+      "type": "technical",
+      "difficulty": "hard",
+      "language": "en",
+      "position": "Backend Developer",
+      "jd": "Backend Developer: Node.js, PostgreSQL transactions, concurrent requests and integration testing.",
+      "cv": "Synthetic profile: built a Node.js inventory project with PostgreSQL transactions. No production experience is claimed."
+    },
+    {
+      "id": "behavioral-easy-vi",
+      "type": "behavioral",
+      "difficulty": "easy",
+      "language": "vi",
+      "position": "Software Engineer Intern",
+      "jd": "Software Engineer Intern: phối hợp nhóm, giao tiếp rõ ràng, chủ động xử lý lỗi và kiểm tra kết quả.",
+      "cv": "Hồ sơ minh họa: tham gia bài tập nhóm xây dựng website. Không cung cấp thông tin nhận dạng hoặc thành tích cụ thể."
+    },
+    {
+      "id": "hr-medium-en",
+      "type": "hr",
+      "difficulty": "medium",
+      "language": "en",
+      "position": "QA Intern",
+      "jd": "Position: QA Intern\nRequirements:\nCommunicate clearly with developers and report reproducible bugs. Collaborate on test planning.",
+      "cv": "Synthetic profile: tested a class project and wrote bug reports. No employer, certification or professional experience is claimed."
+    },
+    {
+      "id": "technical-easy-vi-short-skills",
+      "type": "technical",
+      "difficulty": "easy",
+      "language": "vi",
+      "position": "Backend Intern",
+      "jd": "Vị trí: Backend Intern\nYêu cầu:\n- Go\n- C#\n- REST API",
+      "cv": "Hồ sơ giả lập: đã viết một chương trình nhỏ bằng Go. Chưa sử dụng C#."
+    },
+    {
+      "id": "behavioral-hard-en",
+      "type": "behavioral",
+      "difficulty": "hard",
+      "language": "en",
+      "position": "Software Engineer Intern",
+      "jd": "Software Engineer Intern\nResponsibilities:\nCollaborate on debugging, explain trade-offs and communicate disagreements constructively.",
+      "cv": "Synthetic profile: participated in a team website assignment. No leadership title or measurable team outcome is provided."
+    }
+  ]
+}

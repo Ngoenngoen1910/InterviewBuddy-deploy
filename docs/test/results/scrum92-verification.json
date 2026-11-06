@@ -1,0 +1,65 @@
+{
+  "dateLocal": "2026-11-03",
+  "branch": "feat/scrum-92-interview-next",
+  "base": "0277462",
+  "tests": { "passed": 153, "failed": 0, "baseTests": 116, "newTests": 37 },
+  "typecheck": "passed",
+  "targetedEslint": "passed",
+  "productionBuild": "passed; /api/interview/next is registered",
+  "database": "all three migrations executed on local PGlite with auth-role stand-ins; ownership, leases, replay and persistence tested",
+  "liveGemini": {
+    "model": "gemini-3.5-flash-lite",
+    "callsTotal": 18,
+    "latestExternalRequests": 6,
+    "latestCasesValid": 6,
+    "latestReplaysWithoutExtraCall": 6,
+    "latestPromptVersion": "0.4",
+    "latestContextVersion": "jd-cv-context-v3",
+    "report": "docs/test/results/scrum92-next-live.json",
+    "contentReview": "Codex assistant review, not independent human/expert assessment; initial unsupported experience presupposition revised; final HR opening remains generic with two related asks; no accuracy or expert difficulty claim",
+    "latencyBoundary": "Full local-handler response times 1371-4300ms in the latest six cases; not first-token latency or a streaming benchmark"
+  },
+  "productionHttpSmoke": {
+    "status": 503,
+    "code": "DATABASE_NOT_READY",
+    "reason": "Supabase is not configured in this local environment",
+    "unauthorized401": "verified through the actual HTTP handler with simulated authentication, not a hosted sign-in"
+  },
+  "sharedSupabaseMigrationApplied": false,
+  "uiIntegration": false,
+  "streaming": false,
+  "lastFourTurnCompaction": false,
+  "secretCheck": "configured key ignored by Git and untracked; zero leaks across 326 checked files in final scan",
+  "serverStoppedAfterSmoke": true,
+  "researchBoundary": "Adapted context-selection/prompting ideas; no paper model or published benchmark reproduced",
+  "skillReview": {
+    "skillsApplied": ["gemini-api-dev", "supabase-postgres-best-practices"],
+    "newSkillSource": "https://github.com/supabase/agent-skills/tree/main/skills/supabase-postgres-best-practices",
+    "report": "docs/test/SCRUM-92_SKILL_REVIEW_VI.md",
+    "reproducedFindingsFixed": 3,
+    "supplementalTests": 7,
+    "fixes": ["foreign-key indexes", "column-level SELECT grants", "exact JSON media-type validation"],
+    "additionalGeminiCallsDuringInitialSkillReview": 0,
+    "aiSdkMigration": false
+  },
+  "continuationReview": {
+    "jiraStatusObserved": "In Progress; title checked live; no detailed description; Jira not modified",
+    "remoteMainAfterFetch": "0277462e035748af23f479709fe965c7f5120315",
+    "contextVersion": "jd-cv-context-v3",
+    "regressionTestsAdded": 5,
+    "selectorRegressionsReproducedBeforeFix": 4,
+    "fixes": [
+      "ignore standalone JD headings and saved position title",
+      "retain short technology passages and tokens including Go and C#",
+      "normalize selected technology aliases without rewriting evidence",
+      "use target-position fallback for heading-only JD",
+      "apply round-specific difficulty policies instead of a shared technical hard policy"
+    ],
+    "liveGeminiCallsAfterContextChanges": 12,
+    "payloadSettingsCombinationsVerified": 18,
+    "liveSettingsCasesVerified": 6,
+    "fullLiveCartesianMatrix": false,
+    "acceptanceReport": "docs/test/SCRUM-92_ACCEPTANCE_VI.md",
+    "commitOrPushPerformedAtVerification": false
+  }
+}

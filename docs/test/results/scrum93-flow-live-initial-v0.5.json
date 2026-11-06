@@ -1,0 +1,714 @@
+{
+  "checkedAt": "2026-11-05T01:02:52.170Z",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "0.5",
+  "memoryVersion": "last-four-extractive-v1",
+  "externalRequests": 6,
+  "boundary": "Actual Gemini + actual HTTP handler/service/repository + local PGlite; simulated authentication; no hosted migration or UI integration.",
+  "provenance": "AI-authored synthetic profiles/JDs/answers. Expected semantic actions are fixture expectations, not an independent expert benchmark.",
+  "results": [
+    {
+      "id": "vague-technical-en",
+      "purpose": "clarify the missing concurrency mechanism",
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "en",
+          "targetPosition": "Backend Junior",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Backend Junior: build Node.js REST APIs with PostgreSQL. Explain transactions, concurrent updates, idempotency and integration testing.",
+        "cvText": "Synthetic candidate built a Node.js inventory service using PostgreSQL transactions and integration tests. No identifying information.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "PostgreSQL transactions",
+            "question": "How would you prevent two concurrent purchase requests from overselling the last inventory item?",
+            "answer": "I would use a transaction so the database takes care of it."
+          }
+        ]
+      },
+      "expectedActions": [
+        "follow_up"
+      ],
+      "httpStatus": 200,
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "elapsedMs": 1592,
+      "generationRequests": 1,
+      "replaySameResult": true,
+      "output": {
+        "action": "follow_up",
+        "question": {
+          "id": "b95315d3-9b82-44ab-8052-6025d2178396",
+          "kind": "follow_up",
+          "topic": "PostgreSQL transactions",
+          "content": "Which specific transaction isolation level or locking mechanism would you use to ensure safety under concurrent purchase requests?",
+          "position": 2
+        },
+        "sessionId": "c31c21c5-fe81-4502-8585-d16bdc393733"
+      },
+      "promptTrace": {
+        "recentTurns": [
+          {
+            "kind": "main",
+            "topic": "PostgreSQL transactions",
+            "question": "How would you prevent two concurrent purchase requests from overselling the last inventory item?",
+            "answer": "I would use a transaction so the database takes care of it."
+          }
+        ],
+        "summary": null,
+        "serverPolicy": {
+          "allowedActions": [
+            "follow_up",
+            "next_topic"
+          ],
+          "endReason": null,
+          "mainQuestionsAnswered": 1,
+          "followUpsForCurrent": 0,
+          "maxFollowUps": 2
+        },
+        "originalHistoryCharacters": 232,
+        "sentHistoryCharacters": 278
+      },
+      "needsIndependentContentReview": true
+    },
+    {
+      "id": "interesting-detail-en",
+      "purpose": "probe the explicitly unresolved stale-cache issue",
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "en",
+          "targetPosition": "Backend Junior",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Backend Junior: build Node.js REST APIs with PostgreSQL. Explain transactions, concurrent updates, idempotency and integration testing.",
+        "cvText": "Synthetic candidate built a Node.js inventory service using PostgreSQL transactions and integration tests. No identifying information.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "PostgreSQL transactions",
+            "question": "How would you prevent two concurrent purchase requests from overselling the last inventory item?",
+            "answer": "I would use an atomic UPDATE with quantity >= requested quantity in its WHERE clause, check the affected row count and create the order in the same transaction. A unique idempotency key prevents a retried request from creating a second order. In a concurrent integration test I would start two transactions against one remaining item and verify that only one order commits and stock never becomes negative. One unresolved issue is that the cached product page still shows the old stock value after commit; I have not investigated cache invalidation yet."
+          }
+        ]
+      },
+      "expectedActions": [
+        "follow_up"
+      ],
+      "httpStatus": 200,
+      "status": "valid-output",
+      "actionMatchesExpectation": false,
+      "elapsedMs": 1417,
+      "generationRequests": 1,
+      "replaySameResult": true,
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "c20b78b4-855d-4878-9f6a-3f7c15220b60",
+          "kind": "main",
+          "topic": "Caching Strategy",
+          "content": "How would you design a caching strategy in Node.js to ensure that the product page quickly reflects stock updates after a successful purchase transaction?",
+          "position": 2
+        },
+        "sessionId": "da5cb2fb-0843-4148-807c-f2e1b0162da7"
+      },
+      "promptTrace": {
+        "recentTurns": [
+          {
+            "kind": "main",
+            "topic": "PostgreSQL transactions",
+            "question": "How would you prevent two concurrent purchase requests from overselling the last inventory item?",
+            "answer": "I would use an atomic UPDATE with quantity >= requested quantity in its WHERE clause, check the affected row count and create the order in the same transaction. A unique idempotency key prevents a retried request from creating a second order. In a concurrent integration test I would start two transactions against one remaining item and verify that only one order commits and stock never becomes negative. One unresolved issue is that the cached product page still shows the old stock value after commit; I have not investigated cache invalidation yet."
+          }
+        ],
+        "summary": null,
+        "serverPolicy": {
+          "allowedActions": [
+            "follow_up",
+            "next_topic"
+          ],
+          "endReason": null,
+          "mainQuestionsAnswered": 1,
+          "followUpsForCurrent": 0,
+          "maxFollowUps": 2
+        },
+        "originalHistoryCharacters": 726,
+        "sentHistoryCharacters": 772
+      },
+      "needsIndependentContentReview": true
+    },
+    {
+      "id": "developed-behavioral-vi",
+      "purpose": "move on from a developed STAR account without invented achievements",
+      "input": {
+        "settings": {
+          "type": "behavioral",
+          "difficulty": "medium",
+          "language": "vi",
+          "targetPosition": "Software Engineer Intern",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Software Engineer Intern: phối hợp với nhóm, giao tiếp rõ ràng, chủ động tìm nguyên nhân lỗi và kiểm tra kết quả sửa lỗi.",
+        "cvText": "Ứng viên giả lập tham gia bài tập nhóm xây dựng website và viết kiểm thử cho một lỗi hiển thị. Không có thông tin cá nhân.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "Phối hợp xử lý lỗi",
+            "question": "Hãy kể một lần bạn phối hợp với nhóm để xử lý một lỗi khó trước hạn bàn giao.",
+            "answer": "Trước hạn nộp bài một ngày, trang danh sách bị trắng khi API trả mảng rỗng. Tôi phụ trách tái hiện và khoanh vùng lỗi, còn một bạn kiểm tra response phía server. Tôi tạo dữ liệu rỗng để tái hiện, bổ sung nhánh empty state và viết regression test; sau đó nhờ bạn kiểm tra lại trên bản tích hợp. Nhóm đã xác nhận trường hợp rỗng hoạt động và nộp bản sửa trước hạn; tôi rút kinh nghiệm phải có test cho empty state từ đầu."
+          }
+        ]
+      },
+      "expectedActions": [
+        "next_topic"
+      ],
+      "httpStatus": 200,
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "elapsedMs": 1565,
+      "generationRequests": 1,
+      "replaySameResult": true,
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "124c4824-85f1-45f9-903a-d96e2861d696",
+          "kind": "main",
+          "topic": "Giao tiếp và giải quyết bất đồng",
+          "content": "Bạn hãy chia sẻ về một tình huống khi làm việc nhóm mà ý kiến đóng góp của bạn về kỹ thuật bị các thành viên khác không đồng tình. Bạn đã xử lý tình huống đó thế nào để thống nhất cách giải quyết?",
+          "position": 2
+        },
+        "sessionId": "a652acdb-15e0-438b-aa98-0c36cb5ff4b4"
+      },
+      "promptTrace": {
+        "recentTurns": [
+          {
+            "kind": "main",
+            "topic": "Phối hợp xử lý lỗi",
+            "question": "Hãy kể một lần bạn phối hợp với nhóm để xử lý một lỗi khó trước hạn bàn giao.",
+            "answer": "Trước hạn nộp bài một ngày, trang danh sách bị trắng khi API trả mảng rỗng. Tôi phụ trách tái hiện và khoanh vùng lỗi, còn một bạn kiểm tra response phía server. Tôi tạo dữ liệu rỗng để tái hiện, bổ sung nhánh empty state và viết regression test; sau đó nhờ bạn kiểm tra lại trên bản tích hợp. Nhóm đã xác nhận trường hợp rỗng hoạt động và nộp bản sửa trước hạn; tôi rút kinh nghiệm phải có test cho empty state từ đầu."
+          }
+        ],
+        "summary": null,
+        "serverPolicy": {
+          "allowedActions": [
+            "follow_up",
+            "next_topic"
+          ],
+          "endReason": null,
+          "mainQuestionsAnswered": 1,
+          "followUpsForCurrent": 0,
+          "maxFollowUps": 2
+        },
+        "originalHistoryCharacters": 568,
+        "sentHistoryCharacters": 614
+      },
+      "needsIndependentContentReview": true
+    },
+    {
+      "id": "declines-answer-vi",
+      "purpose": "respect an explicit request to move on",
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "vi",
+          "targetPosition": "Frontend Intern",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Frontend Intern: sử dụng React, JavaScript, gọi REST API và kiểm thử giao diện; giải thích cách xử lý trạng thái tải và lỗi.",
+        "cvText": "Ứng viên minh họa đã làm ứng dụng danh sách công việc bằng React và gọi REST API. Không cung cấp tên, liên hệ hoặc công ty.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "React và gọi API",
+            "question": "Bạn xử lý việc gọi API khi người dùng đổi bộ lọc liên tục trong React như thế nào?",
+            "answer": "Em chưa biết cách làm và muốn chuyển sang câu hỏi khác."
+          }
+        ]
+      },
+      "expectedActions": [
+        "next_topic"
+      ],
+      "httpStatus": 200,
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "elapsedMs": 1366,
+      "generationRequests": 1,
+      "replaySameResult": true,
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "a881975f-1dc0-4604-a6ec-2d03d1a6bb65",
+          "kind": "main",
+          "topic": "Xử lý trạng thái tải và lỗi",
+          "content": "Bạn sẽ thiết kế cách hiển thị trạng thái đang tải (loading) và thông báo lỗi cho người dùng khi gọi REST API trong React như thế nào?",
+          "position": 2
+        },
+        "sessionId": "7c116ac9-6ff7-490a-8daf-b279a04cca6a"
+      },
+      "promptTrace": {
+        "recentTurns": [
+          {
+            "kind": "main",
+            "topic": "React và gọi API",
+            "question": "Bạn xử lý việc gọi API khi người dùng đổi bộ lọc liên tục trong React như thế nào?",
+            "answer": "Em chưa biết cách làm và muốn chuyển sang câu hỏi khác."
+          }
+        ],
+        "summary": null,
+        "serverPolicy": {
+          "allowedActions": [
+            "follow_up",
+            "next_topic"
+          ],
+          "endReason": null,
+          "mainQuestionsAnswered": 1,
+          "followUpsForCurrent": 0,
+          "maxFollowUps": 2
+        },
+        "originalHistoryCharacters": 207,
+        "sentHistoryCharacters": 253
+      },
+      "needsIndependentContentReview": true
+    },
+    {
+      "id": "follow-up-cap-en",
+      "purpose": "enforce the configured cap even after a vague answer",
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "en",
+          "targetPosition": "Frontend Intern",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Frontend Intern: sử dụng React, JavaScript, gọi REST API và kiểm thử giao diện; giải thích cách xử lý trạng thái tải và lỗi.",
+        "cvText": "Ứng viên minh họa đã làm ứng dụng danh sách công việc bằng React và gọi REST API. Không cung cấp tên, liên hệ hoặc công ty.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "React và gọi API",
+            "question": "Bạn xử lý việc gọi API khi người dùng đổi bộ lọc liên tục trong React như thế nào?",
+            "answer": "Em dùng useEffect để gọi API, rồi hiển thị dữ liệu lên giao diện."
+          },
+          {
+            "kind": "follow_up",
+            "topic": "React và gọi API",
+            "question": "Bạn quản lý trạng thái loading như thế nào?",
+            "answer": "Em lưu một biến loading."
+          },
+          {
+            "kind": "follow_up",
+            "topic": "React và gọi API",
+            "question": "Khi request bị hủy thì loading được cập nhật thế nào?",
+            "answer": "Em chưa giải thích được."
+          }
+        ]
+      },
+      "expectedActions": [
+        "next_topic"
+      ],
+      "httpStatus": 200,
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "elapsedMs": 1303,
+      "generationRequests": 1,
+      "replaySameResult": true,
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "2d562391-4f14-4d69-8dbf-391a24f0f09b",
+          "kind": "main",
+          "topic": "Error Handling",
+          "content": "How would you implement error handling when a REST API call fails in a React application?",
+          "position": 4
+        },
+        "sessionId": "5fbd9896-2a0c-4c0d-99e3-3025d12050d2"
+      },
+      "promptTrace": {
+        "recentTurns": [
+          {
+            "kind": "main",
+            "topic": "React và gọi API",
+            "question": "Bạn xử lý việc gọi API khi người dùng đổi bộ lọc liên tục trong React như thế nào?",
+            "answer": "Em dùng useEffect để gọi API, rồi hiển thị dữ liệu lên giao diện."
+          },
+          {
+            "kind": "follow_up",
+            "topic": "React và gọi API",
+            "question": "Bạn quản lý trạng thái loading như thế nào?",
+            "answer": "Em lưu một biến loading."
+          },
+          {
+            "kind": "follow_up",
+            "topic": "React và gọi API",
+            "question": "Khi request bị hủy thì loading được cập nhật thế nào?",
+            "answer": "Em chưa giải thích được."
+          }
+        ],
+        "summary": null,
+        "serverPolicy": {
+          "allowedActions": [
+            "next_topic"
+          ],
+          "endReason": null,
+          "mainQuestionsAnswered": 1,
+          "followUpsForCurrent": 2,
+          "maxFollowUps": 2
+        },
+        "originalHistoryCharacters": 509,
+        "sentHistoryCharacters": 555
+      },
+      "needsIndependentContentReview": true
+    },
+    {
+      "id": "long-memory-en",
+      "purpose": "use four recent turns plus an earlier summary, preserving full counters",
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "en",
+          "targetPosition": "Backend Junior",
+          "durationMinutes": 45,
+          "plannedQuestions": 12
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "React API requests and testing. API input validation. HTTP retries. PostgreSQL concurrent updates. API authorization.",
+        "cvText": "Synthetic candidate built a Node.js inventory service using PostgreSQL transactions and integration tests. No identifying information.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "React requests",
+            "question": "How would you handle stale API responses in React?",
+            "answer": "I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses."
+          },
+          {
+            "kind": "follow_up",
+            "topic": "React requests",
+            "question": "How would you verify the failure cases for React requests?",
+            "answer": "I would inject the described failure, assert the persisted and visible outcome, and confirm that recovery does not duplicate the operation."
+          },
+          {
+            "kind": "main",
+            "topic": "Input validation",
+            "question": "How would you validate a JSON API request?",
+            "answer": "I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases."
+          },
+          {
+            "kind": "follow_up",
+            "topic": "Input validation",
+            "question": "How would you verify the failure cases for Input validation?",
+            "answer": "I would inject the described failure, assert the persisted and visible outcome, and confirm that recovery does not duplicate the operation."
+          },
+          {
+            "kind": "main",
+            "topic": "HTTP retries",
+            "question": "How would you retry an API request safely?",
+            "answer": "I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried."
+          },
+          {
+            "kind": "follow_up",
+            "topic": "HTTP retries",
+            "question": "How would you verify the failure cases for HTTP retries?",
+            "answer": "I would inject the described failure, assert the persisted and visible outcome, and confirm that recovery does not duplicate the operation."
+          },
+          {
+            "kind": "main",
+            "topic": "PostgreSQL transactions",
+            "question": "How would you prevent two concurrent purchase requests from overselling the last inventory item?",
+            "answer": "I would use a transaction so the database takes care of it."
+          }
+        ]
+      },
+      "expectedActions": [
+        "follow_up"
+      ],
+      "httpStatus": 200,
+      "status": "valid-output",
+      "actionMatchesExpectation": false,
+      "elapsedMs": 1512,
+      "generationRequests": 1,
+      "replaySameResult": true,
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "0593e2cf-2fdf-4a09-9bc8-44b0cc83202e",
+          "kind": "main",
+          "topic": "API authorization",
+          "content": "How would you implement role-based API authorization in a Node.js application?",
+          "position": 8
+        },
+        "sessionId": "ffb7eea4-3ed0-4d94-a48f-6d7a547b405d"
+      },
+      "promptTrace": {
+        "recentTurns": [
+          {
+            "kind": "follow_up",
+            "topic": "Input validation",
+            "question": "How would you verify the failure cases for Input validation?",
+            "answer": "I would inject the described failure, assert the persisted and visible outcome, and confirm that recovery does not duplicate the operation."
+          },
+          {
+            "kind": "main",
+            "topic": "HTTP retries",
+            "question": "How would you retry an API request safely?",
+            "answer": "I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried."
+          },
+          {
+            "kind": "follow_up",
+            "topic": "HTTP retries",
+            "question": "How would you verify the failure cases for HTTP retries?",
+            "answer": "I would inject the described failure, assert the persisted and visible outcome, and confirm that recovery does not duplicate the operation."
+          },
+          {
+            "kind": "main",
+            "topic": "PostgreSQL transactions",
+            "question": "How would you prevent two concurrent purchase requests from overselling the last inventory item?",
+            "answer": "I would use a transaction so the database takes care of it."
+          }
+        ],
+        "summary": {
+          "version": "last-four-extractive-v1",
+          "source": "server-extractive",
+          "earlierTurnCount": 3,
+          "coverage": [
+            {
+              "topic": "React requests",
+              "mainQuestions": 1,
+              "followUps": 1
+            },
+            {
+              "topic": "Input validation",
+              "mainQuestions": 1,
+              "followUps": 0
+            }
+          ],
+          "coverageClipped": false,
+          "excerpts": [
+            {
+              "turn": 1,
+              "question": "How would you handle stale API responses in React?",
+              "answer": "I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test …",
+              "clipped": true
+            },
+            {
+              "turn": 2,
+              "question": "How would you verify the failure cases for React requests?",
+              "answer": "I would inject the described failure, assert the persisted and visible outcome, and confirm that recovery does not duplicate the operation.",
+              "clipped": false
+            },
+            {
+              "turn": 3,
+              "question": "How would you validate a JSON API request?",
+              "answer": "I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject ext…",
+              "clipped": true
+            }
+          ],
+          "omittedExcerptCount": 0
+        },
+        "serverPolicy": {
+          "allowedActions": [
+            "follow_up",
+            "next_topic"
+          ],
+          "endReason": null,
+          "mainQuestionsAnswered": 4,
+          "followUpsForCurrent": 0,
+          "maxFollowUps": 2
+        },
+        "originalHistoryCharacters": 6306,
+        "sentHistoryCharacters": 3770
+      },
+      "needsIndependentContentReview": true
+    },
+    {
+      "id": "time-limit",
+      "purpose": "end locally without a Gemini request",
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "vi",
+          "targetPosition": "Frontend Intern",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 900
+        },
+        "jdText": "Frontend Intern: sử dụng React, JavaScript, gọi REST API và kiểm thử giao diện; giải thích cách xử lý trạng thái tải và lỗi.",
+        "cvText": "Ứng viên minh họa đã làm ứng dụng danh sách công việc bằng React và gọi REST API. Không cung cấp tên, liên hệ hoặc công ty.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "React và gọi API",
+            "question": "Bạn xử lý việc gọi API khi người dùng đổi bộ lọc liên tục trong React như thế nào?",
+            "answer": "Em dùng useEffect để gọi API, rồi hiển thị dữ liệu lên giao diện."
+          }
+        ]
+      },
+      "expectedActions": [
+        "end"
+      ],
+      "httpStatus": 200,
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "elapsedMs": 1,
+      "generationRequests": 0,
+      "replaySameResult": true,
+      "output": {
+        "action": "end",
+        "question": null,
+        "sessionId": "1b0a2a46-6d7b-4400-86e0-ae2a42878b30"
+      },
+      "promptTrace": null,
+      "needsIndependentContentReview": true
+    },
+    {
+      "id": "question-limit",
+      "purpose": "count all saved main questions, not only the recent four",
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "vi",
+          "targetPosition": "Frontend Intern",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Frontend Intern: sử dụng React, JavaScript, gọi REST API và kiểm thử giao diện; giải thích cách xử lý trạng thái tải và lỗi.",
+        "cvText": "Ứng viên minh họa đã làm ứng dụng danh sách công việc bằng React và gọi REST API. Không cung cấp tên, liên hệ hoặc công ty.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "Chủ đề 1",
+            "question": "Câu hỏi chính 1?",
+            "answer": "Câu trả lời minh họa đã hoàn tất."
+          },
+          {
+            "kind": "main",
+            "topic": "Chủ đề 2",
+            "question": "Câu hỏi chính 2?",
+            "answer": "Câu trả lời minh họa đã hoàn tất."
+          },
+          {
+            "kind": "main",
+            "topic": "Chủ đề 3",
+            "question": "Câu hỏi chính 3?",
+            "answer": "Câu trả lời minh họa đã hoàn tất."
+          },
+          {
+            "kind": "main",
+            "topic": "Chủ đề 4",
+            "question": "Câu hỏi chính 4?",
+            "answer": "Câu trả lời minh họa đã hoàn tất."
+          },
+          {
+            "kind": "main",
+            "topic": "Chủ đề 5",
+            "question": "Câu hỏi chính 5?",
+            "answer": "Câu trả lời minh họa đã hoàn tất."
+          }
+        ]
+      },
+      "expectedActions": [
+        "end"
+      ],
+      "httpStatus": 200,
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "elapsedMs": 2,
+      "generationRequests": 0,
+      "replaySameResult": true,
+      "output": {
+        "action": "end",
+        "question": null,
+        "sessionId": "23f89fcc-359f-4dcb-a16d-d8cb73e43def"
+      },
+      "promptTrace": null,
+      "needsIndependentContentReview": true
+    },
+    {
+      "id": "closed-session",
+      "purpose": "closed state takes precedence over generation",
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "en",
+          "targetPosition": "Backend Junior",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "abandoned",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Backend Junior: build Node.js REST APIs with PostgreSQL. Explain transactions, concurrent updates, idempotency and integration testing.",
+        "cvText": "Synthetic candidate built a Node.js inventory service using PostgreSQL transactions and integration tests. No identifying information.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "PostgreSQL transactions",
+            "question": "How would you prevent two concurrent purchase requests from overselling the last inventory item?",
+            "answer": "I would use a transaction so the database takes care of it."
+          }
+        ]
+      },
+      "expectedActions": [
+        "end"
+      ],
+      "httpStatus": 200,
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "elapsedMs": 1,
+      "generationRequests": 0,
+      "replaySameResult": true,
+      "output": {
+        "action": "end",
+        "question": null,
+        "sessionId": "5d75852e-5706-4a33-b8ef-a25def6af8b6"
+      },
+      "promptTrace": null,
+      "needsIndependentContentReview": true
+    }
+  ]
+}

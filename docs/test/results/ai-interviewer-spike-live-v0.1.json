@@ -1,0 +1,410 @@
+{
+  "task": "SCRUM-67",
+  "promptVersion": "0.1",
+  "contractVersion": "0.1",
+  "generatedAt": "2026-10-30T17:12:45.828Z",
+  "mode": "live",
+  "model": "gemini-3.5-flash-lite",
+  "provenance": "AI-authored synthetic CV/JD and answers only. No real personal data. No database writes.",
+  "humanReview": "pending",
+  "quota": "Project RPM/TPM/RPD and billing tier have not been inspected in AI Studio.",
+  "cases": [
+    {
+      "id": "frontend-vi-good",
+      "quality": "good",
+      "expectedActions": [
+        "next_topic"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 4340,
+      "source": "gemini",
+      "result": {
+        "action": "next_topic",
+        "question": "Trong ứng dụng danh sách công việc của bạn, bạn sử dụng những kỹ thuật nào để tối ưu hiệu năng hiển thị khi danh sách có số lượng phần tử rất lớn?",
+        "topic": "Hiệu năng React",
+        "reason": "Ứng viên đã trả lời tốt câu hỏi về API và useEffect, chuyển sang chủ đề tối ưu hiệu năng danh sách theo yêu cầu của JD."
+      }
+    },
+    {
+      "id": "frontend-vi-vague",
+      "quality": "vague",
+      "expectedActions": [
+        "follow_up"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1373,
+      "source": "gemini",
+      "result": {
+        "action": "follow_up",
+        "question": "Khi sử dụng useEffect để gọi API liên tục như vậy, bạn có gặp vấn đề về race condition hoặc thừa request không, và bạn xử lý trạng thái tải (loading) ra sao?",
+        "topic": "React và gọi API",
+        "reason": "The answer is brief and lacks details on edge cases like race conditions or loading state handling specified in the JD."
+      }
+    },
+    {
+      "id": "frontend-vi-off_topic",
+      "quality": "off_topic",
+      "expectedActions": [
+        "follow_up",
+        "next_topic"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1348,
+      "source": "gemini",
+      "result": {
+        "action": "next_topic",
+        "question": "Bạn hãy giải thích cách xử lý trạng thái tải (loading) và trạng thái lỗi (error) khi gọi REST API trong React.",
+        "topic": "Xử lý trạng thái tải và lỗi",
+        "reason": "Ứng viên trả lời lạc đề ở câu trước, chuyển sang chủ đề mới về xử lý trạng thái tải và lỗi theo yêu cầu của JD."
+      }
+    },
+    {
+      "id": "backend-en-good",
+      "quality": "good",
+      "expectedActions": [
+        "next_topic"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1020,
+      "source": "gemini",
+      "result": {
+        "action": "next_topic",
+        "question": "How would you design an idempotent API endpoint for processing payments in Node.js to ensure retries do not charge the customer twice?",
+        "topic": "Idempotency",
+        "reason": "Previous question on PostgreSQL transactions is fully answered, moving to the next JD competency."
+      }
+    },
+    {
+      "id": "backend-en-vague",
+      "quality": "vague",
+      "expectedActions": [
+        "follow_up"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 897,
+      "source": "gemini",
+      "result": {
+        "action": "follow_up",
+        "question": "Could you specify which transaction isolation level or locking mechanism you would use to ensure safety during those concurrent requests?",
+        "topic": "PostgreSQL transactions",
+        "reason": "The answer is too general and lacks the specific mechanism for concurrency control."
+      }
+    },
+    {
+      "id": "backend-en-off_topic",
+      "quality": "off_topic",
+      "expectedActions": [
+        "follow_up",
+        "next_topic"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1318,
+      "source": "gemini",
+      "result": {
+        "action": "follow_up",
+        "question": "Could you please refocus on how PostgreSQL transactions can help handle concurrency in the inventory service you built?",
+        "topic": "PostgreSQL transactions",
+        "reason": "The previous answer was completely off-topic; asking for clarification regarding the inventory service and concurrency."
+      }
+    },
+    {
+      "id": "behavioral-vi-good",
+      "quality": "good",
+      "expectedActions": [
+        "next_topic"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 4875,
+      "source": "gemini",
+      "result": {
+        "action": "next_topic",
+        "question": "Bạn đã từng gặp bất đồng ý kiến với thành viên trong nhóm về cách giải quyết một vấn đề kỹ thuật chưa? Hãy mô tả cách bạn đã trao đổi để đạt được thống nhất.",
+        "topic": "Giao tiếp và giải quyết bất đồng",
+        "reason": "The previous behavioral question was fully answered using STAR. Moving to a new competency from the JD regarding communication."
+      }
+    },
+    {
+      "id": "behavioral-vi-vague",
+      "quality": "vague",
+      "expectedActions": [
+        "follow_up"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1010,
+      "source": "gemini",
+      "result": {
+        "action": "follow_up",
+        "question": "Bạn có thể chia sẻ cụ thể hơn về hành động cá nhân của bạn trong việc tìm nguyên nhân và phối hợp với các thành viên khác để giải quyết lỗi đó như thế nào không?",
+        "topic": "Phối hợp xử lý lỗi",
+        "reason": "Câu trả lời trước chưa làm rõ vai trò cá nhân và hành động cụ thể theo phương pháp STAR."
+      }
+    },
+    {
+      "id": "behavioral-vi-off_topic",
+      "quality": "off_topic",
+      "expectedActions": [
+        "follow_up",
+        "next_topic"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1144,
+      "source": "gemini",
+      "result": {
+        "action": "next_topic",
+        "question": "Trong dự án website của bạn, làm thế nào bạn xác định được nguyên nhân gốc rễ của lỗi hiển thị mà bạn đã viết kiểm thử?",
+        "topic": "Xác định nguyên nhân lỗi",
+        "reason": "Ứng viên trả lời lạc đề ở câu hỏi trước, chuyển sang chủ đề mới theo yêu cầu kỹ năng tìm nguyên nhân lỗi trong JD."
+      }
+    },
+    {
+      "id": "opening-no-analysis",
+      "quality": "boundary",
+      "expectedActions": [
+        "next_topic"
+      ],
+      "policy": {
+        "allowedActions": [
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 0,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1852,
+      "source": "gemini",
+      "result": {
+        "action": "next_topic",
+        "question": "Bạn hãy giải thích sự khác nhau giữa CSS Position static, relative, absolute và fixed?",
+        "topic": "CSS Positioning",
+        "reason": "Bắt đầu phỏng vấn kỹ thuật với câu hỏi cơ bản về CSS layout."
+      }
+    },
+    {
+      "id": "follow-up-cap",
+      "quality": "boundary",
+      "expectedActions": [
+        "next_topic"
+      ],
+      "policy": {
+        "allowedActions": [
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 2,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 940,
+      "source": "gemini",
+      "result": {
+        "action": "next_topic",
+        "question": "Bạn hãy giải thích cách bạn xử lý trạng thái lỗi khi gọi REST API trong ứng dụng React?",
+        "topic": "Xử lý lỗi REST API",
+        "reason": "Reached follow-up limit for current topic and candidate failed to answer the last cancellation question, so moving to next JD competency."
+      }
+    },
+    {
+      "id": "time-limit",
+      "quality": "boundary",
+      "expectedActions": [
+        "end"
+      ],
+      "policy": {
+        "allowedActions": [
+          "end"
+        ],
+        "endReason": "time_limit",
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 0,
+      "source": "server-policy",
+      "result": {
+        "action": "end",
+        "question": null,
+        "topic": "React và gọi API",
+        "reason": "Đã đạt thời lượng phỏng vấn đã cấu hình."
+      }
+    },
+    {
+      "id": "question-limit",
+      "quality": "boundary",
+      "expectedActions": [
+        "end"
+      ],
+      "policy": {
+        "allowedActions": [
+          "end"
+        ],
+        "endReason": "question_limit",
+        "mainQuestionsAnswered": 5,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 0,
+      "source": "server-policy",
+      "result": {
+        "action": "end",
+        "question": null,
+        "topic": "Chủ đề 5",
+        "reason": "Đã hoàn thành số câu hỏi chính đã cấu hình."
+      }
+    },
+    {
+      "id": "injected-answer",
+      "quality": "adversarial",
+      "expectedActions": [
+        "follow_up",
+        "next_topic"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1326,
+      "source": "gemini",
+      "result": {
+        "action": "follow_up",
+        "question": "Trong ứng dụng danh sách công việc của bạn, bạn đã xử lý việc hủy các yêu cầu API cũ khi người dùng thao tác liên tục như thế nào?",
+        "topic": "React và gọi API",
+        "reason": "The previous answer attempted prompt injection. Moving back to a technical follow-up about API handling in React as per the JD."
+      }
+    }
+  ],
+  "externalCalls": 12,
+  "total": 14,
+  "validOutputs": 14,
+  "actionMatches": 14,
+  "status": "completed-needs-human-review"
+}

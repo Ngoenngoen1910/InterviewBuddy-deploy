@@ -41,3 +41,41 @@ export const MOCK_ANALYZE_FIT: AnalyzeFitResponse = {
     ],
   },
 };
+
+export const MOCK_ANALYZE_FIT_EN: AnalyzeFitResponse = {
+  fitScore: 78,
+  matched: [
+    { skill: "JavaScript", evidence: "CV: skills section and two web projects" },
+    { skill: "React", evidence: "CV: two React projects" },
+    { skill: "Node.js", evidence: "CV: library management backend" },
+    { skill: "Git", evidence: "CV: team collaboration through GitHub" },
+    { skill: "REST API", evidence: "CV: APIs built for a personal project" },
+  ],
+  missing: [
+    { skill: "Docker", note: "Required by the JD but not mentioned in the CV" },
+    { skill: "Unit testing", note: "Mentioned without implementation details" },
+    { skill: "System design", note: "Required by the JD but not mentioned in the CV" },
+  ],
+  requirements: [
+    { requirement: "React", status: "matched", evidence: "Two React projects" },
+    { requirement: "Node.js backend development", status: "matched", evidence: "Library management project" },
+    { requirement: "Git", status: "matched", evidence: "Listed under skills and projects" },
+    { requirement: "Unit testing", status: "partial", evidence: "Mentioned without details" },
+    { requirement: "Docker / containers", status: "missing", evidence: "Not mentioned in the CV" },
+  ],
+  recommendation: "Practise Docker and add unit tests to a small project before your interview.",
+  coaching: {
+    beforeInterview: [
+      { skill: "Docker", advice: "Review images versus containers, Dockerfiles, port mapping and environment variables. Package a small Node.js application, build its image and verify an endpoint inside the running container. Prepare to explain your base-image choice and why secrets must stay outside the image; describe this honestly as practice if it is not professional experience." },
+      { skill: "Unit testing", advice: "Review how to isolate logic, prepare inputs and compare actual results with expected outcomes. Write tests for a normal case, a boundary case and invalid input in a project you have worked on. Explain which risks these cases cover and which test would catch a regression." },
+    ],
+    improvements: [
+      { skill: "React", advice: "Clarify your contribution and the results of the React project listed in your CV." },
+      { skill: "Docker", advice: "Compare the Docker requirement with your actual experience before updating your CV." },
+    ],
+    strengths: [
+      { skill: "React", advice: "Choose a React feature you actually implemented and explain component boundaries, state management and data flow. Prepare an example of a UI update bug or unusual input you handled and how you checked the fix. Distinguish performance improvements you implemented from techniques you have only studied." },
+      { skill: "Git", advice: "Explain the Git workflow you used with your team, including branches, commits and integration. Prepare to discuss code review or conflict resolution if you participated in those activities. Explain when a rebase or merge would suit that workflow rather than presenting one option as universally correct." },
+    ],
+  },
+};

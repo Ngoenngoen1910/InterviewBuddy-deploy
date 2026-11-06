@@ -1,0 +1,230 @@
+{
+  "checkedAt": "2026-11-03T16:50:17.827Z",
+  "promptVersion": "0.4",
+  "contextVersion": "jd-cv-context-v2",
+  "mode": "live",
+  "model": "gemini-3.5-flash-lite",
+  "externalRequests": 6,
+  "boundary": "Real Gemini + local PGlite database + real HTTP handler, simulated authentication. No hosted migration or UI integration.",
+  "provenance": "AI-authored synthetic CV/JD; no real applicant data. Valid-output checks structure, not independent quality.",
+  "results": [
+    {
+      "id": "technical-medium-vi",
+      "status": "valid-output",
+      "httpStatus": 200,
+      "elapsedMs": 2964,
+      "replaySameQuestion": true,
+      "contextPlan": {
+        "version": "jd-cv-context-v2",
+        "basis": "jd",
+        "jdFocus": "Frontend Intern: sử dụng React, REST API, xử lý trạng thái tải và lỗi, kiểm thử giao diện.",
+        "cvContext": [
+          "Hồ sơ giả lập: đã xây dựng ứng dụng danh sách công việc bằng React và gọi REST API."
+        ],
+        "difficultyPolicy": "Ask about implementation, testing, debugging or a concrete failure case at the configured role level.",
+        "roundPolicy": "Assess job-relevant knowledge or a hypothetical implementation. Use past-project wording only for explicitly evidenced work. Do not require STAR for factual questions."
+      },
+      "input": {
+        "id": "technical-medium-vi",
+        "type": "technical",
+        "difficulty": "medium",
+        "language": "vi",
+        "position": "Frontend Intern",
+        "jd": "Frontend Intern: sử dụng React, REST API, xử lý trạng thái tải và lỗi, kiểm thử giao diện.",
+        "cv": "Hồ sơ giả lập: đã xây dựng ứng dụng danh sách công việc bằng React và gọi REST API. Chưa có kinh nghiệm làm việc chuyên nghiệp."
+      },
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "401cdcf6-6d0c-46cb-a3f4-c676c5c895c4",
+          "kind": "main",
+          "topic": "Xử lý trạng thái tải và lỗi",
+          "content": "Bạn sẽ thiết kế việc quản lý trạng thái tải (loading) và hiển thị lỗi như thế nào khi gọi một REST API lấy dữ liệu danh sách công việc trong React?",
+          "position": 1
+        },
+        "sessionId": "c8d2b51a-d6e3-40ae-bcb7-88ac5f3f7be4"
+      }
+    },
+    {
+      "id": "technical-hard-en",
+      "status": "valid-output",
+      "httpStatus": 200,
+      "elapsedMs": 1238,
+      "replaySameQuestion": true,
+      "contextPlan": {
+        "version": "jd-cv-context-v2",
+        "basis": "jd",
+        "jdFocus": "Backend Developer: Node.js, PostgreSQL transactions, concurrent requests and integration testing.",
+        "cvContext": [
+          "Synthetic profile: built a Node.js inventory project with PostgreSQL transactions."
+        ],
+        "difficultyPolicy": "Present a concrete hypothetical failure or concurrency constraint and ask for a justified design trade-off in one focused question; do not assume senior experience absent from the CV.",
+        "roundPolicy": "Assess job-relevant knowledge or a hypothetical implementation. Use past-project wording only for explicitly evidenced work. Do not require STAR for factual questions."
+      },
+      "input": {
+        "id": "technical-hard-en",
+        "type": "technical",
+        "difficulty": "hard",
+        "language": "en",
+        "position": "Backend Developer",
+        "jd": "Backend Developer: Node.js, PostgreSQL transactions, concurrent requests and integration testing.",
+        "cv": "Synthetic profile: built a Node.js inventory project with PostgreSQL transactions. No production experience is claimed."
+      },
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "e3473e0d-4ae8-4bc1-8065-871701ded883",
+          "kind": "main",
+          "topic": "Concurrency and PostgreSQL Transactions",
+          "content": "How would you design a Node.js API endpoint to handle high-frequency concurrent stock updates in PostgreSQL without causing race conditions?",
+          "position": 1
+        },
+        "sessionId": "35f363ac-804b-45be-9d5c-7d1db725c991"
+      }
+    },
+    {
+      "id": "behavioral-easy-vi",
+      "status": "valid-output",
+      "httpStatus": 200,
+      "elapsedMs": 1882,
+      "replaySameQuestion": true,
+      "contextPlan": {
+        "version": "jd-cv-context-v2",
+        "basis": "jd",
+        "jdFocus": "Software Engineer Intern: phối hợp nhóm, giao tiếp rõ ràng, chủ động xử lý lỗi và kiểm tra kết quả.",
+        "cvContext": [
+          "Hồ sơ minh họa: tham gia bài tập nhóm xây dựng website."
+        ],
+        "difficultyPolicy": "Ask one foundational concept or a straightforward example; avoid a multi-part design problem.",
+        "roundPolicy": "Ask for one real past situation, leaving room for Situation, Task, Action and Result. Do not invent the candidate's situation or result."
+      },
+      "input": {
+        "id": "behavioral-easy-vi",
+        "type": "behavioral",
+        "difficulty": "easy",
+        "language": "vi",
+        "position": "Software Engineer Intern",
+        "jd": "Software Engineer Intern: phối hợp nhóm, giao tiếp rõ ràng, chủ động xử lý lỗi và kiểm tra kết quả.",
+        "cv": "Hồ sơ minh họa: tham gia bài tập nhóm xây dựng website. Không cung cấp thông tin nhận dạng hoặc thành tích cụ thể."
+      },
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "22ee9d68-d6a0-4afc-87ac-59efc12a5cff",
+          "kind": "main",
+          "topic": "phối hợp nhóm",
+          "content": "Bạn hãy chia sẻ về một lần tham gia làm bài tập nhóm xây dựng website, cụ thể là bạn đã phối hợp với các thành viên khác như thế nào để hoàn thành nhiệm vụ được giao?",
+          "position": 1
+        },
+        "sessionId": "ecd0190c-ccaa-400f-b4c5-dbe7e1548c47"
+      }
+    },
+    {
+      "id": "hr-medium-en",
+      "status": "valid-output",
+      "httpStatus": 200,
+      "elapsedMs": 3176,
+      "replaySameQuestion": true,
+      "contextPlan": {
+        "version": "jd-cv-context-v2",
+        "basis": "jd",
+        "jdFocus": "Communicate clearly with developers and report reproducible bugs.",
+        "cvContext": [],
+        "difficultyPolicy": "Ask about implementation, testing, debugging or a concrete failure case at the configured role level.",
+        "roundPolicy": "Ask a job-relevant motivation, collaboration or communication question; avoid private or protected personal attributes."
+      },
+      "input": {
+        "id": "hr-medium-en",
+        "type": "hr",
+        "difficulty": "medium",
+        "language": "en",
+        "position": "QA Intern",
+        "jd": "Position: QA Intern\nRequirements:\nCommunicate clearly with developers and report reproducible bugs. Collaborate on test planning.",
+        "cv": "Synthetic profile: tested a class project and wrote bug reports. No employer, certification or professional experience is claimed."
+      },
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "783c5626-c263-41c0-8e25-f1168be417c6",
+          "kind": "main",
+          "topic": "Bug Reporting and Communication",
+          "content": "Can you describe a time when you found a bug in a project and how you documented the steps to ensure a developer could reproduce it?",
+          "position": 1
+        },
+        "sessionId": "8133c15f-cce6-4dc5-be93-b95ec970e1b8"
+      }
+    },
+    {
+      "id": "technical-easy-vi-short-skills",
+      "status": "valid-output",
+      "httpStatus": 200,
+      "elapsedMs": 2166,
+      "replaySameQuestion": true,
+      "contextPlan": {
+        "version": "jd-cv-context-v2",
+        "basis": "jd",
+        "jdFocus": "- Go",
+        "cvContext": [
+          "Hồ sơ giả lập: đã viết một chương trình nhỏ bằng Go."
+        ],
+        "difficultyPolicy": "Ask one foundational concept or a straightforward example; avoid a multi-part design problem.",
+        "roundPolicy": "Assess job-relevant knowledge or a hypothetical implementation. Use past-project wording only for explicitly evidenced work. Do not require STAR for factual questions."
+      },
+      "input": {
+        "id": "technical-easy-vi-short-skills",
+        "type": "technical",
+        "difficulty": "easy",
+        "language": "vi",
+        "position": "Backend Intern",
+        "jd": "Vị trí: Backend Intern\nYêu cầu:\n- Go\n- C#\n- REST API",
+        "cv": "Hồ sơ giả lập: đã viết một chương trình nhỏ bằng Go. Chưa sử dụng C#."
+      },
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "77efaa81-036b-463c-b157-f1149a7c0bd5",
+          "kind": "main",
+          "topic": "Go Fundamentals",
+          "content": "Bạn có thể giải thích khái niệm Goroutine trong ngôn ngữ Go là gì và nó khác thế nào so với thread thông thường không?",
+          "position": 1
+        },
+        "sessionId": "fec46293-6c95-447c-ae35-02f2c80182f3"
+      }
+    },
+    {
+      "id": "behavioral-hard-en",
+      "status": "valid-output",
+      "httpStatus": 200,
+      "elapsedMs": 2064,
+      "replaySameQuestion": true,
+      "contextPlan": {
+        "version": "jd-cv-context-v2",
+        "basis": "jd",
+        "jdFocus": "Collaborate on debugging, explain trade-offs and communicate disagreements constructively.",
+        "cvContext": [],
+        "difficultyPolicy": "Present a concrete hypothetical failure or concurrency constraint and ask for a justified design trade-off in one focused question; do not assume senior experience absent from the CV.",
+        "roundPolicy": "Ask for one real past situation, leaving room for Situation, Task, Action and Result. Do not invent the candidate's situation or result."
+      },
+      "input": {
+        "id": "behavioral-hard-en",
+        "type": "behavioral",
+        "difficulty": "hard",
+        "language": "en",
+        "position": "Software Engineer Intern",
+        "jd": "Software Engineer Intern\nResponsibilities:\nCollaborate on debugging, explain trade-offs and communicate disagreements constructively.",
+        "cv": "Synthetic profile: participated in a team website assignment. No leadership title or measurable team outcome is provided."
+      },
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "877c818a-badb-4a46-b217-7607d688710f",
+          "kind": "main",
+          "topic": "Conflict Resolution and Collaboration",
+          "content": "Can you share a situation from a team project where you disagreed with a teammate on a technical approach, and how you communicated your perspective?",
+          "position": 1
+        },
+        "sessionId": "79e2e074-c94d-4650-aef0-ccf87bc3ea6c"
+      }
+    }
+  ]
+}

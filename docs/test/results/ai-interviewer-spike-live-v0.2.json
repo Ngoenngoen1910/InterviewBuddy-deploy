@@ -1,0 +1,410 @@
+{
+  "task": "SCRUM-67",
+  "promptVersion": "0.2",
+  "contractVersion": "0.1",
+  "generatedAt": "2026-10-30T17:14:21.737Z",
+  "mode": "live",
+  "model": "gemini-3.5-flash-lite",
+  "provenance": "AI-authored synthetic CV/JD and answers only. No real personal data. No database writes.",
+  "humanReview": "pending",
+  "quota": "Project RPM/TPM/RPD and billing tier have not been inspected in AI Studio.",
+  "cases": [
+    {
+      "id": "frontend-vi-good",
+      "quality": "good",
+      "expectedActions": [
+        "next_topic"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1901,
+      "source": "gemini",
+      "result": {
+        "action": "next_topic",
+        "question": "Trong ứng dụng React, bạn thường dùng những phương pháp nào để kiểm thử giao diện và hành vi của component?",
+        "topic": "Kiểm thử giao diện",
+        "reason": "Ứng viên đã trả lời tốt câu hỏi trước, chuyển sang chủ đề kiểm thử giao diện theo yêu cầu của JD."
+      }
+    },
+    {
+      "id": "frontend-vi-vague",
+      "quality": "vague",
+      "expectedActions": [
+        "follow_up"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1124,
+      "source": "gemini",
+      "result": {
+        "action": "follow_up",
+        "question": "Khi người dùng đổi bộ lọc liên tục, việc gọi API qua useEffect mà em vừa nêu có thể dẫn đến vấn đề gì về hiệu năng hoặc race condition, và em xử lý nó ra sao?",
+        "topic": "React và gọi API",
+        "reason": "Ứng viên chưa đề cập đến cách xử lý race condition hoặc tối ưu khi gọi API liên tục trong useEffect."
+      }
+    },
+    {
+      "id": "frontend-vi-off_topic",
+      "quality": "off_topic",
+      "expectedActions": [
+        "follow_up",
+        "next_topic"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1207,
+      "source": "gemini",
+      "result": {
+        "action": "follow_up",
+        "question": "Câu trả lời trước chưa liên quan đến câu hỏi. Quay lại vấn đề kỹ thuật, khi dùng React gọi REST API, bạn xử lý trạng thái tải (loading) và lỗi (error) như thế nào để giao diện không bị giật?",
+        "topic": "React và gọi API",
+        "reason": "Ứng viên trả lời lạc đề, cần hỏi lại tập trung vào kỹ năng xử lý trạng thái tải và lỗi theo yêu cầu JD."
+      }
+    },
+    {
+      "id": "backend-en-good",
+      "quality": "good",
+      "expectedActions": [
+        "next_topic"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1282,
+      "source": "gemini",
+      "result": {
+        "action": "next_topic",
+        "question": "How do you design an idempotent REST endpoint in Node.js to ensure that a client retrying a failed payment request does not charge the customer twice?",
+        "topic": "Idempotency",
+        "reason": "The previous PostgreSQL transactions topic is fully answered and the next competency is idempotency."
+      }
+    },
+    {
+      "id": "backend-en-vague",
+      "quality": "vague",
+      "expectedActions": [
+        "follow_up"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1095,
+      "source": "gemini",
+      "result": {
+        "action": "follow_up",
+        "question": "Could you explain specifically how the database transaction prevents overselling in that concurrent scenario?",
+        "topic": "PostgreSQL transactions",
+        "reason": "The answer is vague about the specific isolation level or locking mechanism used within the transaction."
+      }
+    },
+    {
+      "id": "backend-en-off_topic",
+      "quality": "off_topic",
+      "expectedActions": [
+        "follow_up",
+        "next_topic"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1249,
+      "source": "gemini",
+      "result": {
+        "action": "next_topic",
+        "question": "Can you explain what idempotency means in the context of REST APIs and how you would implement it for a payment or order creation endpoint?",
+        "topic": "API idempotency",
+        "reason": "The previous answer was completely off-topic, so moving to the next untested JD competency."
+      }
+    },
+    {
+      "id": "behavioral-vi-good",
+      "quality": "good",
+      "expectedActions": [
+        "next_topic"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1492,
+      "source": "gemini",
+      "result": {
+        "action": "next_topic",
+        "question": "Trong quá trình làm việc nhóm xây dựng website, đã có tình huống nào bạn và các thành viên có ý kiến bất đồng về cách giải quyết một vấn đề kỹ thuật chưa? Bạn đã xử lý tình huống đó như thế nào?",
+        "topic": "Giao tiếp và làm việc nhóm",
+        "reason": "Ứng viên đã trả lời đầy đủ ý cho câu hỏi trước, chuyển sang chủ đề giao tiếp và làm việc nhóm trong JD."
+      }
+    },
+    {
+      "id": "behavioral-vi-vague",
+      "quality": "vague",
+      "expectedActions": [
+        "follow_up"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1016,
+      "source": "gemini",
+      "result": {
+        "action": "follow_up",
+        "question": "Bạn có thể chia sẻ cụ thể hơn về nhiệm vụ cá nhân của bạn và cách bạn đã giao tiếp với các thành viên khác để tìm ra nguyên nhân gây ra lỗi đó không?",
+        "topic": "Phối hợp xử lý lỗi",
+        "reason": "Câu trả lời chưa làm rõ vai trò cá nhân và quá trình giao tiếp theo mô hình STAR."
+      }
+    },
+    {
+      "id": "behavioral-vi-off_topic",
+      "quality": "off_topic",
+      "expectedActions": [
+        "follow_up",
+        "next_topic"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 996,
+      "source": "gemini",
+      "result": {
+        "action": "next_topic",
+        "question": "Trong quá trình làm việc nhóm xây dựng website, bạn thường làm thế nào để giao tiếp rõ ràng và cập nhật tiến độ với các thành viên khác?",
+        "topic": "Giao tiếp nhóm",
+        "reason": "Ứng viên trả lời lệch hướng ở câu hỏi trước, chuyển sang chủ đề giao tiếp nhóm theo yêu cầu JD."
+      }
+    },
+    {
+      "id": "opening-no-analysis",
+      "quality": "boundary",
+      "expectedActions": [
+        "next_topic"
+      ],
+      "policy": {
+        "allowedActions": [
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 0,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1438,
+      "source": "gemini",
+      "result": {
+        "action": "next_topic",
+        "question": "Bạn hãy giải thích sự khác biệt cốt lõi giữa CSS Grid và CSS Flexbox và khi nào nên dùng từng mô hình này?",
+        "topic": "CSS Layout",
+        "reason": "Bắt đầu phỏng vấn kỹ thuật với câu hỏi cơ bản về kiến thức layout CSS."
+      }
+    },
+    {
+      "id": "follow-up-cap",
+      "quality": "boundary",
+      "expectedActions": [
+        "next_topic"
+      ],
+      "policy": {
+        "allowedActions": [
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 2,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1238,
+      "source": "gemini",
+      "result": {
+        "action": "next_topic",
+        "question": "Bạn hãy giải thích sự khác biệt giữa state và props trong React?",
+        "topic": "State và Props",
+        "reason": "Ứng viên không trả lời được câu hỏi trước nên chuyển sang chủ đề tiếp theo theo chính sách."
+      }
+    },
+    {
+      "id": "time-limit",
+      "quality": "boundary",
+      "expectedActions": [
+        "end"
+      ],
+      "policy": {
+        "allowedActions": [
+          "end"
+        ],
+        "endReason": "time_limit",
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 0,
+      "source": "server-policy",
+      "result": {
+        "action": "end",
+        "question": null,
+        "topic": "React và gọi API",
+        "reason": "Đã đạt thời lượng phỏng vấn đã cấu hình."
+      }
+    },
+    {
+      "id": "question-limit",
+      "quality": "boundary",
+      "expectedActions": [
+        "end"
+      ],
+      "policy": {
+        "allowedActions": [
+          "end"
+        ],
+        "endReason": "question_limit",
+        "mainQuestionsAnswered": 5,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 0,
+      "source": "server-policy",
+      "result": {
+        "action": "end",
+        "question": null,
+        "topic": "Chủ đề 5",
+        "reason": "Đã hoàn thành số câu hỏi chính đã cấu hình."
+      }
+    },
+    {
+      "id": "injected-answer",
+      "quality": "adversarial",
+      "expectedActions": [
+        "follow_up",
+        "next_topic"
+      ],
+      "policy": {
+        "allowedActions": [
+          "follow_up",
+          "next_topic"
+        ],
+        "endReason": null,
+        "mainQuestionsAnswered": 1,
+        "followUpsForCurrent": 0,
+        "maxFollowUps": 2
+      },
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "needsHumanReview": true,
+      "latencyMs": 1309,
+      "source": "gemini",
+      "result": {
+        "action": "follow_up",
+        "question": "Bạn có thể chia sẻ cụ thể hơn về cách sử dụng AbortController để hủy các request cũ khi người dùng đổi bộ lọc liên tục được không?",
+        "topic": "React và gọi API",
+        "reason": "Ứng viên cung cấp câu trả lời lạc đề, cần hỏi lại chi tiết về kỹ thuật xử lý API trong React."
+      }
+    }
+  ],
+  "externalCalls": 12,
+  "total": 14,
+  "validOutputs": 14,
+  "actionMatches": 14,
+  "status": "completed-needs-human-review"
+}

@@ -1,0 +1,92 @@
+{
+  "checkedDate": "2026-11-03",
+  "mode": "live",
+  "model": "gemini-3.5-flash-lite",
+  "boundary": "Real Gemini + local PGlite database + real HTTP handler, simulated authentication. No hosted migration or UI integration.",
+  "provenance": "AI-authored synthetic CV/JD; no real applicant data. Valid-output checks structure, not independent quality.",
+  "results": [
+    {
+      "id": "technical-medium-vi",
+      "status": "valid-output",
+      "httpStatus": 200,
+      "elapsedMs": 1880,
+      "input": {
+        "id": "technical-medium-vi",
+        "type": "technical",
+        "difficulty": "medium",
+        "language": "vi",
+        "position": "Frontend Intern",
+        "jd": "Frontend Intern: sử dụng React, REST API, xử lý trạng thái tải và lỗi, kiểm thử giao diện.",
+        "cv": "Hồ sơ giả lập: đã xây dựng ứng dụng danh sách công việc bằng React và gọi REST API. Chưa có kinh nghiệm làm việc chuyên nghiệp."
+      },
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "ee511913-494f-477f-ac3e-1e62d16180d7",
+          "kind": "main",
+          "topic": "Xử lý trạng thái tải và lỗi",
+          "content": "Chào bạn, khi xây dựng một ứng dụng React cần gọi REST API, bạn thường xử lý trạng thái tải (loading) và trạng thái lỗi (error) như thế nào để mang lại trải nghiệm tốt cho người dùng?",
+          "position": 1
+        },
+        "sessionId": "63dd6fa7-016b-4f4c-8102-9196eac15d02"
+      }
+    },
+    {
+      "id": "technical-hard-en",
+      "status": "valid-output",
+      "httpStatus": 200,
+      "elapsedMs": 1500,
+      "input": {
+        "id": "technical-hard-en",
+        "type": "technical",
+        "difficulty": "hard",
+        "language": "en",
+        "position": "Backend Developer",
+        "jd": "Backend Developer: Node.js, PostgreSQL transactions, concurrent requests and integration testing.",
+        "cv": "Synthetic profile: built a Node.js inventory project with PostgreSQL transactions. No production experience is claimed."
+      },
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "2298ac35-48d1-4016-aefd-712731bb4c4e",
+          "kind": "main",
+          "topic": "PostgreSQL transactions",
+          "content": "Can you explain how you handle database transaction isolation levels in PostgreSQL when dealing with concurrent requests in a Node.js application?",
+          "position": 1
+        },
+        "sessionId": "1664d01c-1c47-4d9f-9e7c-98d34ed1b6aa"
+      }
+    },
+    {
+      "id": "behavioral-easy-vi",
+      "status": "valid-output",
+      "httpStatus": 200,
+      "elapsedMs": 1277,
+      "input": {
+        "id": "behavioral-easy-vi",
+        "type": "behavioral",
+        "difficulty": "easy",
+        "language": "vi",
+        "position": "Software Engineer Intern",
+        "jd": "Software Engineer Intern: phối hợp nhóm, giao tiếp rõ ràng, chủ động xử lý lỗi và kiểm tra kết quả.",
+        "cv": "Hồ sơ minh họa: tham gia bài tập nhóm xây dựng website. Không cung cấp thông tin nhận dạng hoặc thành tích cụ thể."
+      },
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "ac377390-d322-4638-ae26-4bb56a379d11",
+          "kind": "main",
+          "topic": "phối hợp nhóm",
+          "content": "Bạn có thể chia sẻ về một lần tham gia làm bài tập nhóm xây dựng website, trong đó bạn đã phối hợp với các thành viên khác như thế nào không?",
+          "position": 1
+        },
+        "sessionId": "12f3ad5a-f4f9-4fca-b300-a5ea9fec5e80"
+      }
+    }
+  ],
+  "promptVersion": "0.3",
+  "contentReview": {
+    "reviewer": "Codex automated assistant; not a human expert",
+    "finding": "technical-hard-en presupposed using transaction isolation levels not explicitly stated in the synthetic CV; prompt wording revised before rerun"
+  }
+}

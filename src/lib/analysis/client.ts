@@ -1,4 +1,5 @@
-import { MOCK_ANALYZE_FIT } from "./mock";
+import { MOCK_ANALYZE_FIT, MOCK_ANALYZE_FIT_EN } from "./mock";
+import { RESULT_TEXT } from "./result-text";
 import type {
   AnalyzeFitErrorCode,
   AnalyzeFitRequest,
@@ -18,18 +19,13 @@ export class AnalyzeFitError extends Error {
 }
 
 // Messages shown to the user, by error code from the API contract.
-const MESSAGES: Record<AnalyzeFitErrorCode, string> = {
-  BAD_INPUT: "JD hoặc CV đang trống hoặc quá dài. Vui lòng kiểm tra lại.",
-  RATE_LIMIT: "AI đang quá tải, vui lòng thử lại sau ít phút.",
-  INVALID_OUTPUT: "AI trả kết quả không hợp lệ. Vui lòng bấm phân tích lại.",
-  SERVER_ERROR: "Có lỗi ở máy chủ. Vui lòng thử lại sau.",
-  NETWORK_ERROR: "Không kết nối được máy chủ. Kiểm tra mạng rồi thử lại.",
-};
+const MESSAGES = RESULT_TEXT.vi.errors;
 
 export async function analyzeFit(input: AnalyzeFitRequest): Promise<AnalyzeFitResponse> {
+  const messages = RESULT_TEXT[input.language].errors;
   if (USE_MOCK) {
     await new Promise((r) => setTimeout(r, 1200)); // pretend the AI is thinking
-    return MOCK_ANALYZE_FIT;
+    return input.language === "en" ? MOCK_ANALYZE_FIT_EN : MOCK_ANALYZE_FIT;
   }
 
   let res: Response;
@@ -40,16 +36,15 @@ export async function analyzeFit(input: AnalyzeFitRequest): Promise<AnalyzeFitRe
       body: JSON.stringify(input),
     });
   } catch {
-    throw new AnalyzeFitError("NETWORK_ERROR", MESSAGES.NETWORK_ERROR);
+    throw new AnalyzeFitError("NETWORK_ERROR", messages.NETWORK_ERROR);
   }
 
   const body = (await res.json().catch(() => null)) as AnalyzeFitResponse | ApiError | null;
 
   if (!res.ok || !body || "error" in body) {
     const code = toCode(res.status, body && "error" in body ? body.error.code : undefined);
-    // Prefer the server message (already in the user's language), else our default.
-    const message = body && "error" in body && body.error.message ? body.error.message : MESSAGES[code];
-    throw new AnalyzeFitError(code, message);
+    // Server errors may use a different language; localize by the stable error code.
+    throw new AnalyzeFitError(code, messages[code]);
   }
 
   const coaching = body.coaching;
@@ -58,7 +53,7 @@ export async function analyzeFit(input: AnalyzeFitRequest): Promise<AnalyzeFitRe
       item && typeof item.skill === "string" && typeof item.advice === "string");
   if (!coaching || !validItems(coaching.beforeInterview)
       || !validItems(coaching.improvements) || !validItems(coaching.strengths)) {
-    throw new AnalyzeFitError("INVALID_OUTPUT", MESSAGES.INVALID_OUTPUT);
+    throw new AnalyzeFitError("INVALID_OUTPUT", messages.INVALID_OUTPUT);
   }
 
   return body;

@@ -1,0 +1,88 @@
+{
+  "checkedAt": "2026-11-03T11:51:48.666Z",
+  "promptVersion": "0.4",
+  "mode": "live",
+  "model": "gemini-3.5-flash-lite",
+  "boundary": "Real Gemini + local PGlite database + real HTTP handler, simulated authentication. No hosted migration or UI integration.",
+  "provenance": "AI-authored synthetic CV/JD; no real applicant data. Valid-output checks structure, not independent quality.",
+  "results": [
+    {
+      "id": "technical-medium-vi",
+      "status": "valid-output",
+      "httpStatus": 200,
+      "elapsedMs": 1754,
+      "input": {
+        "id": "technical-medium-vi",
+        "type": "technical",
+        "difficulty": "medium",
+        "language": "vi",
+        "position": "Frontend Intern",
+        "jd": "Frontend Intern: sử dụng React, REST API, xử lý trạng thái tải và lỗi, kiểm thử giao diện.",
+        "cv": "Hồ sơ giả lập: đã xây dựng ứng dụng danh sách công việc bằng React và gọi REST API. Chưa có kinh nghiệm làm việc chuyên nghiệp."
+      },
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "1ebed762-faa0-41a8-b8e1-f0d613f4e9ab",
+          "kind": "main",
+          "topic": "Xử lý trạng thái tải và lỗi",
+          "content": "Bạn sẽ thiết kế cơ chế xử lý trạng thái tải (loading) và hiển thị thông báo lỗi như thế nào khi gọi REST API trong một component React?",
+          "position": 1
+        },
+        "sessionId": "d24d6d9f-8d37-461c-a2c7-48fbe8e1122f"
+      }
+    },
+    {
+      "id": "technical-hard-en",
+      "status": "valid-output",
+      "httpStatus": 200,
+      "elapsedMs": 1541,
+      "input": {
+        "id": "technical-hard-en",
+        "type": "technical",
+        "difficulty": "hard",
+        "language": "en",
+        "position": "Backend Developer",
+        "jd": "Backend Developer: Node.js, PostgreSQL transactions, concurrent requests and integration testing.",
+        "cv": "Synthetic profile: built a Node.js inventory project with PostgreSQL transactions. No production experience is claimed."
+      },
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "0fc7cc6b-187c-4921-894e-29d39388c456",
+          "kind": "main",
+          "topic": "PostgreSQL transactions",
+          "content": "How would you design a Node.js API endpoint to handle high-volume concurrent stock updates in PostgreSQL without causing race conditions or deadlocks?",
+          "position": 1
+        },
+        "sessionId": "5f0fc876-d4eb-4332-9b96-94f0e10684b0"
+      }
+    },
+    {
+      "id": "behavioral-easy-vi",
+      "status": "valid-output",
+      "httpStatus": 200,
+      "elapsedMs": 1562,
+      "input": {
+        "id": "behavioral-easy-vi",
+        "type": "behavioral",
+        "difficulty": "easy",
+        "language": "vi",
+        "position": "Software Engineer Intern",
+        "jd": "Software Engineer Intern: phối hợp nhóm, giao tiếp rõ ràng, chủ động xử lý lỗi và kiểm tra kết quả.",
+        "cv": "Hồ sơ minh họa: tham gia bài tập nhóm xây dựng website. Không cung cấp thông tin nhận dạng hoặc thành tích cụ thể."
+      },
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "ebf33ec7-4524-46df-802b-8382c9eb6d12",
+          "kind": "main",
+          "topic": "phối hợp nhóm",
+          "content": "Chào bạn, trong quá trình tham gia bài tập nhóm xây dựng website, bạn có thể chia sẻ một tình huống cụ thể mà nhóm gặp khó khăn trong việc phối hợp công việc không?",
+          "position": 1
+        },
+        "sessionId": "a6e2e39b-3eba-400b-86a4-18d474aacb40"
+      }
+    }
+  ]
+}

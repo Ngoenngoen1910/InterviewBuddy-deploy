@@ -29,6 +29,9 @@ export function buildGeminiRequest(input) {
         'Avoid generic advice such as "learn the basics" or "talk about your experience". For absent CV evidence, recommend practice without claiming the candidate lacks the skill. Keep coaching.improvements concise and distinguish truthful CV evidence from a skill not yet demonstrated.',
         'Return only the requested JSON schema. Do not calculate a percentage or add any score field.',
         `Write summary, reason, and coaching advice in ${input.language === 'vi' ? 'Vietnamese' : 'English'}. Keep skill names recognizable.`,
+        input.language === 'en'
+          ? 'MANDATORY: Write all generated display text in English, including requirement skill labels, reasons, summary and every coaching advice, even when the CV/JD is in Vietnamese. Translate general skill names into English; keep product names and technical identifiers unchanged. Reuse exactly the same English skill label in requirements and coaching. Only jdEvidence and cvEvidence must remain verbatim in the original source language.'
+          : 'Viết nhận xét và lời khuyên bằng tiếng Việt. Giữ nguyên tên công nghệ và trích dẫn bằng chứng từ tài liệu gốc.',
       ].join('\n') }],
     },
     contents: [{ role: 'user', parts: [{ text: JSON.stringify({ cvText: input.cvText, jdText: input.jdText }) }] }],

@@ -1,0 +1,357 @@
+{
+  "mode": "prepared",
+  "provenance": "AI-authored synthetic data",
+  "cases": [
+    {
+      "id": "vague-technical-en",
+      "expectedActions": [
+        "follow_up"
+      ],
+      "purpose": "clarify the missing concurrency mechanism",
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "en",
+          "targetPosition": "Backend Junior",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Backend Junior: build Node.js REST APIs with PostgreSQL. Explain transactions, concurrent updates, idempotency and integration testing.",
+        "cvText": "Synthetic candidate built a Node.js inventory service using PostgreSQL transactions and integration tests. No identifying information.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "PostgreSQL transactions",
+            "question": "How would you prevent two concurrent purchase requests from overselling the last inventory item?",
+            "answer": "I would use a transaction so the database takes care of it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "interesting-detail-en",
+      "expectedActions": [
+        "follow_up"
+      ],
+      "purpose": "probe the explicitly unresolved stale-cache issue",
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "en",
+          "targetPosition": "Backend Junior",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Backend Junior: build Node.js REST APIs with PostgreSQL. Explain transactions, concurrent updates, idempotency and integration testing.",
+        "cvText": "Synthetic candidate built a Node.js inventory service using PostgreSQL transactions and integration tests. No identifying information.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "PostgreSQL transactions",
+            "question": "How would you prevent two concurrent purchase requests from overselling the last inventory item?",
+            "answer": "I would use an atomic UPDATE with quantity >= requested quantity in its WHERE clause, check the affected row count and create the order in the same transaction. A unique idempotency key prevents a retried request from creating a second order. In a concurrent integration test I would start two transactions against one remaining item and verify that only one order commits and stock never becomes negative. One unresolved issue is that the cached product page still shows the old stock value after commit; I have not investigated cache invalidation yet."
+          }
+        ]
+      }
+    },
+    {
+      "id": "developed-behavioral-vi",
+      "expectedActions": [
+        "next_topic"
+      ],
+      "purpose": "move on from a developed STAR account without invented achievements",
+      "input": {
+        "settings": {
+          "type": "behavioral",
+          "difficulty": "medium",
+          "language": "vi",
+          "targetPosition": "Software Engineer Intern",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Software Engineer Intern: phối hợp với nhóm, giao tiếp rõ ràng, chủ động tìm nguyên nhân lỗi và kiểm tra kết quả sửa lỗi.",
+        "cvText": "Ứng viên giả lập tham gia bài tập nhóm xây dựng website và viết kiểm thử cho một lỗi hiển thị. Không có thông tin cá nhân.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "Phối hợp xử lý lỗi",
+            "question": "Hãy kể một lần bạn phối hợp với nhóm để xử lý một lỗi khó trước hạn bàn giao.",
+            "answer": "Trước hạn nộp bài một ngày, trang danh sách bị trắng khi API trả mảng rỗng. Tôi phụ trách tái hiện và khoanh vùng lỗi, còn một bạn kiểm tra response phía server. Tôi tạo dữ liệu rỗng để tái hiện, bổ sung nhánh empty state và viết regression test; sau đó nhờ bạn kiểm tra lại trên bản tích hợp. Nhóm đã xác nhận trường hợp rỗng hoạt động và nộp bản sửa trước hạn; tôi rút kinh nghiệm phải có test cho empty state từ đầu."
+          }
+        ]
+      }
+    },
+    {
+      "id": "declines-answer-vi",
+      "expectedActions": [
+        "next_topic"
+      ],
+      "purpose": "respect an explicit request to move on",
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "vi",
+          "targetPosition": "Frontend Intern",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Frontend Intern: sử dụng React, JavaScript, gọi REST API và kiểm thử giao diện; giải thích cách xử lý trạng thái tải và lỗi.",
+        "cvText": "Ứng viên minh họa đã làm ứng dụng danh sách công việc bằng React và gọi REST API. Không cung cấp tên, liên hệ hoặc công ty.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "React và gọi API",
+            "question": "Bạn xử lý việc gọi API khi người dùng đổi bộ lọc liên tục trong React như thế nào?",
+            "answer": "Em chưa biết cách làm và muốn chuyển sang câu hỏi khác."
+          }
+        ]
+      }
+    },
+    {
+      "id": "follow-up-cap-en",
+      "expectedActions": [
+        "next_topic"
+      ],
+      "purpose": "enforce the configured cap even after a vague answer",
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "en",
+          "targetPosition": "Frontend Intern",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Frontend Intern: sử dụng React, JavaScript, gọi REST API và kiểm thử giao diện; giải thích cách xử lý trạng thái tải và lỗi.",
+        "cvText": "Ứng viên minh họa đã làm ứng dụng danh sách công việc bằng React và gọi REST API. Không cung cấp tên, liên hệ hoặc công ty.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "React và gọi API",
+            "question": "Bạn xử lý việc gọi API khi người dùng đổi bộ lọc liên tục trong React như thế nào?",
+            "answer": "Em dùng useEffect để gọi API, rồi hiển thị dữ liệu lên giao diện."
+          },
+          {
+            "kind": "follow_up",
+            "topic": "React và gọi API",
+            "question": "Bạn quản lý trạng thái loading như thế nào?",
+            "answer": "Em lưu một biến loading."
+          },
+          {
+            "kind": "follow_up",
+            "topic": "React và gọi API",
+            "question": "Khi request bị hủy thì loading được cập nhật thế nào?",
+            "answer": "Em chưa giải thích được."
+          }
+        ]
+      }
+    },
+    {
+      "id": "long-memory-en",
+      "expectedActions": [
+        "follow_up"
+      ],
+      "purpose": "use four recent turns plus an earlier summary, preserving full counters",
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "en",
+          "targetPosition": "Backend Junior",
+          "durationMinutes": 45,
+          "plannedQuestions": 12
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "React API requests and testing. API input validation. HTTP retries. PostgreSQL concurrent updates. API authorization.",
+        "cvText": "Synthetic candidate built a Node.js inventory service using PostgreSQL transactions and integration tests. No identifying information.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "React requests",
+            "question": "How would you handle stale API responses in React?",
+            "answer": "I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses.I would cancel the previous request in cleanup, ignore AbortError, update only the latest request, and test out-of-order responses."
+          },
+          {
+            "kind": "follow_up",
+            "topic": "React requests",
+            "question": "How would you verify the failure cases for React requests?",
+            "answer": "I would inject the described failure, assert the persisted and visible outcome, and confirm that recovery does not duplicate the operation."
+          },
+          {
+            "kind": "main",
+            "topic": "Input validation",
+            "question": "How would you validate a JSON API request?",
+            "answer": "I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases.I would check required fields, types, lengths and accepted values before persistence, reject extra fields, and test invalid and boundary cases."
+          },
+          {
+            "kind": "follow_up",
+            "topic": "Input validation",
+            "question": "How would you verify the failure cases for Input validation?",
+            "answer": "I would inject the described failure, assert the persisted and visible outcome, and confirm that recovery does not duplicate the operation."
+          },
+          {
+            "kind": "main",
+            "topic": "HTTP retries",
+            "question": "How would you retry an API request safely?",
+            "answer": "I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried.I would retry only safe transient failures with bounded backoff and an idempotency key for writes; validation errors must not be retried."
+          },
+          {
+            "kind": "follow_up",
+            "topic": "HTTP retries",
+            "question": "How would you verify the failure cases for HTTP retries?",
+            "answer": "I would inject the described failure, assert the persisted and visible outcome, and confirm that recovery does not duplicate the operation."
+          },
+          {
+            "kind": "main",
+            "topic": "PostgreSQL transactions",
+            "question": "How would you prevent two concurrent purchase requests from overselling the last inventory item?",
+            "answer": "I would use a transaction so the database takes care of it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "time-limit",
+      "expectedActions": [
+        "end"
+      ],
+      "purpose": "end locally without a Gemini request",
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "vi",
+          "targetPosition": "Frontend Intern",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 900
+        },
+        "jdText": "Frontend Intern: sử dụng React, JavaScript, gọi REST API và kiểm thử giao diện; giải thích cách xử lý trạng thái tải và lỗi.",
+        "cvText": "Ứng viên minh họa đã làm ứng dụng danh sách công việc bằng React và gọi REST API. Không cung cấp tên, liên hệ hoặc công ty.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "React và gọi API",
+            "question": "Bạn xử lý việc gọi API khi người dùng đổi bộ lọc liên tục trong React như thế nào?",
+            "answer": "Em dùng useEffect để gọi API, rồi hiển thị dữ liệu lên giao diện."
+          }
+        ]
+      }
+    },
+    {
+      "id": "question-limit",
+      "expectedActions": [
+        "end"
+      ],
+      "purpose": "count all saved main questions, not only the recent four",
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "vi",
+          "targetPosition": "Frontend Intern",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Frontend Intern: sử dụng React, JavaScript, gọi REST API và kiểm thử giao diện; giải thích cách xử lý trạng thái tải và lỗi.",
+        "cvText": "Ứng viên minh họa đã làm ứng dụng danh sách công việc bằng React và gọi REST API. Không cung cấp tên, liên hệ hoặc công ty.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "Chủ đề 1",
+            "question": "Câu hỏi chính 1?",
+            "answer": "Câu trả lời minh họa đã hoàn tất."
+          },
+          {
+            "kind": "main",
+            "topic": "Chủ đề 2",
+            "question": "Câu hỏi chính 2?",
+            "answer": "Câu trả lời minh họa đã hoàn tất."
+          },
+          {
+            "kind": "main",
+            "topic": "Chủ đề 3",
+            "question": "Câu hỏi chính 3?",
+            "answer": "Câu trả lời minh họa đã hoàn tất."
+          },
+          {
+            "kind": "main",
+            "topic": "Chủ đề 4",
+            "question": "Câu hỏi chính 4?",
+            "answer": "Câu trả lời minh họa đã hoàn tất."
+          },
+          {
+            "kind": "main",
+            "topic": "Chủ đề 5",
+            "question": "Câu hỏi chính 5?",
+            "answer": "Câu trả lời minh họa đã hoàn tất."
+          }
+        ]
+      }
+    },
+    {
+      "id": "closed-session",
+      "expectedActions": [
+        "end"
+      ],
+      "purpose": "closed state takes precedence over generation",
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "en",
+          "targetPosition": "Backend Junior",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "abandoned",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Backend Junior: build Node.js REST APIs with PostgreSQL. Explain transactions, concurrent updates, idempotency and integration testing.",
+        "cvText": "Synthetic candidate built a Node.js inventory service using PostgreSQL transactions and integration tests. No identifying information.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "PostgreSQL transactions",
+            "question": "How would you prevent two concurrent purchase requests from overselling the last inventory item?",
+            "answer": "I would use a transaction so the database takes care of it."
+          }
+        ]
+      }
+    }
+  ]
+}
